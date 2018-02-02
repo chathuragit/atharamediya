@@ -11,10 +11,20 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/Dashboard', 'HomeController@index')->name('home');
+
+Route::resource('/administrators', 'AdministratorController')->middleware('SuperAdministrator');
+Route::resource('/advertisement_collectors', 'AdvertisementCollectorController')->middleware('SuperAdministrator');
+Route::resource('/advertising_members', 'AdvertisingMemberController')->middleware('SuperAdministrator');
+Route::resource('/web_space_holders', 'WebSpaceHolderController')->middleware('SuperAdministrator');
+Route::resource('/individual_advertisers', 'IndividualAdvertiserController')->middleware('SuperAdministrator');
+
+
+

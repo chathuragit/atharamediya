@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\SuperAdministratorMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -57,5 +58,12 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+        'SuperAdministrator' => SuperAdministratorMiddleware::class,
+        'Administrator' => AdministratorMiddleware::class,
+        'AdvertisementCollector' => AdvertisementCollectorMiddleware::class,
+        'AdvertisingMember' => AdvertisingMemberMiddleware::class,
+        'WebSpaceHolder' => WebSpaceHolderMiddleware::class,
+        'IndividualAdvertiser' => IndividualAdvertiserMiddleware::class,
     ];
 }
