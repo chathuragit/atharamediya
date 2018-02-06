@@ -50,7 +50,8 @@
             </li>
 
 
-            <li class="treeview">
+            @php $treeview = array('categories', 'attributes'); @endphp
+            <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
                 <a href="#">
                     <i class="fa fa-cubes"></i>
                     <span>Categories</span>
@@ -59,8 +60,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="{{url('/administrators')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
-                    <li><a href="{{url('/advertisement_collectors')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
+                    <li class="{{ Request::segment(1) == 'categories' ? 'active' : ''}}"><a href="{{url('/categories')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
+                    <li class="{{ Request::segment(1) == 'attributes' ? 'active' : ''}}"><a href="{{url('/attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
                 </ul>
             </li>
 

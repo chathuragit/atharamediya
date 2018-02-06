@@ -50,5 +50,11 @@ Route::post('/individual_advertisers/change_status', 'IndividualAdvertiserContro
 Route::get('/individual_advertisers/filter', 'IndividualAdvertiserController@filter');
 Route::resource('/individual_advertisers', 'IndividualAdvertiserController')->middleware('SuperAdministrator');
 
+Route::resource('/categories', 'CategoryController')->middleware('SuperAdministrator');
+
+Route::get('/attributes/filter', 'AttributeController@filter');
+Route::post('/attributes/change_status', 'AttributeController@change_status');
+Route::resource('/attributes', 'AttributeController')->middleware('SuperAdministrator');
+
 
 

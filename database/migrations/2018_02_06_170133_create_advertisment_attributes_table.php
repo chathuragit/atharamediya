@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateAdvertismentAttributesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('advertisment_attributes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('category_name');
-            $table->integer('parent_category_id')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->integer('advertisment_id');
+            $table->integer('attribute_id');
+            $table->text('attribute_value');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('advertisment_attributes');
     }
 }

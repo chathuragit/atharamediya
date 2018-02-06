@@ -15,9 +15,9 @@ class CreateAttributesTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('advertisment_id');
-            $table->integer('attribute_id');
-            $table->text('attribute_value');
+            $table->string('attribute_name', 255);
+            $table->integer('attribute_type')->default(1);
+            $table->text('attribute_values')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
