@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate($this->per_page);
+        $categories = Category::FilterCategory($this->per_page);
         return view('categories.list', ['categories' => $categories]);
     }
 
@@ -96,5 +96,23 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function filter(Request $request){
+        $categories = Category::FilterCategory($this->per_page, $request->search);
+        return view('categories.list', ['categories' => $categories]);
+    }
+
+    public function change_status(Request $request){
+        $Category = Category::find($request->id);
+        $Category->is_active = ($request->active == 'true') ? true : false;
+        $Category->update();
+
+        if(($request->active == 'true')){
+            parent::userLog(Auth::user()->id, 'Category activated #'.$Category->id);
+        }
+        else{
+            parent::userLog(Auth::user()->id, 'Category deactivated #'.$Category->id);
+        }
     }
 }

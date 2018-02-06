@@ -58,7 +58,6 @@
                                             <a href="{{url('/categories')}}/{{$category->id}}/" title="view details" class="actions"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="{{url('/categories')}}/{{$category->id}}/edit" title="edit details" class="actions"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                             <a href="#" data-toggle="modal" data-method="delete" class="trash actions" data-id="{{$category->id}}" data-target="#modalDelete" title="delete"><i class="fa fa-trash"></i></a>
-                                            <a href="{{url('categories/change_password')}}/{{$category->id}}" class="user_change_password_btn actions" title="Change Password"><i class="fa fa-chain-broken" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
