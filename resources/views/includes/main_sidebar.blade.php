@@ -41,12 +41,12 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::segment(1) == 'administrators' ? 'active' : ''}}"><a href="{{url('/administrators')}}"><i class="fa fa-circle-o"></i> Administrators</a></li>
-                    <li class="{{ Request::segment(1) == 'advertisement_collectors' ? 'active' : ''}}"><a href="{{url('/advertisement_collectors')}}"><i class="fa fa-circle-o"></i> Advertisement Collectors</a></li>
-                    <li class="{{ Request::segment(1) == 'advertising_members' ? 'active' : ''}}"><a href="{{url('/advertising_members')}}"><i class="fa fa-circle-o"></i> Advertising Members</a></li>
-                    <li class="{{ Request::segment(1) == 'web_space_holders' ? 'active' : ''}}"><a href="{{url('/web_space_holders')}}"><i class="fa fa-circle-o"></i> Web Space Holders</a></li>
-                    <li class="{{ Request::segment(1) == 'individual_advertisers' ? 'active' : ''}}"><a href="{{url('/individual_advertisers')}}"><i class="fa fa-circle-o"></i> Individual Advertisers</a></li>
-                </ul>t
+                    <li class="{{ Request::segment(1) == 'administrators' ? 'active' : ''}}"><a href="{{url('/administrators')}}"><i class="fa fa-circle-o text-red"></i> Administrators</a></li>
+                    <li class="{{ Request::segment(1) == 'advertisement_collectors' ? 'active' : ''}}"><a href="{{url('/advertisement_collectors')}}"><i class="fa fa-circle-o  text-yellow"></i> Advertisement Collectors</a></li>
+                    <li class="{{ Request::segment(1) == 'advertising_members' ? 'active' : ''}}"><a href="{{url('/advertising_members')}}"><i class="fa fa-circle-o text-blue"></i> Advertising Members</a></li>
+                    <li class="{{ Request::segment(1) == 'web_space_holders' ? 'active' : ''}}"><a href="{{url('/web_space_holders')}}"><i class="fa fa-circle-o text-light-blue"></i> Web Space Holders</a></li>
+                    <li class="{{ Request::segment(1) == 'individual_advertisers' ? 'active' : ''}}"><a href="{{url('/individual_advertisers')}}"><i class="fa fa-circle-o text-green"></i> Individual Advertisers</a></li>
+                </ul>
             </li>
 
 
@@ -80,6 +80,19 @@
                 </ul>
             </li>
 
+            <li class="{{ Request::segment(1) == 'log' ? 'active' : ''}}">
+                <a href="{{url('/log')}}">
+                    <i class="fa fa-history"></i> <span>Log</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    <i class="fa fa-power-off"></i> <span>Sign out</span>
+                </a>
+            </li>
 
 <!--
             <li class="treeview">

@@ -3,12 +3,12 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Administrators
+            Individual Advertisers
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Users</a></li>
-            <li class="active">Administrators</li>
+            <li class="active">Individual Advertisers</li>
         </ol>
     </section>
 
@@ -20,10 +20,10 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <a type="button" href="{{url('/administrators/create')}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Administrator</a>
+                        <a type="button" style="visibility:hidden;" class="btn btn-sm btn-success"> &nbsp;</a>
 
                         <div class="box-tools">
-                            {!! Form::open(['url' => '/administrators/filter', 'method' => 'GET']) !!}
+                            {!! Form::open(['url' => '/individual_advertisers/filter', 'method' => 'GET']) !!}
                             <div class="input-group input-group-sm" style="width: 250px;">
                                 <input type="text" name="search" class="form-control pull-right" placeholder="Search" value="{{ (isset($request) && !empty($request)) ? $request->search : '' }}">
 
@@ -42,23 +42,14 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Status</th>
-                                <th width="10%">Actions</th>
                             </tr>
-                            @if(count($administrators) > 0)
-                                @foreach($administrators as $administrator)
+                            @if(count($individual_advertisers) > 0)
+                                @foreach($individual_advertisers as $individual_advertiser)
                                     <tr>
-                                        <td>{{$administrator->id}}</td>
-                                        <td>{{$administrator->name}}</td>
-                                        <td>{{$administrator->email}}</td>
-                                        <td><input @if($administrator->is_active) checked @endif data-toggle="toggle" data-style="ios" data-size="mini" type="checkbox" class="toggle-event" data-id="{{$administrator->id}}"></td>
-                                        <td>
-                                            @if(Auth::user()->id != $administrator->id)
-                                                <a href="{{url('/administrators')}}/{{$administrator->id}}/" title="view details" class="actions"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                <a href="{{url('/administrators')}}/{{$administrator->id}}/edit" title="edit details" class="actions"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                <a href="#" data-toggle="modal" data-method="delete" class="trash actions" data-id="{{$administrator->id}}" data-target="#modalDelete" title="delete"><i class="fa fa-trash"></i></a>
-                                                <a href="{{url('administrators/change_password')}}/{{$administrator->id}}" class="user_change_password_btn actions" title="Change Password"><i class="fa fa-chain-broken" aria-hidden="true"></i></a>
-                                            @endif
-                                        </td>
+                                        <td>{{$individual_advertiser->id}}</td>
+                                        <td>{{$individual_advertiser->name}}</td>
+                                        <td>{{$individual_advertiser->email}}</td>
+                                        <td><input @if($individual_advertiser->is_active) checked @endif data-toggle="toggle" data-style="ios" data-size="mini" type="checkbox" class="toggle-event" data-id="{{$individual_advertiser->id}}"></td>
                                     </tr>
                                 @endforeach
                             @else
@@ -70,7 +61,7 @@
                     <!-- /.box-body -->
 
                     <div class="box-footer clearfix">
-                        {{ $administrators->links() }}
+                        {{ $individual_advertisers->links() }}
                     </div>
                 </div>
                 <!-- /.box -->

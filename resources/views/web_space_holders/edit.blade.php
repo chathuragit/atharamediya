@@ -3,13 +3,13 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Advertisement Collectors
-            <small>Edit Advertisement Collector</small>
+            Web Space Holders
+            <small>Edit Web Space Holder</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Users</a></li>
-            <li class="active">Advertisement Collectors</li>
+            <li class="active">Web Space Holders</li>
         </ol>
         <hr/>
     </section>
@@ -19,11 +19,11 @@
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Edit Advertisement Collector</h3>
+                        <h3 class="box-title">Edit Web Space Holder</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    {{ Form::model($User, array('route' => array('advertisement_collectors.update', $User->id), 'method' => 'PUT')) }}
+                    {{ Form::model($User, array('route' => array('web_space_holders.update', $User->id), 'method' => 'PUT')) }}
                     <div class="box-body">
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                             <label>Name</label>
@@ -44,7 +44,7 @@
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                        <a  href="{{url('/advertisement_collectors')}}" class="btn btn-default pull-left">Close</a>
+                        <a  href="{{url('/web_space_holders')}}" class="btn btn-default pull-left">Close</a>
                         <button type="submit" class="btn btn-success pull-right">Update</button>
                     </div>
                     {!! Form::close() !!}

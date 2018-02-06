@@ -3,12 +3,12 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Advertisement Collectors
+            Web Space Holders
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Users</a></li>
-            <li class="active">Advertisement Collectors</li>
+            <li class="active">Web Space Holders</li>
         </ol>
     </section>
 
@@ -20,10 +20,10 @@
 
                 <div class="box box-primary">
                     <div class="box-header">
-                        <a type="button" href="{{url('/advertisement_collectors/create')}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Advertisement Collector</a>
+                        <a type="button" href="{{url('/web_space_holders/create')}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Web Space Holder</a>
 
                         <div class="box-tools">
-                            {!! Form::open(['url' => '/advertisement_collectors/filter', 'method' => 'GET']) !!}
+                            {!! Form::open(['url' => '/web_space_holders/filter', 'method' => 'GET']) !!}
                             <div class="input-group input-group-sm" style="width: 250px;">
                                 <input type="text" name="search" class="form-control pull-right" placeholder="Search" value="{{ (isset($request) && !empty($request)) ? $request->search : '' }}">
 
@@ -44,19 +44,19 @@
                                 <th>Status</th>
                                 <th width="10%">Actions</th>
                             </tr>
-                            @if(count($advertisement_collectors) > 0)
-                                @foreach($advertisement_collectors as $advertisement_collector)
+                            @if(count($web_space_holders) > 0)
+                                @foreach($web_space_holders as $web_space_holder)
                                     <tr>
-                                        <td>{{$advertisement_collector->id}}</td>
-                                        <td>{{$advertisement_collector->name}}</td>
-                                        <td>{{$advertisement_collector->email}}</td>
-                                        <td><input @if($advertisement_collector->is_active) checked @endif data-toggle="toggle" data-style="ios" data-size="mini" type="checkbox" class="toggle-event" data-id="{{$advertisement_collector->id}}"></td>
+                                        <td>{{$web_space_holder->id}}</td>
+                                        <td>{{$web_space_holder->name}}</td>
+                                        <td>{{$web_space_holder->email}}</td>
+                                        <td><input @if($web_space_holder->is_active) checked @endif data-toggle="toggle" data-style="ios" data-size="mini" type="checkbox" class="toggle-event" data-id="{{$web_space_holder->id}}"></td>
                                         <td>
-                                            @if(Auth::user()->id != $advertisement_collector->id)
-                                                <a href="{{url('/advertisement_collectors')}}/{{$advertisement_collector->id}}/" title="view details" class="actions"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                <a href="{{url('/advertisement_collectors')}}/{{$advertisement_collector->id}}/edit" title="edit details" class="actions"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                <a href="#" data-toggle="modal" data-method="delete" class="trash actions" data-id="{{$advertisement_collector->id}}" data-target="#modalDelete" title="delete"><i class="fa fa-trash"></i></a>
-                                                <a href="{{url('advertisement_collectors/change_password')}}/{{$advertisement_collector->id}}" class="user_change_password_btn actions" title="Change Password"><i class="fa fa-chain-broken" aria-hidden="true"></i></a>
+                                            @if(Auth::user()->id != $web_space_holder->id)
+                                                <a href="{{url('/web_space_holders')}}/{{$web_space_holder->id}}/" title="view details" class="actions"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                <a href="{{url('/web_space_holders')}}/{{$web_space_holder->id}}/edit" title="edit details" class="actions"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="#" data-toggle="modal" data-method="delete" class="trash actions" data-id="{{$web_space_holder->id}}" data-target="#modalDelete" title="delete"><i class="fa fa-trash"></i></a>
+                                                <a href="{{url('web_space_holders/change_password')}}/{{$web_space_holder->id}}" class="user_change_password_btn actions" title="Change Password"><i class="fa fa-chain-broken" aria-hidden="true"></i></a>
                                             @endif
                                         </td>
                                     </tr>
@@ -70,7 +70,7 @@
                     <!-- /.box-body -->
 
                     <div class="box-footer clearfix">
-                        {{ $advertisement_collectors->links() }}
+                        {{ $web_space_holders->links() }}
                     </div>
                 </div>
                 <!-- /.box -->

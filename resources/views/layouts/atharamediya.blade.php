@@ -31,6 +31,7 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
+    <link href="{{ asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -99,5 +100,47 @@
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
+<script src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
+
+<script>
+    $(function() {
+        $('.toggle-event').change(function() {
+            var record_id = $(this).attr('data-id');
+            var state = $(this).prop('checked');
+
+            $.ajax({
+                url : "{{url('/'.Request::segment(1).'/')}}/change_status",
+                type: 'POST',
+                data : { id : record_id, '_token': $('meta[name="csrf-token"]').attr('content'), active : state},
+                success: function(data)
+                {
+                    //window.location.reload();
+                },
+                beforeSend : function(){
+                }
+            });
+        })
+    })
+
+    $('.trash').click(function(e){
+        var id = $(this).attr('data-id');
+
+        $('.proceed-delete').click(function(e){
+            $.ajax({
+                url : "{{url('/'.Request::segment(1).'/')}}/"+ id,
+                type: 'DELETE',
+                data : { id : id, '_token': $('meta[name="csrf-token"]').attr('content')},
+                success: function(data)
+                {
+                    window.location.reload();
+                },
+                beforeSend : function(){
+                    $('#modalDelete').modal('hide');
+                }
+            });
+        });
+
+    });
+</script>
 </body>
 </html>

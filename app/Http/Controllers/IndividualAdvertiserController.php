@@ -3,9 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class IndividualAdvertiserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->per_page  = 2;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +28,8 @@ class IndividualAdvertiserController extends Controller
      */
     public function index()
     {
-        //
+        $individual_advertisers = User::UsersByType(6, $this->per_page);
+        return view('individual_advertisers.list', ['individual_advertisers' => $individual_advertisers]);
     }
 
     /**
@@ -23,7 +39,7 @@ class IndividualAdvertiserController extends Controller
      */
     public function create()
     {
-        //
+        return $this->index();
     }
 
     /**
@@ -34,7 +50,7 @@ class IndividualAdvertiserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->index();
     }
 
     /**
@@ -45,7 +61,7 @@ class IndividualAdvertiserController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->index();
     }
 
     /**
@@ -56,7 +72,7 @@ class IndividualAdvertiserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->index();
     }
 
     /**
@@ -68,7 +84,7 @@ class IndividualAdvertiserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->index();
     }
 
     /**
@@ -79,6 +95,24 @@ class IndividualAdvertiserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->index();
+    }
+
+    public function filter(Request $request){
+        $individual_advertisers = User::UsersByType(6, $this->per_page, $request->search);
+        return view('individual_advertisers.list', ['individual_advertisers' => $individual_advertisers, 'request' => $request]);
+    }
+
+    public function change_status(Request $request){
+        $user = User::find($request->id);
+        $user->is_active = ($request->active == 'true') ? true : false;
+        $user->update();
+
+        if(($request->active == 'true')){
+            parent::userLog(Auth::user()->id, 'Individual Advertisers activated #'.$user->id);
+        }
+        else{
+            parent::userLog(Auth::user()->id, 'Individual Advertisers deactivated #'.$user->id);
+        }
     }
 }

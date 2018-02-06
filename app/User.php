@@ -26,4 +26,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function UsersByType($role, $per_page, $search = null){
+        $result = User::where('role', $role);
+
+        if($search != null){
+            $result->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%');
+            });
+        }
+
+        return $result->orderBy('id','DESC')->paginate($per_page);
+    }
 }
