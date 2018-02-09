@@ -12,11 +12,11 @@
             </div>
         </div>
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
+        <form action="#" method="GET" class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <input type="text" name="search" class="form-control" placeholder="Search...">
                 <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button type="submit"  id="search-btn" class="btn btn-flat search_btn"><i class="fa fa-search"></i>
                 </button>
               </span>
             </div>
@@ -81,9 +81,9 @@
                 </ul>
             </li>
 
-            <li class="{{ Request::segment(1) == 'log' ? 'active' : ''}}">
-                <a href="{{url('/log')}}">
-                    <i class="fa fa-history"></i> <span>Log</span>
+            <li class="{{ Request::segment(1) == 'logs' ? 'active' : ''}}">
+                <a href="{{url('/logs')}}">
+                    <i class="fa fa-history"></i> <span>Logs</span>
                 </a>
             </li>
 

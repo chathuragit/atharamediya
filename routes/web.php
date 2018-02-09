@@ -58,5 +58,8 @@ Route::get('/attributes/filter', 'AttributeController@filter');
 Route::post('/attributes/change_status', 'AttributeController@change_status');
 Route::resource('/attributes', 'AttributeController')->middleware('SuperAdministrator');
 
+Route::get('/logs/filter', 'LogController@filter');
+Route::get('/logs', 'LogController@index');
+
 
 

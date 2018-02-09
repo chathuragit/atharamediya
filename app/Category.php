@@ -22,4 +22,13 @@ class Category extends Model
 
         return $result->paginate($per_page);
     }
+
+    public static function CategoryAttributeByID($category, $attribute){
+        return DB::table('category_attributes')->where('category_id', $category)->where('attribute_id', $attribute)->first();
+    }
+
+
+    public function assigned_attributes(){
+        return $this->hasMany('App\CategoryAttribute', 'category_id');
+    }
 }

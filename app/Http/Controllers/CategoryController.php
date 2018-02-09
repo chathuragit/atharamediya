@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Attribute;
 use App\Category;
+use App\CategoryAttribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -39,7 +41,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::where('is_active', 1)->get();
+        $attributes = Attribute::where('is_active', 1)->get();
+        return view('categories.create', ['categories' => $categories, 'attributes' => $attributes]);
     }
 
     /**
@@ -50,7 +54,38 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'category_name' => 'required'
+        );
+
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors())->withInput(Input::all());
+        }
+        else{
+            $Category = new Category();
+            $Category->category_name = $request->category_name;
+            $Category->parent_category_id = $request->parent_category;
+            $Category->is_active = true;
+            $Category->save();
+
+            if(count($request->category_attributes) > 0){
+                foreach ($request->category_attributes as $attribute){
+                    $Attribute = new CategoryAttribute();
+                    $Attribute->attribute_id = $attribute;
+                    $Attribute->category_id = $Category->id;
+                    $Attribute->save();
+                }
+            }
+
+            parent::userLog(Auth::user()->id, 'Created Category #'.$Category->id);
+
+            $request->session()->flash('message', "Category Created Successfully!");
+            $request->session()->flash('is_error', false);
+            return Redirect::to('/categories');
+        }
     }
 
     /**
@@ -61,7 +96,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $Category = Category::find($id);
+        $categories = Category::where('id', $Category->parent_category_id)->get();
+        $attributes = Attribute::where('is_active', 1)->get();
+        return view('categories.show', ['categories' => $categories, 'attributes' => $attributes, 'Category' => $Category]);
     }
 
     /**
@@ -72,7 +110,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Category = Category::find($id);
+        $categories = Category::where('id', '!=',  $id)->where('is_active', 1)->get();
+        $attributes = Attribute::where('is_active', 1)->get();
+        return view('categories.edit', ['categories' => $categories, 'attributes' => $attributes, 'Category' => $Category]);
     }
 
     /**
@@ -84,7 +125,48 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Category = Category::find($id);
+
+        $rules = array(
+            'category_name' => 'required'
+        );
+
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors())->withInput(Input::all());
+        }
+        else{
+
+            $Category->category_name = $request->category_name;
+            $Category->parent_category_id = $request->parent_category;
+            $Category->is_active = true;
+            $Category->update();
+
+            if(!is_null($request->category_attributes)){
+
+                CategoryAttribute::where('category_id',$Category->id)->whereNotIn('attribute_id', $request->category_attributes)->delete();
+
+                foreach ($request->category_attributes as $attribute){
+                    $isExcistAttribute = CategoryAttribute::where('category_id', $Category->id)->where('attribute_id', $attribute)->first();
+                    if(is_null($isExcistAttribute) || (count($isExcistAttribute) == 0)){
+                        $Attribute = new CategoryAttribute();
+                        $Attribute->attribute_id = $attribute;
+                        $Attribute->category_id = $Category->id;
+                        $Attribute->save();
+                    }
+                }
+            }else{
+                CategoryAttribute::where('category_id',$Category->id)->delete();
+            }
+
+            parent::userLog(Auth::user()->id, 'Updated Category #'.$Category->id);
+
+            $request->session()->flash('message', "Category Updated Successfully!");
+            $request->session()->flash('is_error', false);
+            return Redirect::to('/categories');
+        }
     }
 
     /**
@@ -93,14 +175,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        $Category = Category::find($id);
+        $Category->assigned_attributes()->delete();
+        $Category->delete();
+
+        parent::userLog(Auth::user()->id, 'Deleted Category #'.$Category->id);
+
+        $request->session()->flash('message', "Category Deleted Successfully!");
+        $request->session()->flash('is_error', false);
     }
 
     public function filter(Request $request){
         $categories = Category::FilterCategory($this->per_page, $request->search);
-        return view('categories.list', ['categories' => $categories]);
+        return view('categories.list', ['categories' => $categories, 'request' => $request]);
     }
 
     public function change_status(Request $request){

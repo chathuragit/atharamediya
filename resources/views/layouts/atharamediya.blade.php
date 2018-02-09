@@ -62,7 +62,7 @@
     @include('includes.control_sidebar')
 </div>
 <!-- ./wrapper -->
-@yield('page_JS')
+
 <!-- jQuery 3 -->
 <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -102,8 +102,17 @@
 <script src="{{asset('dist/js/demo.js')}}"></script>
 <script src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
 
+@yield('page_JS')
 <script>
     $(function() {
+        if($('.box-tools:first form').attr('action') == undefined){
+            $('.sidebar-form input[name=search]').attr('disabled','disabled');
+            $('.sidebar-form button.search_btn').attr('disabled','disabled');
+        }
+        else{
+            $('.sidebar-form').attr('action', $('.box-tools:first form').attr('action'));
+        }
+
         $('.toggle-event').change(function() {
             var record_id = $(this).attr('data-id');
             var state = $(this).prop('checked');
