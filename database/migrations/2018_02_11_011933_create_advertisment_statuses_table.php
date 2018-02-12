@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdvertismentMediaTable extends Migration
+class CreateAdvertismentStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateAdvertismentMediaTable extends Migration
      */
     public function up()
     {
-        Schema::create('advertisment_media', function (Blueprint $table) {
+        Schema::create('advertisment_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('advertisment_id');
-            $table->string('data_url','45');
-            $table->boolean('default_pic')->default(false);
-            $table->boolean('is_active')->default(true);
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateAdvertismentMediaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advertisment_media');
+        Schema::dropIfExists('advertisment_statuses');
     }
 }

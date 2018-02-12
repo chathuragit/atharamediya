@@ -65,7 +65,8 @@
                 </ul>
             </li>
 
-            <li class="treeview">
+            @php $treeview = array('advertisments', 'advertisments_active', 'advertisments_pending', 'advertisments_expired'); @endphp
+            <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
                 <a href="#">
                     <i class="fa fa-newspaper-o"></i>
                     <span>Advertisments</span>
@@ -74,10 +75,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="{{url('/administrators')}}"><i class="fa fa-circle-o"></i> All Advertisments</a></li>
-                    <li><a href="{{url('/advertisement_collectors')}}"><i class="fa fa-circle-o"></i> Active Advertisments</a></li>
-                    <li><a href="{{url('/advertisement_collectors')}}"><i class="fa fa-circle-o"></i> Pending Advertisments</a></li>
-                    <li><a href="{{url('/advertisement_collectors')}}"><i class="fa fa-circle-o"></i> Expired Advertisments</a></li>
+                    <li class="{{ Request::segment(1) == 'advertisments' ? 'active' : ''}}"><a href="{{url('/advertisments')}}"><i class="fa fa-circle-o"></i> All Advertisments</a></li>
+                    <li class="{{ Request::segment(1) == 'advertisments_active' ? 'active' : ''}}"><a href="{{url('/advertisments_active')}}"><i class="fa fa-circle-o"></i> Active Advertisments</a></li>
+                    <li class="{{ Request::segment(1) == 'advertisments_pending' ? 'active' : ''}}"><a href="{{url('/advertisments_pending')}}"><i class="fa fa-circle-o"></i> Pending Advertisments</a></li>
+                    <li class="{{ Request::segment(1) == 'advertisments_expired' ? 'active' : ''}}"><a href="{{url('/advertisments_expired')}}"><i class="fa fa-circle-o"></i> Expired Advertisments</a></li>
                 </ul>
             </li>
 

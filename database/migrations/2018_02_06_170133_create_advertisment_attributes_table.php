@@ -17,7 +17,7 @@ class CreateAdvertismentAttributesTable extends Migration
             $table->increments('id');
             $table->integer('advertisment_id');
             $table->integer('attribute_id');
-            $table->text('attribute_value');
+            $table->text('attribute_value')->nullable();
             $table->timestamps();
         });
     }

@@ -31,4 +31,8 @@ class Category extends Model
     public function assigned_attributes(){
         return $this->hasMany('App\CategoryAttribute', 'category_id');
     }
+
+    public static function AttributeByID($id){
+        return Attribute::where('id', $id)->first();
+    }
 }
