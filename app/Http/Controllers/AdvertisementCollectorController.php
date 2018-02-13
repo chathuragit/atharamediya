@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -50,10 +51,12 @@ class AdvertisementCollectorController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = array(
             'name' => 'required',
             'email' => "required|email|max:191|unique:users,email",
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
+            'title' => 'required',
         );
 
 
@@ -70,6 +73,33 @@ class AdvertisementCollectorController extends Controller
             $user->role = 3;
             $user->is_active = true;
             $user->save();
+
+            $member = new Member();
+            $member->user_id = $user->id;
+            $member->title = $request->title;
+            $member->moto = $request->moto;
+            $member->description = $request->description;
+            $member->address = $request->address;
+            $member->contact_number = $request->contact_number;
+            $member->contact_email = $request->contact_email;
+
+            $files = $request->file('images');
+            if(count($files) > 0){
+                foreach ($files as $key => $file){
+                    $filename = parent::file_uploader($file);
+
+                    if($request->image_names[$key] == 'cover_image'){
+                        $member->cover_image = $filename;
+                    }
+
+                    if($request->image_names[$key] == 'profile_image'){
+                        $member->logo = $filename;
+                    }
+                }
+            }
+
+            $member->is_active = true;
+            $member->save();
 
             parent::userLog(Auth::user()->id, 'Created Advertisement Collector User #'.$user->id);
 
@@ -88,7 +118,8 @@ class AdvertisementCollectorController extends Controller
     public function show($id)
     {
         $User = User::find($id);
-        return view('advertisement_collectors.show', ['User' => $User]);
+        $Member = $User->assigned_member;
+        return view('advertisement_collectors.show', ['User' => $User, 'Member' => $Member]);
     }
 
     /**
@@ -100,7 +131,8 @@ class AdvertisementCollectorController extends Controller
     public function edit($id)
     {
         $User = User::find($id);
-        return view('advertisement_collectors.edit', ['User' => $User]);
+        $Member = $User->assigned_member;
+        return view('advertisement_collectors.edit', ['User' => $User, 'Member' => $Member]);
     }
 
     /**
@@ -128,6 +160,31 @@ class AdvertisementCollectorController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->update();
+
+            $member = $user->assigned_member;
+            $member->title = $request->title;
+            $member->moto = $request->moto;
+            $member->description = $request->description;
+            $member->address = $request->address;
+            $member->contact_number = $request->contact_number;
+            $member->contact_email = $request->contact_email;
+
+            $files = $request->file('images');
+            if(count($files) > 0){
+                foreach ($files as $key => $file){
+                    $filename = parent::file_uploader($file);
+
+                    if($request->image_names[$key] == 'cover_image'){
+                        $member->cover_image = $filename;
+                    }
+
+                    if($request->image_names[$key] == 'profile_image'){
+                        $member->logo = $filename;
+                    }
+                }
+            }
+
+            $member->update();
 
             parent::userLog(Auth::user()->id, 'Updated Advertisement Collector User #'.$user->id);
 
