@@ -74,5 +74,9 @@ Route::resource('/advertisments', 'AdvertismentController');
 Route::post('/profile/change_credentials', 'ProfileController@change_credentials');
 Route::get('/profile', 'ProfileController@index');
 
+Route::get('/banners/filter', 'BannerController@filter');
+Route::post('/banners/change_status', 'BannerController@change_status');
+Route::resource('/banners', 'BannerController');
+
 
 
