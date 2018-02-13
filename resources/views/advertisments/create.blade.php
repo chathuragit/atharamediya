@@ -99,6 +99,39 @@
 
                         <hr/>
 
+                        <div class="form-group">
+                            <label>Negotiable Price :</label><br>
+                            <input  type="radio" name="negotiable" id="negotiable_1" value="1" checked="checked">
+                            <label for="negotiable_1">Yes</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input  type="radio" name="negotiable" id="negotiable_2" value="0">
+                            <label for="negotiable_2">No</label>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('contact_email') ? ' has-error' : '' }}">
+                            <label for="contact_email">Contact email:</label>
+                            <input id="contact_email" type="text" class="form-control" name="contact_email" value="{{ (!is_null($profile)) ? $profile->contact_email : '' }}" >
+
+                            @if ($errors->has('contact_email'))
+                                <span class="help-block">
+                                                    <strong>{{ $errors->first('contact_email') }}</strong>
+                                                </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group{{ $errors->has('contact_number') ? ' has-error' : '' }}">
+                            <label for="contact_number">Contact Number:</label>
+                            <input id="contact_number" type="text" class="form-control" name="contact_number" value="{{ (!is_null($profile)) ? $profile->contact_number : '' }}" >
+
+                            @if ($errors->has('contact_number'))
+                                <span class="help-block">
+                                                        <strong>{{ $errors->first('contact_number') }}</strong>
+                                                    </span>
+                            @endif
+                        </div>
+
+                        <hr/>
+
                         <div class="form-group{{ $errors->has('images') ? ' has-error' : '' }}">
                             <label>Images *</label>
 

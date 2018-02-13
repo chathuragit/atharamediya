@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Advertisment extends Model
 {
+    use Sluggable;
+
     public static function FilterAdvertisment($status = null, $per_page, $search = null){
         $result = Advertisment::where('status', '!=', 5);
 
@@ -40,5 +43,14 @@ class Advertisment extends Model
 
     public static function advertisment_attribute_byid($id){
         return Attribute::where('id', $id)->first();
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }

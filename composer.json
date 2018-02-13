@@ -6,11 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "cviebrock/eloquent-sluggable": "^4.0",
         "fideloper/proxy": "~3.3",
+        "intervention/image": "^2.3",
         "laravel/framework": "5.5.*",
-        "laravelcollective/html": "^5.5",
         "laravel/tinker": "~1.0",
-        "intervention/image": "^2.3"
+        "laravelcollective/html": "^5.5"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

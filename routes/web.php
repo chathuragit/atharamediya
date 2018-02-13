@@ -64,6 +64,7 @@ Route::get('/logs', 'LogController@index');
 Route::get('/advertisments_active', 'AdvertismentController@index');
 Route::get('/advertisments_pending', 'AdvertismentController@index');
 Route::get('/advertisments_expired', 'AdvertismentController@index');
+Route::get('/advertisments_blocked', 'AdvertismentController@index');
 Route::post('/advertisments/advertisment_attributes', 'AdvertismentController@advertisment_attributes');
 Route::get('/advertisments/filter', 'AdvertismentController@filter');
 Route::post('/advertisments/change_status', 'AdvertismentController@change_status');

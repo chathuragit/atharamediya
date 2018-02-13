@@ -39,4 +39,12 @@ class User extends Authenticatable
 
         return $result->orderBy('id','DESC')->paginate($per_page);
     }
+
+    public function assigned_individual(){
+        return $this->hasOne('App\Individual','user_id');
+    }
+
+    public function assigned_member(){
+        return $this->hasOne('App\Member','user_id');
+    }
 }

@@ -8,14 +8,13 @@ use App\AdvertismentMedia;
 use App\AdvertismentStatus;
 use App\Category;
 use App\District;
-use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-
+use Carbon\Carbon;
 
 class AdvertismentController extends Controller
 {
@@ -50,6 +49,10 @@ class AdvertismentController extends Controller
                 $advertisments = Advertisment::FilterAdvertisment(3, $this->per_page);
                 break;
 
+             case 'advertisments_blocked' :
+                $advertisments = Advertisment::FilterAdvertisment(4, $this->per_page);
+                break;
+
             default :
                 $advertisments = Advertisment::FilterAdvertisment(null, $this->per_page);
                 break;
@@ -67,7 +70,19 @@ class AdvertismentController extends Controller
     {
         $categories = Category::where('is_active', 1)->get();
         $districts = District::all();
-        return view('advertisments.create', ['categories' => $categories, 'districts' => $districts]);
+
+        $profile = null;
+        $assigned_individual = Auth::user()->assigned_individual;
+        if(!is_null($assigned_individual)){
+            $profile = $assigned_individual;
+        }else{
+            $assigned_member = Auth::user()->assigned_member;
+            if(!is_null($assigned_member)){
+                $profile = $assigned_member;
+            }
+        }
+
+        return view('advertisments.create', ['categories' => $categories, 'districts' => $districts, 'profile' => $profile]);
     }
 
     /**
@@ -97,10 +112,24 @@ class AdvertismentController extends Controller
             $Advertisment->title = $request->advertisment_title;
             $Advertisment->category_id = $request->category;
             $Advertisment->user_id = Auth::user()->id;
-            $Advertisment->is_active = false;
-            $Advertisment->status = 1;
+
+            if(Auth::user()->role > 2) {
+                $Advertisment->is_active = false;
+                $Advertisment->status = 1;
+            }
+            else{
+                $Advertisment->is_active = true;
+                $Advertisment->status = 2;
+                $Advertisment->approved_by = Auth::user()->id;
+            }
+
             $Advertisment->description =  $request->advertisment_desc;
             $Advertisment->location_id =  $request->advertisment_location;
+            $Advertisment->price =  $request->price;
+            $Advertisment->is_negotiable = $request->negotiable;
+            $Advertisment->contact_email = $request->contact_email;
+            $Advertisment->contact_mobile = $request->contact_number;
+            $Advertisment->expier_at = Carbon::now()->addDays(env('ATHARAMEDIYA_ALLOWED_TIME_FRAME_FOR_MEMBER'));
             $Advertisment->save();
 
             $files = $request->file('images');
@@ -153,7 +182,19 @@ class AdvertismentController extends Controller
         $categories = Category::where('is_active', 1)->get();
         $districts = District::all();
         $AdvertismentStatus = AdvertismentStatus::all();
-        return view('advertisments.edit', ['categories' => $categories, 'districts' => $districts, 'Advertisment' => $Advertisment, 'AdvertismentStatus' => $AdvertismentStatus]);
+
+        $profile = null;
+        $assigned_individual = Auth::user()->assigned_individual;
+        if(!is_null($assigned_individual)){
+            $profile = $assigned_individual;
+        }else{
+            $assigned_member = Auth::user()->assigned_member;
+            if(!is_null($assigned_member)){
+                $profile = $assigned_member;
+            }
+        }
+
+        return view('advertisments.edit', ['categories' => $categories, 'profile' => $profile, 'districts' => $districts, 'Advertisment' => $Advertisment, 'AdvertismentStatus' => $AdvertismentStatus]);
     }
 
     /**
@@ -186,13 +227,29 @@ class AdvertismentController extends Controller
             $Advertisment->category_id = $request->category;
             $Advertisment->user_id = Auth::user()->id;
 
-            if(Auth::user()->user_role > 2) {
+            if(Auth::user()->role > 2) {
+                $Advertisment->is_active = false;
+                $Advertisment->approved_by = 0;
+                $Advertisment->status = 1;
+            }
+            else{
+                $Advertisment->status = (isset($request->advertisment_status)) ? $request->advertisment_status : $Advertisment->status;
+            }
+
+            if((isset($request->advertisment_status)) && ($request->advertisment_status == 2)){
+                $Advertisment->approved_by = Auth::user()->id;
+                $Advertisment->is_active = true;
+            }else{
                 $Advertisment->is_active = false;
             }
 
-            $Advertisment->status = (isset($request->advertisment_status)) ? $request->advertisment_status : 1;
+            //$Advertisment->status = (isset($request->advertisment_status)) ? $request->advertisment_status : $Advertisment->status;
             $Advertisment->description =  $request->advertisment_desc;
             $Advertisment->location_id =  $request->advertisment_location;
+            $Advertisment->price =  $request->price;
+            $Advertisment->is_negotiable = $request->negotiable;
+            $Advertisment->contact_email = $request->contact_email;
+            $Advertisment->contact_mobile = $request->contact_number;
             $Advertisment->update();
 
             if(!is_null($request->advertisment_attribute)){
@@ -274,6 +331,10 @@ class AdvertismentController extends Controller
     public function change_status(Request $request){
         $Advertisment = Advertisment::find($request->id);
         $Advertisment->is_active = ($request->active == 'true') ? true : false;
+        if($Advertisment->status == 1){
+            $Advertisment->status = 2;
+            $Advertisment->approved_by = Auth::user()->id;
+        }
         $Advertisment->update();
 
         if(($request->active == 'true')){

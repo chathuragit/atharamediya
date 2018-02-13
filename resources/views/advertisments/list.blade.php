@@ -41,7 +41,9 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Category</th>
-                                <th>Active</th>
+                                @if(Auth::user()->role <= 2)
+                                    <th>Active</th>
+                                @endif
                                 <th>Status</th>
                                 <th width="10%">Actions</th>
                             </tr>
@@ -51,7 +53,9 @@
                                         <td>{{$advertisment->id}}</td>
                                         <td>{{$advertisment->title}}</td>
                                         <td>{{ ($advertisment->assigned_category != null) ? $advertisment->assigned_category->category_name : 'not-assigned' }}</td>
-                                        <td><input @if($advertisment->is_active) checked @endif data-toggle="toggle" data-style="ios" data-size="mini" type="checkbox" class="toggle-event" data-id="{{$advertisment->id}}"></td>
+                                        @if(Auth::user()->role <= 2)
+                                            <td><input @if($advertisment->is_active) checked @endif data-toggle="toggle" data-style="ios" data-size="mini" type="checkbox" class="toggle-event" data-id="{{$advertisment->id}}"></td>
+                                        @endif
                                         <td>{{ ($advertisment->assigned_status != null) ? $advertisment->assigned_status->status : 'not-assigned' }}</td>
                                         <td>
                                             <a href="{{url('/advertisments')}}/{{$advertisment->id}}/" title="view details" class="actions"><i class="fa fa-eye" aria-hidden="true"></i></a>
