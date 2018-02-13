@@ -58,8 +58,6 @@
 
     @include('includes.main_footer')
 
-    <!-- Control Sidebar -->
-    @include('includes.control_sidebar')
 </div>
 <!-- ./wrapper -->
 

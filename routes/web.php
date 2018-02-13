@@ -71,5 +71,8 @@ Route::post('/advertisments/change_status', 'AdvertismentController@change_statu
 Route::get('/remove_advertisment_image', 'AdvertismentController@remove_image');
 Route::resource('/advertisments', 'AdvertismentController');
 
+Route::post('/profile/change_credentials', 'ProfileController@change_credentials');
+Route::get('/profile', 'ProfileController@index');
+
 
 
