@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -43,10 +43,10 @@ class LoginController extends Controller
     public function authenticated($request , $user){
         if($user->role > 1){
             parent::userLog($user->id, 'Logged in to system');
-            return Redirect::to('/');
+            return Redirect::to('/dashboard');
         }else{
             parent::userLog($user->id, 'Logged in to system');
-            return Redirect::to('/');
+            return Redirect::to('/dashboard');
         }
     }
 

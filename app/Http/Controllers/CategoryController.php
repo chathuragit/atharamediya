@@ -67,6 +67,7 @@ class CategoryController extends Controller
         else{
             $Category = new Category();
             $Category->category_name = $request->category_name;
+            $Category->fontawesome = $request->category_icon;
             $Category->parent_category_id = $request->parent_category;
             $Category->is_active = true;
             $Category->save();
@@ -140,6 +141,7 @@ class CategoryController extends Controller
         else{
 
             $Category->category_name = $request->category_name;
+            $Category->fontawesome = $request->category_icon;
             $Category->parent_category_id = $request->parent_category;
             $Category->is_active = true;
             $Category->update();

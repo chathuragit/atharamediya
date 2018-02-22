@@ -37,6 +37,14 @@
                             @endif
                         </div>
 
+                        <div class="form-group {{ $errors->has('category_icon') ? ' has-error' : '' }}">
+                            <label>Category Icon</label>
+                            <input type="text" class="form-control" placeholder="Enter Category Icon" name="category_icon" value="{{$Category->fontawesome}}" readonly>
+                            @if ($errors->has('category_icon'))
+                                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('category_icon') }}</label>
+                            @endif
+                        </div>
+
                         <div class="form-group {{ $errors->has('parent_category') ? ' has-error' : '' }}">
                             <label>Select Parent Category</label>
                             <select class="form-control" name="parent_category" readonly>

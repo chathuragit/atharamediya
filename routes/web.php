@@ -15,10 +15,14 @@
     return view('welcome');
 });*/
 
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/all-ads', 'HomeController@all_ads')->name('all_ads');
+Route::get('/ads', 'HomeController@all_ads')->name('ads');
+Route::get('/advertisment/{slug}', 'HomeController@advertisment')->name('ads');
+
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/Dashboard', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');
 
 Route::post('/administrators/change_status', 'AdministratorController@change_status');
 Route::get('/administrators/change_password/{id}', 'AdministratorController@changePasswordRequest');
