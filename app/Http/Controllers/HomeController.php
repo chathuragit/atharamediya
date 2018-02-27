@@ -44,10 +44,12 @@ class HomeController extends Controller
         $AdvertismentAttributes =$Advertisment->advertisment_attributes_and_values($Advertisment->id);
         $ParentCategories = Category::where('parent_category_id' , 0)->where('is_active' , 1)->get();
 
+        $Advertisment_user = $Advertisment->advertisment_user($Advertisment->id);
+
         $Advertisments = Advertisment::similar_ads($Advertisment, 3);
         $left_web_space_banners = Banner::web_space_banners(1, $Advertisment->category_id, 3);
 
         return view('advertisment', ['ParentCategories' => $ParentCategories, 'Advertisment' => $Advertisment, 'Advertisments' => $Advertisments,
-            'left_web_space_banners' => $left_web_space_banners, 'AdvertismentAttributes' => $AdvertismentAttributes]);
+            'left_web_space_banners' => $left_web_space_banners, 'AdvertismentAttributes' => $AdvertismentAttributes, 'Advertisment_user' => $Advertisment_user]);
     }
 }

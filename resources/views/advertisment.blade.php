@@ -54,9 +54,13 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2 class="vgap item-heading">{{$Advertisment->title}}
                                 <a href="tel:+94772256488" class="contact">
+
                                     <i class="fa fa-phone-square" aria-hidden="true"></i>
-                                    077-225-6488
-                                    <span class="contact-name">Chathura Wijekoon</span></a></h2>
+                                    {{$Advertisment->contact_mobile}}
+
+                                    @if(count($Advertisment_user) > 0)
+                                        <span class="contact-name">{{$Advertisment_user->name}}</span></a></h2>
+                                    @endif
                         </div>
                     </div>
                     <div class="row product-item">
