@@ -5,15 +5,27 @@
         </div>
     </div>
 
-    @php $count = 1; @endphp
+    @php
+        $count = 1;
+        $web_space = 0;
+    @endphp
     @foreach($Advertisments as $Advertisment)
 
-        @if(($count%4 == 1))
+        @if(($count%5 == 1))
             <div class="row product-list-item boost">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 img-product-list">
-                    <a href="#" title="Sample Ad"><img src="{{ asset('images/ads/ad-0-sample.jpg')}}" alt="Ad Sample" class="img-fluid"><span>Web Space Advertisement</span></a>
+                    @if((count($listing_web_space_banners) > 0))
+                        @if(isset($listing_web_space_banners[$web_space]))
+                            {!!  ($listing_web_space_banners[$web_space]->link_url != '') ? '<a href="'.$listing_web_space_banners[$web_space]->link_url.'" target="_blank">' : ''  !!}
+                                <img src="{{url('/uploads/'.$listing_web_space_banners[$web_space]->data_url)}}" alt="Ad Sample" class="img-fluid">
+                                <span>{{$listing_web_space_banners[$web_space]->title}}</span>
+                            {!! ($listing_web_space_banners[$web_space]->link_url != '') ? '</a>' : ''  !!}
+                        @endif
+
+                    @endif
                 </div>
             </div>
+            @php $web_space++; @endphp
         @endif
 
         <div class="row product-list-item">
