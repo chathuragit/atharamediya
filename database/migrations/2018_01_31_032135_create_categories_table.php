@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('category_name');
             $table->text('slug')->nullable();
-            $table->string('fontawesome', 15)->default('fa fa-briefcase ');
+            $table->string('fontawesome', 30)->default('fa fa-briefcase');
             $table->integer('parent_category_id')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

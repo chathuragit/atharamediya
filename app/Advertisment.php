@@ -36,24 +36,18 @@ class Advertisment extends Model
             });
         }
 
-        /*if($search->category != null){
-            $result->where(function ($query) use ($serach_title) {
-                $query->where('title', 'like', '%' . $serach_title . '%');
-            });
-        }
-
-        if($search != null){
-            $Appointments->where(function ($query) use ($search) {
-                $query->where('users.name', 'like', '%' . $search . '%')
-                    ->orWhere('customers.name', 'like', '%' . $search . '%')
-                    ->orWhere('saloons.saloon_name', 'like', '%' . $search . '%')
-                    ->orWhere('services.service_name', 'like', '%' . $search . '%');
-            });
-        }*/
-
         $result->where('is_active', true);
 
         return $result->orderBy('id','DESC')->paginate($per_page);
+    }
+
+    public static function similar_ads($Advertisement, $perpage){
+        $result = Advertisment::where('category_id', $Advertisement->category_id);
+        $result->where('status', 2);
+        $result->where('id', '!=', $Advertisement->id);
+        $result->where('is_active', true);
+
+        return $result->inRandomOrder()->limit($perpage)->get();
     }
 
     public function assigned_category(){
@@ -76,8 +70,8 @@ class Advertisment extends Model
         return $this->hasMany('App\AdvertismentMedia', 'advertisment_id');
     }
 
-    public function advertisment_default_image(){
-        return $this->hasMany('App\AdvertismentMedia', 'advertisment_id')->where('default_pic', true);
+    public static function advertisment_default_image($advertisment_id){
+        return AdvertismentMedia::where('advertisment_id', $advertisment_id)->where('default_pic', true)->first();
     }
 
     public static function advertisment_first_image($advertisment_id){

@@ -29,4 +29,15 @@ class Banner extends Model
     public function assigned_status(){
         return $this->belongsTo('App\AdvertismentStatus', 'status');
     }
+
+    public static function web_space_banners($position, $category, $limit){
+        $result = Banner::where('status', 2);
+        $result->where('is_active', true);
+        $result->where('display_in', $position);
+        $result->whereIn('category_id', [$category, 0]);
+
+        return $result->inRandomOrder()->limit($limit)->get();
+
+        //where('category_id', $Advertisement->category_id);
+    }
 }

@@ -10,6 +10,10 @@
 .vgap{
 	padding: 20px 0 20px 0;
 }
+.nogap-bottom{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
 
 .arrow-right {
     width: 0;
@@ -33,14 +37,25 @@ body {
   position: relative;
 }
 
+figcaption {
+    color: #e89f9f;
+}
+
 .full-banner {
     background: #e7edee;
     color: #000;
     padding: 10px;
 }
 
-main{
-	padding: 20px 0;
+.inner-page main {
+    padding: 20px 0;
+    background: #fbdbdb;
+}
+
+.inner-page .main-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px 0 20px 0;
 }
 
 h1.seo {
@@ -86,6 +101,10 @@ h2.vgap.item-heading {
     color: #fff;
     display: table;
     width: 100%;
+    background: #000;
+    padding: 10px;
+    border-radius: 10px 10px 0px 0;
+    margin: 0;
 }
 
 h2.vgap.item-heading a {
@@ -122,6 +141,10 @@ aside p{
     font-size: 14px;
     text-align: justify;
     color: #727376;
+}
+
+.category-list p{
+    text-align: left;
 }
 
 /* UI Price Tag */
@@ -181,7 +204,7 @@ aside p{
 .ui-price-tag .r3 {
     top: 4px;
     border-top-width: 1.224rem;
-    border-right: solid 1.224rem #330f0f;
+    border-right: solid 1.224rem #560101;
     border-bottom-width: 1.224rem;
 }
 /* /UI Price Tag */
@@ -191,7 +214,7 @@ aside p{
     background-color: #b71a1e !important;
 }
 a:focus, a:hover, a:active, a:target {
-    color: #000;
+    color: #c7a1a1;
     text-decoration: underline;
 }
 .navbar-inverse .navbar-nav .nav-link {
@@ -211,6 +234,10 @@ a:focus, a:hover, a:active, a:target {
 	color: #ffe100;
 }
 /* /main navigation */
+.home-logo{
+    margin: 0 auto;
+    display: block;
+}
 /* Home Search */
 #advanced-search{
 	margin: 10% 0;
@@ -220,7 +247,6 @@ a:focus, a:hover, a:active, a:target {
     background: #ed3237;
     color: #fff;
     font-size: .8rem;
-    width: 160px;
 }
 .dropdown-divider {
     margin: .1rem 0;
@@ -322,10 +348,13 @@ button.btn.btn-secondary.dropdown-toggle.btn-home-category {
 }
 /* /Inner Page Advanced Search */
 
+/* Inner Page - Sorting */
+.btn-full-width{
+    width: 100%;
+}
 /* mid-section */
 .mid-section{
-	/*background-color: #ffefef;*/
-	background-color: #330f0f;
+	background-color: #560101;
 	border-radius: 10px;
 	padding-bottom: 15px;
 }
@@ -422,8 +451,8 @@ button.btn.btn-secondary.dropdown-toggle.btn-home-category {
 
 /* Item */
 .product-item {
-    background-color: #96989a;
-    border-radius: 3px;
+    background-color: #000;
+    border-radius: 0px 0px 10px 10px;
     margin: 0px;
     padding-top: 15px;
 }
@@ -485,12 +514,15 @@ button.btn.btn-secondary.dropdown-toggle.btn-home-category {
     text-align: left;
 }
 .single-product-details dl dt{
-    color: #ddd;
-    font-weight: 700;
-    padding-right: .3em;
+    color: #fff;
+    font-weight: 400;
+    padding: .3em;
     white-space: nowrap;
     width: auto;
     display: inline;
+    background: #000;
+    border-radius: 5px;
+    margin-right: 4px;
 }
 .single-product-details dl dd{
     color: #ccc;
@@ -608,6 +640,53 @@ footer a:hover{
 }
 /* Inner Pages */
 
+/* Member */
+.member-banner{
+    background: #010ae1; /* dynamic */
+}
+.member-section{
+    background-color: #f2ea19; /* dynamic */
+}
+.member-ads-heading{
+    color: #000; /* dynamic */
+}
+h1.member-profile-heading{
+    font-size: 2rem;
+    color: #f0f0f0; /* dynamic */
+}
+aside p.member-contact a i.fa.fa-phone-square,
+aside p.member-contact a i.fa.fa-envelope-square{
+    display: inline-block;
+    font-size: 18px;
+    width: 13px;
+}
+p.member-contact {
+    margin: 10px 0 0 0;
+}
+.member-tel{
+    font-size: 18px;
+}
+.contact-name{
+    display: block;
+    padding-left: 18px;
+}
+.contact-email {
+    padding-left: 4px;
+}
+.member-tag {
+    background: #fff;
+    color: #ff0000;
+    display: table;
+    font-size: 12px;
+    padding: 0 4px;
+    line-height: 1;
+    border-radius: 7px 0 7px 0;
+    margin-top: 4px;
+    font-weight: 700;
+}
+
+/* /Member */
+
 @media (max-width: 1200px) {
 	/* button.btn.btn-secondary.dropdown-toggle.btn-home-category {
     	width: auto;
@@ -619,6 +698,11 @@ footer a:hover{
     	width: 80px;
 	}
 }
+/* Overriding Bootstrap */
+.input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-group {
+    margin-right: 0;
+}
+/* /Overriding Bootstrap */
 
 .amcharts-chart-div > a{
     display: none !important;
