@@ -53,7 +53,10 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2 class="vgap item-heading">{{$Advertisment->title}}
-                                <a href="tel:+94772256488" class="contact"><i class="fa fa-phone-square" aria-hidden="true"></i> 077-225-6488<span class="contact-name">Chathura Wijekoon</span></a></h2>
+                                <a href="tel:+94772256488" class="contact">
+                                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                                    077-225-6488
+                                    <span class="contact-name">Chathura Wijekoon</span></a></h2>
                         </div>
                     </div>
                     <div class="row product-item">
@@ -134,24 +137,21 @@
                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                             <div class="single-product-details">
                                 <h3 class="heading3">Product Details:</h3>
-                                <dl>
-                                    <dt>Condition:</dt><dd>New</dd>
-                                </dl>
-                                <dl>
-                                    <dt>Brand:</dt><dd>Nissan</dd>
-                                </dl>
-                                <dl>
-                                    <dt>Model year:</dt><dd>2017</dd>
-                                </dl>
-                                <dl>
-                                    <dt>Model:</dt><dd>Leaf Plug-in Maroon</dd>
-                                </dl>
-                                <dl>
-                                    <dt>Engine capacity:</dt><dd>Full Electric</dd>
-                                </dl>
-                                <dl>
-                                    <dt>Mileage:</dt><dd>0 km</dd>
-                                </dl>
+                                @if(count($AdvertismentAttributes) > 0)
+                                    @foreach($AdvertismentAttributes as $AdvertismentAttribute)
+                                        <dl>
+                                            <dt>{{$AdvertismentAttribute->attribute_name}} : </dt>
+
+                                            @if(!$Advertisment->is_serial($AdvertismentAttribute->attribute_value))
+                                                <dd>{{$AdvertismentAttribute->attribute_value}}</dd>
+                                            @else
+                                                @foreach(unserialize($AdvertismentAttribute->attribute_value) as $value)
+                                                    <dd>{{$value}}, </dd>
+                                                @endforeach
+                                            @endif
+                                        </dl>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>

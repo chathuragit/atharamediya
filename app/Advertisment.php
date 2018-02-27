@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\DB;
 
 class Advertisment extends Model
 {
@@ -80,6 +81,32 @@ class Advertisment extends Model
 
     public static function advertisment_attribute_byid($id){
         return Attribute::where('id', $id)->first();
+    }
+
+    public static function advertisment_attributes_and_values($id){
+        return DB::table('advertisments')
+            ->join('advertisment_attributes', function ($join) {
+                $join->on('advertisment_attributes.advertisment_id', '=', 'advertisments.id');
+            })
+            ->join('attributes', function ($join) {
+                $join->on('advertisment_attributes.attribute_id', '=', 'attributes.id');
+            })->where('advertisments.id', $id)
+            ->select('attributes.attribute_name','advertisment_attributes.attribute_value')
+            ->get();
+    }
+
+    public static function advertisment_user($id){
+        return DB::table('advertisments')
+            ->join('users', function ($join) {
+                $join->on('advertisments.user_id', '=', 'users.id');
+            })
+            ->where('advertisments.id', $id)
+            ->select('users.*')
+            ->first();
+    }
+
+    public static function is_serial($string) {
+        return (@unserialize($string) !== false);
     }
 
     public function sluggable()

@@ -41,12 +41,13 @@ class HomeController extends Controller
 
     public function advertisment(Request $request, $slug){
         $Advertisment = Advertisment::where('slug', $slug)->where('is_active', true)->where('status', 2)->first();
+        $AdvertismentAttributes =$Advertisment->advertisment_attributes_and_values($Advertisment->id);
         $ParentCategories = Category::where('parent_category_id' , 0)->where('is_active' , 1)->get();
 
         $Advertisments = Advertisment::similar_ads($Advertisment, 3);
         $left_web_space_banners = Banner::web_space_banners(1, $Advertisment->category_id, 3);
 
         return view('advertisment', ['ParentCategories' => $ParentCategories, 'Advertisment' => $Advertisment, 'Advertisments' => $Advertisments,
-            'left_web_space_banners' => $left_web_space_banners]);
+            'left_web_space_banners' => $left_web_space_banners, 'AdvertismentAttributes' => $AdvertismentAttributes]);
     }
 }
