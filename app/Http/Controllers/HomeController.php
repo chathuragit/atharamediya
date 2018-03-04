@@ -49,7 +49,7 @@ class HomeController extends Controller
         $Advertisment_user = $Advertisment->advertisment_user($Advertisment->id);
 
         $Advertisments = Advertisment::similar_ads($Advertisment, 3);
-        $left_web_space_banners = Banner::web_space_banners(1, $Advertisment->category_id, 1);
+        $left_web_space_banners = Banner::web_space_banners(1, $Advertisment->category_id, 3);
         $listing_web_space_banners = Banner::web_space_banners(3, null, 1);
 
         return view('advertisment', ['ParentCategories' => $ParentCategories, 'Advertisment' => $Advertisment, 'Advertisments' => $Advertisments,

@@ -20,6 +20,10 @@ Route::get('/all-ads', 'HomeController@all_ads')->name('all_ads');
 Route::get('/ads', 'HomeController@all_ads')->name('ads');
 Route::get('/advertisment/{slug}', 'HomeController@advertisment')->name('ads');
 
+Route::get('/members', 'HomeController@all_ads')->name('all_ads');
+Route::get('/adcollectors', 'HomeController@all_ads')->name('all_ads');
+Route::get('/services', 'HomeController@all_ads')->name('all_ads');
+
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');

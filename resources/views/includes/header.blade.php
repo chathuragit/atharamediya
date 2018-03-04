@@ -11,6 +11,15 @@
             <li class="nav-item {{ Request::segment(1) == 'services' ? 'active' : ''}}">
                 <a class="nav-link" href="#">Services</a>
             </li>
+
+            <li class="nav-item {{ Request::segment(1) == 'adcollectors' ? 'active' : ''}}">
+                <a class="nav-link" href="{{url('/adcollectors')}}">Ad Collectors</a>
+            </li>
+
+            <li class="nav-item {{ Request::segment(1) == 'members' ? 'active' : ''}}">
+                <a class="nav-link" href="{{url('/members')}}">Members</a>
+            </li>
+
             <li class="nav-item {{ Request::segment(1) == 'all-ads' ? 'active' : ''}}">
                 <a class="nav-link" href="{{url('/all-ads')}}">All Ads </a>
             </li>

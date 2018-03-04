@@ -824,3 +824,65 @@ p.member-contact {
     height: 0px !important;
     display: none !important;
 }
+
+.detail-gallery {
+    padding-bottom: 30px;
+}
+
+.detail-gallery .detail-gallery-main-image {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.detail-gallery .detail-gallery-main-image .prev {
+    background: url("../images/search-bg.png") repeat;
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    left: -25px;
+    z-index: 9;
+    text-align: right;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 18px 15px;
+    top: 45%;
+    cursor: pointer;
+}
+
+.detail-gallery .detail-gallery-main-image .next {
+    background: url("../images/search-bg.png") repeat;
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    right: -25px;
+    z-index: 9;
+    text-align: left;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 18px 15px;
+    top: 45%;
+    cursor: pointer;
+}
+
+.detail-gallery .detail-gallery-thumbs {
+    padding-top: 25px;
+}
+
+.detail-gallery .detail-gallery-thumbs ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.detail-gallery .detail-gallery-thumbs ul li {
+    list-style: none;
+    float: left;
+    width: 20%;
+    padding: 5px;
+}
+
+.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

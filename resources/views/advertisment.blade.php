@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('page_JS')
+    <script type="text/javascript" src="{{url('/')}}/js/detail_slider.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            detail_slider('.detail-gallery');
+        });
+    </script>
+@endsection
+
 @section('page_header')
     <header>
         <div class="container-flid full-banner">
@@ -48,7 +57,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2 class="vgap item-heading">{{$Advertisment->title}}
-                                <a href="tel:+94772256488" class="contact">
+                                <a href="tel:{{$Advertisment->contact_mobile}}" class="contact">
 
                                     <i class="fa fa-phone-square" aria-hidden="true"></i>
                                     {{$Advertisment->contact_mobile}}
@@ -58,59 +67,44 @@
                                     @endif
                         </div>
                     </div>
-                    <div class="row product-item">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 product-item-wrapper">
-                            <div class="btn-back">
-                                <a href="#" title="Back"><span>&lt;</span></a>
-                            </div>
-                            <figure>
-                                @php
-                                    if(count($Advertisment->advertisment_default_image($Advertisment->id)) > 0){
-                                        $default_image = $Advertisment->advertisment_default_image($Advertisment->id);
-                                        $default_image = $default_image->data_url;
-                                    }
-                                    elseif(count($Advertisment->advertisment_first_image($Advertisment->id)) > 0){
-                                        $default_image = $Advertisment->advertisment_first_image($Advertisment->id);
-                                        $default_image = $default_image->data_url;
-                                    }
-                                    else{
-                                       $default_image = 'default_image.jpg';
-                                    }
-                                @endphp
+                    <div class="row product-item detail-gallery">
+                            @php
+                                if(count($Advertisment->advertisment_default_image($Advertisment->id)) > 0){
+                                    $default_image = $Advertisment->advertisment_default_image($Advertisment->id);
+                                    $default_image = $default_image->data_url;
+                                }
+                                elseif(count($Advertisment->advertisment_first_image($Advertisment->id)) > 0){
+                                    $default_image = $Advertisment->advertisment_first_image($Advertisment->id);
+                                    $default_image = $default_image->data_url;
+                                }
+                                else{
+                                   $default_image = 'default_image.jpg';
+                                }
+                            @endphp
 
-                                <img src="{{url('/uploads/'.$default_image)}}" alt="{{$Advertisment->title}}" class="img-fluid">
-                            </figure>
-                            <div class="btn-next">
-                                <a href="#" title="Next"><span>&gt;</span></a>
+
+                            <div class="detail-gallery-main-image" id="preview_wrapper">
+                                <div class="prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+                                <img src="{{$Advertisment->stingImage('uploads/'.$default_image)}}" class="img-responsive" width="100%">
+                                <div class="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
                             </div>
-                        </div>
+                            <div class="detail-gallery-thumbs">
+                                <ul>
+                                    {{--<li><img src="{{$Advertisment->stingImage('uploads/'.$default_image)}}" class="img-responsive"></li>--}}
+
+                                    @if(is_object($Advertisment->advertisment_media) && !empty($Advertisment->advertisment_media))
+                                        @foreach($Advertisment->advertisment_media as $key => $advertisement_image)
+                                            @if(File::exists('uploads/'.$advertisement_image->data_url))
+                                                <li @if($advertisement_image->default_pic == 1) class="active" @endif><img src="{{$Advertisment->stingImage('uploads/'.$advertisement_image->data_url)}}" class="img-responsive"></li>
+                                            @endif
+                                        @endforeach
+                                    @endif
+
+                                </ul>
+                            </div>
+
                     </div>
-                    <div class="row product-gal-items">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <ul>
-                                <li>
-                                    <a href="{{ asset('uploads/'.$default_image)}}" data-toggle="lightbox" data-gallery="example-gallery">
-                                        <img src="{{ asset('uploads/'.$default_image)}}" alt="{{$Advertisment->title}}" class="img-fluid">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ asset('images/ads/gal-1/standard-nissan-leaf-2.jpg')}}" data-toggle="lightbox" data-gallery="example-gallery">
-                                        <img src="{{ asset('images/ads/gal-1/thumb-nissan-leaf-2.jpg')}}" alt="Nissan Leaf" class="img-fluid">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ asset('images/ads/gal-1/standard-nissan-leaf-3.jpg')}}" data-toggle="lightbox" data-gallery="example-gallery">
-                                        <img src="{{ asset('images/ads/gal-1/thumb-nissan-leaf-3.jpg')}}" alt="Nissan Leaf" class="img-fluid">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ asset('images/ads/gal-1/standard-nissan-leaf-4.jpg')}}" data-toggle="lightbox" data-gallery="example-gallery">
-                                        <img src="{{ asset('images/ads/gal-1/thumb-nissan-leaf-4.jpg')}}" alt="Nissan Leaf" class="img-fluid">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
                             <div class="single-product-description">
@@ -170,12 +164,3 @@
     </main>
 @endsection
 
-@section('page_JS')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
-    <script>
-        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
-        });
-    </script>
-@endsection
