@@ -120,19 +120,16 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="input-group">
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-secondary dropdown-toggle btn-home-category" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select From Category</button>
-                                                <div class="dropdown-menu dropdown-menu-home">
-                                                    <a class="dropdown-item" href="{{url('/all-ads')}}">All Categories</a>
-                                                    <div role="separator" class="dropdown-divider"></div>
-                                                    @if(count($ParentCategories) > 0)
-                                                        @foreach($ParentCategories as $ParentCategory)
-                                                            <a class="dropdown-item" href="{{url('/all-ads')}}/?category={{$ParentCategory->slug}}">{{$ParentCategory->category_name}}</a>
-                                                            <div role="separator" class="dropdown-divider"></div>
-                                                        @endforeach
-                                                    @endif
-                                                </div>
-                                            </div>
+
+                                            <select class="selectpicker" name="category">
+                                                <option value="">All Categories</option>
+                                                @if(count($ParentCategories) > 0)
+                                                    @foreach($ParentCategories as $ParentCategory)
+                                                        <option value="{{$ParentCategory->slug}}" {{ ($ParentCategory->slug == $request->category) ? 'selected' : '' }} >{{$ParentCategory->category_name}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+
                                             <input type="text" name="search" class="form-control home-search-input" aria-label="Text input with dropdown button" placeholder="Search for anything">
                                             <input type="submit" value="" class="home-search-submit">
                                         </div>
@@ -158,10 +155,9 @@
                 </section>
                 <aside class="col-sm-2 icon-bar">
                     <div class="text-right social-icons">
-                        <a href="#" title="Facebook"><i class="fa fa-facebook-square"></i></a>
-                        <a href="#" title="Twitter"><i class="fa fa-twitter-square"></i></a>
-                        <a href="#" title="Youtube"><i class="fa fa-youtube-square"></i></a>
-                        <a href="#" title="Google Plus"><i class="fa fa-google-plus-square"></i></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::fullUrl()}}" title="Facebook"><i class="fa fa-facebook-square"></i></a>
+                        <a href="https://twitter.com/home?status={{Request::fullUrl()}}" title="Twitter"><i class="fa fa-twitter-square"></i></a>
+                        <a href="https://plus.google.com/share?url={{urlencode(Request::fullUrl())}}" title="Google Plus"><i class="fa fa-google-plus-square"></i></a>
                         <h2 class="text-right">Share...</h2>
                     </div>
                     <h2>Categories:</h2>

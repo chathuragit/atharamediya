@@ -23,10 +23,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $ParentCategories = Category::where('parent_category_id' , 0)->where('is_active' , 1)->get();
-        return view('home', ['ParentCategories' => $ParentCategories]);
+        return view('home', ['ParentCategories' => $ParentCategories, 'request' => $request]);
     }
 
     public function all_ads(Request $request)
@@ -38,7 +38,7 @@ class HomeController extends Controller
         $listing_web_space_banners = Banner::web_space_banners(3, null, 3);
 
         return view('advertisments', ['ParentCategories' => $ParentCategories, 'Advertisments' => $Advertisments,  'left_web_space_banners' => $left_web_space_banners
-            , 'listing_web_space_banners' => $listing_web_space_banners]);
+            , 'listing_web_space_banners' => $listing_web_space_banners, 'request' => $request]);
     }
 
     public function advertisment(Request $request, $slug){
@@ -54,6 +54,6 @@ class HomeController extends Controller
 
         return view('advertisment', ['ParentCategories' => $ParentCategories, 'Advertisment' => $Advertisment, 'Advertisments' => $Advertisments,
             'left_web_space_banners' => $left_web_space_banners, 'AdvertismentAttributes' => $AdvertismentAttributes, 'Advertisment_user' => $Advertisment_user
-            , 'listing_web_space_banners' => $listing_web_space_banners]);
+            , 'listing_web_space_banners' => $listing_web_space_banners, 'request' => $request]);
     }
 }

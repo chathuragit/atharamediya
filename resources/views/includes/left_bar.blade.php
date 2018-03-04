@@ -15,16 +15,16 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <!-- Enter Location -->
-            <form method="GET" action="http://www.atharamediya.lk/ads" accept-charset="UTF-8" class="advanced-search vgap">
+                {!! Form::open(['url' => 'all-ads/', 'method' => 'GET', 'class' => 'advanced-search vgap']) !!}
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="input-group enter-location">
-                            <input type="text" class="form-control home-search-input" aria-label="Text input with dropdown button" placeholder="Enter location">
+                            <input type="text" class="form-control home-search-input" name="location" aria-label="Text input with dropdown button" id="location" placeholder="Enter location" value="{{ isset($request->location)? $request->location : '' }}">
                             <input type="submit" value="" class="home-search-submit">
                         </div>
                     </div>
                 </div>
-            </form>
+                {!! Form::close() !!}
             <!-- /Enter Location -->
         </div>
     </div>
@@ -43,3 +43,44 @@
         </div>
     </div>
 </article>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTbPWFhqZPQhHCtAcLIhwAMkF1iMS4imQ&libraries=places&callback=initAutocomplete"
+        async defer></script>
+
+<script type="text/javascript">
+    var placeSearch, autocomplete;
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    function initAutocomplete() {
+        var options = {
+            types: ['(cities)'],
+            componentRestrictions: {country: "lk"}
+        };
+        var input = document.getElementById('location');
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+        var place = autocomplete.getPlace();
+        if(place != undefined && place != null){
+            if(place.address_components != undefined && place.address_components != null){
+                var type = place.address_components[0].types[0];
+                if(type == 'locality'){
+                    var addressType = place.address_components[0].types[0];
+                    var val = place.address_components[0][componentForm[addressType]];
+                    document.getElementById('location').value = val;
+                }
+            }
+        }
+
+        return true;
+    }
+</script>

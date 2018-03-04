@@ -1,79 +1,76 @@
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <!-- Search -->
-        <form method="GET" action="http://www.atharamediya.lk/ads" accept-charset="UTF-8" id="advanced-search" class="inner-page-advanced-search">
+
+    {!! Form::open(['url' => 'all-ads/', 'method' => 'GET', 'files'=>true, 'id' => 'advanced-search', 'class' => 'inner-page-advanced-search']) !!}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <!-- Search -->
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="input-group vgap">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-secondary dropdown-toggle btn-home-category" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select From Category</button>
-                            <div class="dropdown-menu dropdown-menu-home">
-                                <a class="dropdown-item" href="{{url('/all-ads')}}">All Categories</a>
-                                <div role="separator" class="dropdown-divider"></div>
-                                @if(count($ParentCategories) > 0)
-                                    @foreach($ParentCategories as $ParentCategory)
-                                        <a class="dropdown-item" href="{{url('/all-ads')}}/?category={{$ParentCategory->slug}}">{{$ParentCategory->category_name}}</a>
-                                        <div role="separator" class="dropdown-divider"></div>
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
-                        <input type="text" class="form-control home-search-input" aria-label="Text input with dropdown button" placeholder="Search for anything">
+                        <select class="selectpicker" name="category">
+                            <option value="">All Categories</option>
+                            @if(count($ParentCategories) > 0)
+                                @foreach($ParentCategories as $ParentCategory)
+                                    <option value="{{$ParentCategory->slug}}" {{ ($ParentCategory->slug == $request->category) ? 'selected' : '' }} >{{$ParentCategory->category_name}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+
+                        <input type="text" name="search" class="form-control home-search-input" aria-label="Text input with dropdown button" placeholder="Search for anything" value="{{$request->search}}">
                         <input type="submit" value="" class="home-search-submit">
                     </div>
                 </div>
             </div>
-        </form>
-        <!-- /Search -->
+            <!-- /Search -->
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-        <!-- Sort By Category -->
-        <form method="GET" action="http://www.atharamediya.lk/ads" accept-charset="UTF-8" class="advanced-search">
-            <div class="input-group">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-secondary dropdown-toggle btn-home-category" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort Based on Rating</button>
-                    <div class="dropdown-menu dropdown-menu-home">
-                        <a class="dropdown-item" href="#">Highest Rating First</a>
-                        <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Lowest Rating First</a>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                    <!-- Sort By Category -->
+                    <div class="input-group">
+                        <select class="selectpicker" name="sort_by_selling">
+                            <option value=""></option>
+                            <option value="Retailing">Retailing</option>
+                            <option value="Whole_Selling">Whole Selling</option>
+                        </select>
                     </div>
+                    <!-- /Sort By Category -->
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                    <!-- Sort By Price -->
+                    <div class="input-group">
+                        <select class="selectpicker" name="sort_by_price">
+                            <option value=""></option>
+                            <option value="lowast" {{ (isset($request->sort_by_price) && ($request->sort_by_price == "lowast")) ? "selected" : '' }}>Lowest Price First</option>
+                            <option value="highest" {{ (isset($request->sort_by_price) && ($request->sort_by_price == "highest")) ? "selected" : '' }}>Highest Price First</option>
+                        </select>
+                    </div>
+                    <!-- /Sort By Price -->
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                    <!-- Sort By Time -->
+                    <div class="input-group">
+                        <select class="selectpicker" name="sort_by_time">
+                            <option value="">Sort By Time</option>
+                            <option value="oldest" {{ (isset($request->sort_by_time) && ($request->sort_by_time == "oldest")) ? "selected" : '' }}>The Oldest Ad First</option>
+                            <option value="latest" {{ (isset($request->sort_by_time) && ($request->sort_by_time == "latest")) ? "selected" : '' }}>The Latest Ad First</option>
+                        </select>
+                    </div>
+                    <!-- /Sort By Time -->
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                    <!-- Sorting Members and Ad collectors -->
+                    <div class="input-group">
+                        <select class="selectpicker" name="sort_by_advertisertype">
+                            <option value="all">All</option>
+                            <option value="members">Members' Ads</option>
+                            <option value="ad_collecors">Ad Collectors' Ads</option>
+                        </select>
+                    </div>
+                    <!-- /Sorting Members and Ad collectors -->
                 </div>
             </div>
-        </form>
-        <!-- /Sort By Category -->
+        </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-        <!-- Sort By Price -->
-        <form method="GET" action="http://www.atharamediya.lk/ads" accept-charset="UTF-8" class="advanced-search">
-            <div class="input-group">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-secondary dropdown-toggle btn-home-category" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort Based on Price</button>
-                    <div class="dropdown-menu dropdown-menu-home">
-                        <a class="dropdown-item" href="#">Lowest Price First</a>
-                        <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Highest Price First</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <!-- /Sort By Price -->
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-        <!-- Sort By Price -->
-        <form method="GET" action="http://www.atharamediya.lk/ads" accept-charset="UTF-8" class="advanced-search">
-            <div class="input-group">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-secondary dropdown-toggle btn-home-category" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort Based on Time</button>
-                    <div class="dropdown-menu dropdown-menu-home">
-                        <a class="dropdown-item" href="#">The Oldest Ad First</a>
-                        <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">The Latest Ad First</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <!-- /Sort By Price -->
-    </div>
-</div>
+    {!! Form::close() !!}

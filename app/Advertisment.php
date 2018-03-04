@@ -39,7 +39,48 @@ class Advertisment extends Model
 
         $result->where('is_active', true);
 
-        return $result->orderBy('id','DESC')->paginate($per_page);
+        if($search != null){
+            if($search->sort_by_price != null){
+                switch ($search->sort_by_price){
+                    case 'lowast':
+                        $result->orderBy('price', 'ASC');
+                        break;
+
+                    case 'highest':
+                        $result->orderBy('price', 'DESC');
+                        break;
+                }
+
+            }
+
+            if(($search->sort_by_time != null) || ($search->sort_by_time != "")){
+                switch ($search->sort_by_time){
+                    case 'oldest':
+                        $result->orderBy('created_at', 'ASC');
+                        break;
+
+                    case 'latest':
+                        $result->orderBy('created_at', 'DESC');
+                        break;
+                }
+            }
+
+            if($search->sort_by_advertisertype != null){
+                switch ($search->sort_by_advertisertype){
+                    case 'oldest':
+                        $result->orderBy('created_at', 'ASC');
+                        break;
+
+                    case 'latest':
+                        $result->orderBy('created_at', 'DESC');
+                        break;
+                }
+            }
+        }else{
+            $result->orderBy('id','DESC');
+        }
+
+        return $result->paginate($per_page);
     }
 
     public static function similar_ads($Advertisement, $perpage){

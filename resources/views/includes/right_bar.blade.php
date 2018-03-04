@@ -2,10 +2,9 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="text-right social-icons">
-                <a href="#" title="Facebook"><i class="fa fa-facebook-square"></i></a>
-                <a href="#" title="Twitter"><i class="fa fa-twitter-square"></i></a>
-                <a href="#" title="Youtube"><i class="fa fa-youtube-square"></i></a>
-                <a href="#" title="Google Plus"><i class="fa fa-google-plus-square"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::fullUrl()}}" title="Facebook"><i class="fa fa-facebook-square"></i></a>
+                <a href="https://twitter.com/home?status={{Request::fullUrl()}}" title="Twitter"><i class="fa fa-twitter-square"></i></a>
+                <a href="https://plus.google.com/share?url={{urlencode(Request::fullUrl())}}" title="Google Plus"><i class="fa fa-google-plus-square"></i></a>
                 <h2 class="text-right">Share...</h2>
             </div>
             <h2>Categories:</h2>
