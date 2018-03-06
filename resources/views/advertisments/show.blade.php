@@ -79,6 +79,14 @@
                         </div>
 
 
+                        <div class="form-group {{ $errors->has('location') ? ' has-error' : '' }}">
+                            <label>Location</label>
+                            <input type="text" class="form-control home-search-input" name="location" value="{{ ($Advertisment->location != '')? $Advertisment->location : '' }}" aria-label="Text input with dropdown button" id="location" placeholder="Enter location" readonly>
+
+                            @if ($errors->has('location'))
+                                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('location') }}</label>
+                            @endif
+                        </div>
                         {{--<div class="form-group {{ $errors->has('location') ? ' has-error' : '' }}">
                             <label>Location</label>
                             <input type="text" class="form-control" placeholder="Enter location" name="location" value="{{old('location')}}" required>
