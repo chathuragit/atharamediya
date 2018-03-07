@@ -37,7 +37,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="input-group vgap">
-                                            <select class="selectpicker" name="category">
+                                            <select class="selectpicker category_selectpicker" name="category">
                                                 <option value="">All Categories</option>
                                                 @if(count($ParentCategories) > 0)
                                                     @foreach($ParentCategories as $ParentCategory)

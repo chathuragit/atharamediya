@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="input-group vgap">
-                        <select class="selectpicker" name="category">
+                        <select class="selectpicker category_selectpicker" name="category">
                             <option value="">All Categories</option>
                             @if(count($ParentCategories) > 0)
                                 @foreach($ParentCategories as $ParentCategory)
@@ -30,7 +30,7 @@
                     <!-- Sort By Category -->
                     <div class="input-group">
                         <select class="selectpicker" name="sort_by_selling">
-                            <option value=""></option>
+                            <option value="">All</option>
                             <option value="Retailing">Retailing</option>
                             <option value="Whole_Selling">Whole Selling</option>
                         </select>
@@ -41,7 +41,7 @@
                     <!-- Sort By Price -->
                     <div class="input-group">
                         <select class="selectpicker" name="sort_by_price">
-                            <option value=""></option>
+                            <option value="">All</option>
                             <option value="lowast" {{ (isset($request->sort_by_price) && ($request->sort_by_price == "lowast")) ? "selected" : '' }}>Lowest Price First</option>
                             <option value="highest" {{ (isset($request->sort_by_price) && ($request->sort_by_price == "highest")) ? "selected" : '' }}>Highest Price First</option>
                         </select>

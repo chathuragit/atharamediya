@@ -16,7 +16,7 @@ class CreateCategoryAttributesTable extends Migration
         Schema::create('category_attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('attribute_id');
-            $table->string('value');
+            $table->string('value')->nullable();
             $table->integer('category_id');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

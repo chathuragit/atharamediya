@@ -32,6 +32,8 @@ class Advertisment extends Model
                     $District = District::where('district', $search->location)->first();
                     if($District != null){
                         $query->where('location_id', $District->id);
+                    }else{
+                        $query->where('location', 'like', '%' . $search->location . '%');
                     }
                 }
             });
