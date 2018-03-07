@@ -826,7 +826,7 @@ p.member-contact {
 }
 
 .detail-gallery {
-    padding-bottom: 30px;
+    padding-bottom: 15px;
 }
 
 .detail-gallery .detail-gallery-main-image {
@@ -866,12 +866,26 @@ p.member-contact {
 }
 
 .detail-gallery .detail-gallery-thumbs {
-    padding-top: 25px;
+    padding-top: 15px;
+    width: 100%;
 }
 
 .detail-gallery .detail-gallery-thumbs ul {
     padding: 0px;
     margin: 0px;
+}
+
+.single-product-description, .single-product-details {
+    margin-top: 15px;
+}
+
+select.selectpicker {
+    width: 100%;
+}
+
+select.selectpicker.category_selectpicker,
+select.selectpicker.category_selectpicker {
+    width: auto;
 }
 
 .detail-gallery .detail-gallery-thumbs ul li {

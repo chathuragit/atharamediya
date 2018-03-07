@@ -8,6 +8,7 @@
                 <h2 class="text-right">Share...</h2>
             </div>
             <h2>Categories:</h2>
+            <div class="category-list">
             @if(count($ParentCategories) > 0)
                 @foreach($ParentCategories as $ParentCategory)
                     <p>
@@ -18,6 +19,7 @@
                     </p>
                 @endforeach
             @endif
+            </div>
         </div>
     </div>
     <div class="row">
