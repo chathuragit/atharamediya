@@ -37,7 +37,36 @@ class Advertisment extends Model
                     }
                 }
             });
+
+            if($search->sort_by_selling != null){
+                switch ($search->sort_by_selling){
+                    case 'Whole_Selling':
+                        $result->where('selling_type', '1');
+                        break;
+
+                    case 'Retailing':
+                        $result->where('selling_type', '0');
+                        break;
+                }
+            }
+
+            if($search->sort_by_advertisertype != null){
+                switch ($search->sort_by_advertisertype){
+                    case 'members':
+                        $members = User::where('role', 4)->get();
+                        $members = collect($members)->map(function($x){ return $x->id;})->toArray();
+                        $result->whereIn('user_id', $members);
+                        break;
+
+                    case 'ad_collecors':
+                        $members = User::where('role', 3)->get();
+                        $members = collect($members)->map(function($x){ return $x->id;})->toArray();
+                        $result->whereIn('user_id', $members);
+                        break;
+                }
+            }
         }
+
 
         $result->where('is_active', true);
 
@@ -78,6 +107,8 @@ class Advertisment extends Model
                         break;
                 }
             }
+
+
         }else{
             $result->orderBy('id','DESC');
         }

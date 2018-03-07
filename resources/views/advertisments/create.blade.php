@@ -106,6 +106,14 @@
 
                         <div class="attributes_wrapper"></div>
 
+
+                        <div class="input-group">
+                            <label>Selling Type</label>
+                            <select class="form-control" name="selling_type">
+                                <option value="Retailing">Retailing</option>
+                                <option value="Whole_Selling">Whole Selling</option>
+                            </select>
+                        </div>
                         <hr/>
 
                         <div class="form-group">
@@ -171,7 +179,7 @@
 
 @section('page_JS')
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTbPWFhqZPQhHCtAcLIhwAMkF1iMS4imQ&libraries=places&callback=initAutocomplete"
-            async defer></script>
+                     async defer></script>
 
     <script type="text/javascript">
         var placeSearch, autocomplete;

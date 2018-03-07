@@ -170,6 +170,13 @@
                             @endif
                         </div>
 
+                        <div class="input-group">
+                            <label>Selling Type</label>
+                            <select class="form-control" name="selling_type">
+                                <option value="Retailing" {{ ($Advertisment->selling_type == 0) ? "selected" : '' }}>Retailing</option>
+                                <option value="Whole_Selling" {{ ($Advertisment->selling_type == 1) ? "selected" : '' }}>Whole Selling</option>
+                            </select>
+                        </div>
                         <hr/>
 
                         <div class="form-group">

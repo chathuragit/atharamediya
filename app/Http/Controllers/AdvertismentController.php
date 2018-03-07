@@ -98,6 +98,7 @@ class AdvertismentController extends Controller
             'category' => 'required',
             'advertisment_location' => 'required',
             'location' => 'required',
+            'selling_type' => 'required',
             //'locationlocation' => 'required',
             'advertisment_desc' => 'required',
         );
@@ -128,6 +129,7 @@ class AdvertismentController extends Controller
             $Advertisment->location_id =  $request->advertisment_location;
             $Advertisment->location =  $request->location;
             $Advertisment->price =  $request->price;
+            $Advertisment->selling_type =  ($request->selling_type == 'Whole_Selling') ? 1 : 0;
             $Advertisment->is_negotiable = $request->negotiable;
             $Advertisment->contact_email = $request->contact_email;
             $Advertisment->contact_mobile = $request->contact_number;
@@ -214,6 +216,7 @@ class AdvertismentController extends Controller
             'category' => 'required',
             'advertisment_location' => 'required',
             'location' => 'required',
+            'selling_type' => 'required',
             //'locationlocation' => 'required',
             'advertisment_desc' => 'required',
         );
@@ -249,6 +252,7 @@ class AdvertismentController extends Controller
             //$Advertisment->status = (isset($request->advertisment_status)) ? $request->advertisment_status : $Advertisment->status;
             $Advertisment->description =  $request->advertisment_desc;
             $Advertisment->location_id =  $request->advertisment_location;
+            $Advertisment->selling_type =  ($request->selling_type == 'Whole_Selling') ? 1 : 0;
             $Advertisment->location =  $request->location;
             $Advertisment->price =  $request->price;
             $Advertisment->is_negotiable = $request->negotiable;

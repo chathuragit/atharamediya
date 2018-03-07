@@ -31,8 +31,8 @@
                     <div class="input-group">
                         <select class="selectpicker" name="sort_by_selling">
                             <option value="">All</option>
-                            <option value="Retailing">Retailing</option>
-                            <option value="Whole_Selling">Whole Selling</option>
+                            <option value="Retailing" {{ (isset($request->sort_by_selling) && ($request->sort_by_selling == "Retailing")) ? "selected" : '' }}>Retailing</option>
+                            <option value="Whole_Selling" {{ (isset($request->sort_by_selling) && ($request->sort_by_selling == "Whole_Selling")) ? "selected" : '' }}>Whole Selling</option>
                         </select>
                     </div>
                     <!-- /Sort By Category -->
@@ -64,8 +64,8 @@
                     <div class="input-group">
                         <select class="selectpicker" name="sort_by_advertisertype">
                             <option value="all">All</option>
-                            <option value="members">Members' Ads</option>
-                            <option value="ad_collecors">Ad Collectors' Ads</option>
+                            <option value="members" {{ (isset($request->sort_by_advertisertype) && ($request->sort_by_advertisertype == "members")) ? "selected" : '' }}>Members' Ads</option>
+                            <option value="ad_collecors" {{ (isset($request->sort_by_advertisertype) && ($request->sort_by_advertisertype == "ad_collecors")) ? "selected" : '' }}>Ad Collectors' Ads</option>
                         </select>
                     </div>
                     <!-- /Sorting Members and Ad collectors -->
