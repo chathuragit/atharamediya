@@ -109,7 +109,7 @@
                 <article class="col-sm-7">
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="http://localhost/atharamedi" title="Atharamediya Logo"><img src="images/logo-atharamediya.png" alt="Athramediya Logo" class="img-fluid home-logo"></a>
+                            <a href="{{url('/')}}" title="Atharamediya Logo"><img src="images/logo-atharamediya.png" alt="Athramediya Logo" class="img-fluid home-logo"></a>
                         </div>
                     </div>
                     <div class="row">
