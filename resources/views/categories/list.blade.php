@@ -50,7 +50,7 @@
                                         <td>{{$category->id}}</td>
                                         <td>{{$category->category_name}}</td>
                                         <td>
-                                            @php $parent_category = $category::assigned_parent_category($category->parent_category_id) @endphp
+                                            @php $parent_category = $category->assigned_parent_category($category->parent_category_id) @endphp
                                             {{ (!is_null($parent_category) ? $parent_category->category_name : '-')}}
                                         </td>
                                         <td><input @if($category->is_active) checked @endif data-toggle="toggle" data-style="ios" data-size="mini" type="checkbox" class="toggle-event" data-id="{{$category->id}}"></td>

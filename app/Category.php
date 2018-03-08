@@ -11,7 +11,8 @@ class Category extends Model
     use Sluggable;
 
     public static function assigned_parent_category($parent_category){
-        return Category::where('parent_category_id', $parent_category)->where('id', '!=', 1)->first();
+        return Category::where('id', $parent_category)->first();
+//        return Category::where('parent_category_id', $parent_category)->where('id', '!=', 1)->first();
     }
 
     public static function FilterCategory($per_page, $search = null){
