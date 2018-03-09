@@ -169,6 +169,18 @@ class Advertisment extends Model
             ->get();
     }
 
+    public static function advertisment_default_attribute_and_value($id, $category_id){
+        return DB::table('category_attributes')
+            ->join('advertisment_attributes', function ($join) {
+                $join->on('advertisment_attributes.attribute_id', '=', 'category_attributes.attribute_id');
+            })
+            ->where('advertisment_attributes.advertisment_id', $id)
+            ->where('category_attributes.is_default', true)
+
+            ->select('advertisment_attributes.*')
+            ->first();
+    }
+
     public static function advertisment_user($id){
         return DB::table('advertisments')
             ->join('users', function ($join) {

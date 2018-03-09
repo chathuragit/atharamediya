@@ -55,7 +55,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'category_name' => 'required'
+            'category_name' => 'required',
+            'default_attribute' => 'required',
         );
 
 
@@ -77,6 +78,7 @@ class CategoryController extends Controller
                     $Attribute = new CategoryAttribute();
                     $Attribute->attribute_id = $attribute;
                     $Attribute->category_id = $Category->id;
+                    $Attribute->is_default = ($attribute == $request->default_attribute) ? 1 : 0;
                     $Attribute->save();
                 }
             }
@@ -100,7 +102,8 @@ class CategoryController extends Controller
         $Category = Category::find($id);
         $categories = Category::where('id', $Category->parent_category_id)->get();
         $attributes = Attribute::where('is_active', 1)->get();
-        return view('categories.show', ['categories' => $categories, 'attributes' => $attributes, 'Category' => $Category]);
+        $default_attribute = CategoryAttribute::where('is_default', 1)->where('category_id', $Category->id)->first();
+        return view('categories.show', ['categories' => $categories, 'attributes' => $attributes, 'default_attribute' => $default_attribute, 'Category' => $Category]);
     }
 
     /**
@@ -114,7 +117,8 @@ class CategoryController extends Controller
         $Category = Category::find($id);
         $categories = Category::where('id', '!=',  $id)->where('is_active', 1)->get();
         $attributes = Attribute::where('is_active', 1)->get();
-        return view('categories.edit', ['categories' => $categories, 'attributes' => $attributes, 'Category' => $Category]);
+        $default_attribute = CategoryAttribute::where('is_default', 1)->where('category_id', $Category->id)->first();
+        return view('categories.edit', ['categories' => $categories, 'attributes' => $attributes, 'default_attribute' => $default_attribute, 'Category' => $Category]);
     }
 
     /**
@@ -129,7 +133,8 @@ class CategoryController extends Controller
         $Category = Category::find($id);
 
         $rules = array(
-            'category_name' => 'required'
+            'category_name' => 'required',
+            'default_attribute' => 'required',
         );
 
 
@@ -156,6 +161,7 @@ class CategoryController extends Controller
                         $Attribute = new CategoryAttribute();
                         $Attribute->attribute_id = $attribute;
                         $Attribute->category_id = $Category->id;
+                        $Attribute->is_default = ($attribute == $request->default_attribute) ? 1 : 0;
                         $Attribute->save();
                     }
                 }

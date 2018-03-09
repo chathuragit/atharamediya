@@ -113,6 +113,7 @@ class AdvertismentController extends Controller
             $Advertisment = new Advertisment();
             $Advertisment->title = $request->advertisment_title;
             $Advertisment->category_id = $request->category;
+            $Advertisment->sub_category_id = $request->sub_category;
             $Advertisment->user_id = Auth::user()->id;
 
             if(Auth::user()->role > 2) {
@@ -170,8 +171,9 @@ class AdvertismentController extends Controller
     {
         $Advertisment = Advertisment::find($id);
         $categories = Category::where('is_active', 1)->get();
+        $SubCategories = Category::where('parent_category_id' , $Advertisment->category_id)->where('is_active' , 1)->get();
         $districts = District::all();
-        return view('advertisments.show', ['categories' => $categories, 'districts' => $districts, 'Advertisment' => $Advertisment]);
+        return view('advertisments.show', ['categories' => $categories, 'SubCategories' => $SubCategories, 'districts' => $districts, 'Advertisment' => $Advertisment]);
     }
 
     /**
@@ -184,6 +186,7 @@ class AdvertismentController extends Controller
     {
         $Advertisment = Advertisment::find($id);
         $categories = Category::where('is_active', 1)->get();
+        $SubCategories = Category::where('parent_category_id' , $Advertisment->category_id)->where('is_active' , 1)->get();
         $districts = District::all();
         $AdvertismentStatus = AdvertismentStatus::all();
 
@@ -198,7 +201,7 @@ class AdvertismentController extends Controller
             }
         }
 
-        return view('advertisments.edit', ['categories' => $categories, 'profile' => $profile, 'districts' => $districts, 'Advertisment' => $Advertisment, 'AdvertismentStatus' => $AdvertismentStatus]);
+        return view('advertisments.edit', ['categories' => $categories, 'SubCategories' => $SubCategories, 'profile' => $profile, 'districts' => $districts, 'Advertisment' => $Advertisment, 'AdvertismentStatus' => $AdvertismentStatus]);
     }
 
     /**
@@ -231,6 +234,7 @@ class AdvertismentController extends Controller
 
             $Advertisment->title = $request->advertisment_title;
             $Advertisment->category_id = $request->category;
+            $Advertisment->sub_category_id = $request->sub_category;
             $Advertisment->user_id = Auth::user()->id;
 
             if(Auth::user()->role > 2) {
@@ -358,6 +362,20 @@ class AdvertismentController extends Controller
         $Attributes = $Category->assigned_attributes;
 
         return view('advertisments.attributes', ['Attributes' => $Attributes, 'Category' => $Category]);
+    }
+
+    public function sub_categories(Request $request){
+        $SubCategories = Category::where('parent_category_id' , $request->category)->where('is_active' , 1)->get();
+
+        $SubCategorySelect = '<option value="0">Select Sub Category</option>';
+
+        if(count($SubCategories) > 0){
+            foreach ($SubCategories as $SubCategory){
+                $SubCategorySelect .= '<option value="'.$SubCategory->id.'">'.$SubCategory->category_name.'</option>';
+            }
+        }
+
+        return $SubCategorySelect;
     }
 
     public function remove_image(){

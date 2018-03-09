@@ -61,6 +61,21 @@
                             @endif
                         </div>
 
+                        <div class="form-group {{ $errors->has('default_attribute') ? ' has-error' : '' }}">
+                            <label>Select Default Attribute</label>
+                            <select class="form-control" name="default_attribute" required>
+                                <option value="0">Select Default Attribute</option>
+                                @if(count($attributes) > 0)
+                                    @foreach($attributes as $attribute)
+                                        <option value="{{$attribute->id}}" {{ ((count($default_attribute) > 0) && ($default_attribute->attribute_id == $attribute->id)) ? 'selected' : '' }}>{{$attribute->attribute_name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+
+                            @if ($errors->has('default_attribute'))
+                                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('default_attribute') }}</label>
+                            @endif
+                        </div>
                         <hr/>
                         @if(count($attributes) > 0)
                             @foreach($attributes as $attribute)

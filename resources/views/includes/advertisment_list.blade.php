@@ -50,7 +50,9 @@
             </div>
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <p class="item-title"><a href="{{url('/advertisment/'.$Advertisment->slug)}}" title="{{$Advertisment->title}}">{{$Advertisment->title}}</a></p>
-                <p class="item-meta">20.0 Perches</p>
+                <p class="item-meta">
+                    {{ (count($Advertisment->advertisment_default_attribute_and_value($Advertisment->id, $Advertisment->sub_category_id)) > 0) ? $Advertisment->advertisment_default_attribute_and_value($Advertisment->id, $Advertisment->sub_category_id)->attribute_value : ''}}
+                </p>
                 <p class="item-location">{{($Advertisment->location != '') ? $Advertisment->location.', ': ''}}{{(count($Advertisment->advertisment_location) > 0) ? $Advertisment->advertisment_location->district : ''}}</p>
                 <p class="item-info text-right"><span class="item-price">{{ 'Rs. '.$Advertisment->price.' /=' }}</span></p>
             </div>

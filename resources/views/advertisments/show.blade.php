@@ -54,6 +54,23 @@
                         </div>
 
 
+                        <div class="form-group {{ $errors->has('sub_category') ? ' has-error' : '' }}">
+                            <label>Select Sub Category</label>
+                            <select class="form-control" name="sub_category" readonly>
+                                <option value="0">Select Sub Category</option>
+                                @if(count($SubCategories) > 0)
+                                    @foreach($SubCategories as $category)
+                                        <option value="{{$category->id}}" {{ ($Advertisment->sub_category_id == $category->id) ? 'selected' : '' }}>{{$category->category_name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+
+                            @if ($errors->has('sub_category'))
+                                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('sub_category') }}</label>
+                            @endif
+                        </div>
+
+
                         <div class="form-group {{ $errors->has('advertisment_desc') ? ' has-error' : '' }}">
                             <label>Advertisment Description</label>
                             <textarea class="form-control" name="advertisment_desc" readonly>{{$Advertisment->description}}</textarea>

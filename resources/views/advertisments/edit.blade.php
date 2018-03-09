@@ -53,6 +53,22 @@
                             @endif
                         </div>
 
+                        <div class="form-group {{ $errors->has('sub_category') ? ' has-error' : '' }}">
+                            <label>Select Sub Category</label>
+                            <select class="form-control" name="sub_category" required>
+                                <option value="0">Select Sub Category</option>
+                                @if(count($SubCategories) > 0)
+                                    @foreach($SubCategories as $category)
+                                        <option value="{{$category->id}}" {{ ($Advertisment->sub_category_id == $category->id) ? 'selected' : '' }}>{{$category->category_name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+
+                            @if ($errors->has('sub_category'))
+                                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('sub_category') }}</label>
+                            @endif
+                        </div>
+
 
                         <div class="form-group {{ $errors->has('advertisment_desc') ? ' has-error' : '' }}">
                             <label>Advertisment Description</label>
@@ -361,6 +377,18 @@
                     success: function(data)
                     {
                         $('.attributes_wrapper').html(data);
+                    },
+                    beforeSend : function(){
+                    }
+                });
+
+                $.ajax({
+                    url : "/advertisments/sub_categories",
+                    type: 'POST',
+                    data : { category : category, '_token': $('meta[name="csrf-token"]').attr('content')},
+                    success: function(data)
+                    {
+                        $('select[name=sub_category]').html(data);
                     },
                     beforeSend : function(){
                     }

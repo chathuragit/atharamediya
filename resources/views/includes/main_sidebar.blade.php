@@ -22,6 +22,7 @@
                 </a>
             </li>
 
+            @if(Auth::user()->role <= 1)
             @php $treeview = array('administrators', 'advertisement_collectors', 'advertising_members', 'web_space_holders', 'individual_advertisers'); @endphp
             <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
                 <a href="#">
@@ -39,6 +40,7 @@
                     <li class="{{ Request::segment(1) == 'individual_advertisers' ? 'active' : ''}}"><a href="{{url('/individual_advertisers')}}"><i class="fa fa-circle-o text-green"></i> Individual Advertisers</a></li>
                 </ul>
             </li>
+            @endif
 
 
             @php $treeview = array('categories', 'attributes'); @endphp

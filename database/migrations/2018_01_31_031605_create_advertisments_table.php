@@ -18,6 +18,7 @@ class CreateAdvertismentsTable extends Migration
             $table->text('title');
             $table->text('slug')->nullable();
             $table->integer('category_id');
+            $table->integer('sub_category_id')->default(0);
             $table->integer('user_id');
             $table->boolean('is_active')->default(true);
             $table->boolean('status')->default(true);
