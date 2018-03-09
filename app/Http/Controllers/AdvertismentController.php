@@ -68,7 +68,7 @@ class AdvertismentController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('is_active', 1)->get();
+        $categories = Category::where('parent_category_id', 0)->where('is_active', 1)->get();
         $districts = District::all();
 
         $profile = null;
@@ -170,7 +170,7 @@ class AdvertismentController extends Controller
     public function show($id)
     {
         $Advertisment = Advertisment::find($id);
-        $categories = Category::where('is_active', 1)->get();
+        $categories = Category::where('parent_category_id', 0)->where('is_active', 1)->get();
         $SubCategories = Category::where('parent_category_id' , $Advertisment->category_id)->where('is_active' , 1)->get();
         $districts = District::all();
         return view('advertisments.show', ['categories' => $categories, 'SubCategories' => $SubCategories, 'districts' => $districts, 'Advertisment' => $Advertisment]);
@@ -185,7 +185,7 @@ class AdvertismentController extends Controller
     public function edit($id)
     {
         $Advertisment = Advertisment::find($id);
-        $categories = Category::where('is_active', 1)->get();
+        $categories = Category::where('parent_category_id', 0)->where('is_active', 1)->get();
         $SubCategories = Category::where('parent_category_id' , $Advertisment->category_id)->where('is_active' , 1)->get();
         $districts = District::all();
         $AdvertismentStatus = AdvertismentStatus::all();
