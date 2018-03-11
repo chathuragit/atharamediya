@@ -276,6 +276,23 @@
                     }
                 });
             })
+
+            $('select[name=sub_category]').on('change', function() {
+                var category = this.value;
+
+                $.ajax({
+                    url : "/advertisments/advertisment_attributes",
+                    type: 'POST',
+                    data : { category : category, '_token': $('meta[name="csrf-token"]').attr('content')},
+                    success: function(data)
+                    {
+                        $('.attributes_wrapper').html(data);
+                    },
+                    beforeSend : function(){
+                        $('.attributes_wrapper').html('');
+                    }
+                });
+            })
         });
     </script>
 @endsection

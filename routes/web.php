@@ -55,6 +55,17 @@ Route::group(['middleware' => ['SuperAdministrator']], function () {
     Route::post('/individual_advertisers/change_status', 'IndividualAdvertiserController@change_status');
     Route::get('/individual_advertisers/filter', 'IndividualAdvertiserController@filter');
     Route::resource('/individual_advertisers', 'IndividualAdvertiserController')->middleware('SuperAdministrator');
+
+    Route::post('/categories/change_status', 'CategoryController@change_status');
+    Route::get('/categories/filter', 'CategoryController@filter');
+    Route::resource('/categories', 'CategoryController');
+
+    Route::get('/attributes/filter', 'AttributeController@filter');
+    Route::post('/attributes/change_status', 'AttributeController@change_status');
+    Route::resource('/attributes', 'AttributeController')->middleware('SuperAdministrator');
+
+    Route::get('/logs/filter', 'LogController@filter');
+    Route::get('/logs', 'LogController@index');
 });
 
 Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');
@@ -62,19 +73,6 @@ Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');
 
 
 //Route::resource('/administrators', 'AdministratorController')->middleware('SuperAdministrator');
-
-
-
-Route::post('/categories/change_status', 'CategoryController@change_status');
-Route::get('/categories/filter', 'CategoryController@filter');
-Route::resource('/categories', 'CategoryController')->middleware('SuperAdministrator');
-
-Route::get('/attributes/filter', 'AttributeController@filter');
-Route::post('/attributes/change_status', 'AttributeController@change_status');
-Route::resource('/attributes', 'AttributeController')->middleware('SuperAdministrator');
-
-Route::get('/logs/filter', 'LogController@filter');
-Route::get('/logs', 'LogController@index');
 
 Route::get('/advertisments_active', 'AdvertismentController@index');
 Route::get('/advertisments_pending', 'AdvertismentController@index');

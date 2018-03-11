@@ -40,7 +40,7 @@
                     <li class="{{ Request::segment(1) == 'individual_advertisers' ? 'active' : ''}}"><a href="{{url('/individual_advertisers')}}"><i class="fa fa-circle-o text-green"></i> Individual Advertisers</a></li>
                 </ul>
             </li>
-            @endif
+
 
 
             @php $treeview = array('categories', 'attributes'); @endphp
@@ -57,6 +57,7 @@
                     <li class="{{ Request::segment(1) == 'attributes' ? 'active' : ''}}"><a href="{{url('/attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
                 </ul>
             </li>
+            @endif
 
             @php $treeview = array('advertisments', 'advertisments_active', 'advertisments_pending', 'advertisments_expired', 'advertisments_blocked'); @endphp
             <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
@@ -90,11 +91,13 @@
                 </ul>
             </li>
 
+            @if(Auth::user()->role <= 1)
             <li class="{{ Request::segment(1) == 'logs' ? 'active' : ''}}">
                 <a href="{{url('/logs')}}">
                     <i class="fa fa-history"></i> <span>Logs</span>
                 </a>
             </li>
+            @endif
 
             <li>
                 <a href="{{ route('logout') }}"

@@ -30,6 +30,7 @@ class CreateAdvertismentsTable extends Migration
             $table->string('contact_email','255')->nullable();
             $table->string('contact_mobile','25')->nullable();
             $table->boolean('is_negotiable')->default(false);
+            $table->integer('selling_type')->default(0);
             $table->dateTime('expier_at');
             $table->timestamps();
         });

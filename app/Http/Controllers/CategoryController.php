@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->per_page  = 2;
+        $this->per_page  = 25;
     }
     /**
      * Display a listing of the resource.

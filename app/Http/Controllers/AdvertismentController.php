@@ -26,7 +26,7 @@ class AdvertismentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->per_page  = 10;
+        $this->per_page  = 25;
     }
     /**
      * Display a listing of the resource.
