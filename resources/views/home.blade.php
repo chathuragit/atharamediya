@@ -162,11 +162,13 @@
                     </div>
                     <h2>Categories:</h2>
                     @if(count($ParentCategories) > 0)
+                        <div class="category-list">
                         @foreach($ParentCategories as $ParentCategory)
                         <p>
                             <i class="fa {{$ParentCategory->fontawesome}}" aria-hidden="true"></i><a href="{{url('/all-ads')}}/?category={{$ParentCategory->slug}}" title="{{$ParentCategory->category_name}}">{{$ParentCategory->category_name}}</a>
                         </p>
                         @endforeach
+                        </div>
                     @endif
                 </aside>
             </div>
