@@ -24,7 +24,7 @@
                 <article class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <a href="http://localhost/atharamedi" title="Atharamediya Logo"><img src="images/logo-atharamediya.png" alt="Athramediya Logo" class="img-fluid home-logo"></a>
+                            <a href="{{url('/')}}" title="Atharamediya"><img src="{{ asset('/images/logo-atharamediya.png') }}" alt="Athramediya" class="img-fluid home-logo"></a>
                         </div>
                     </div>
                     <!-- intro -->

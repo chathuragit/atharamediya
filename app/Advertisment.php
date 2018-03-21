@@ -25,6 +25,7 @@ class Advertisment extends Model
                     $category = Category::where('slug', $search->category)->first();
                     if($category != null){
                         $query->where('category_id', $category->id);
+                        $query->orWhere('sub_category_id', $category->id);
                     }
                 }
 
@@ -65,10 +66,9 @@ class Advertisment extends Model
                         break;
                 }
             }
+
+            $result->where('is_active', true);
         }
-
-
-        $result->where('is_active', true);
 
         if($search != null){
             if($search->sort_by_price != null){

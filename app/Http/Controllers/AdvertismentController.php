@@ -235,7 +235,6 @@ class AdvertismentController extends Controller
             $Advertisment->title = $request->advertisment_title;
             $Advertisment->category_id = $request->category;
             $Advertisment->sub_category_id = $request->sub_category;
-            $Advertisment->user_id = Auth::user()->id;
 
             if(Auth::user()->role > 2) {
                 $Advertisment->is_active = false;

@@ -22,7 +22,8 @@ Route::get('/advertisment/{slug}', 'HomeController@advertisment')->name('ads');
 
 Route::get('/members', 'HomeController@members')->name('members');
 Route::get('/member/{slug}', 'HomeController@member')->name('member');
-Route::get('/adcollectors', 'HomeController@all_ads')->name('all_ads');
+Route::get('/adcollectors', 'HomeController@ad_collectors')->name('adcollectors');
+Route::get('/adcollector/{slug}', 'HomeController@ad_collector')->name('adcollector');
 Route::get('/services', 'HomeController@all_ads')->name('all_ads');
 
 Auth::routes();

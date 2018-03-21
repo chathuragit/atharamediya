@@ -18,12 +18,12 @@ class Member extends Model
             ]
         ];
     }
-    public static function memberslist($per_page){
+    public static function memberslist($per_page, $role){
         return DB::table('users')
             ->join('members', function ($join) {
                 $join->on('members.user_id', '=', 'users.id');
             })
-            ->where('users.role', 4)
+            ->where('users.role', $role)
             ->where('users.is_active', true)
             ->select('members.*')
             ->paginate($per_page);

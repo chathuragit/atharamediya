@@ -94,6 +94,28 @@
                             @endif
                         </div>
 
+                        <div class="form-group{{ $errors->has('corporate_color_forground') ? ' has-error' : '' }}">
+                            <label for="corporate_color_forground">Corporate Color Forgroundr:</label>
+                            <input id="corporate_color_forground" type="text" class="form-control" name="corporate_color_forground" value="{{$Member->corporate_color_forground}}" >
+
+                            @if ($errors->has('corporate_color_forground'))
+                                <span class="help-block">
+                                                        <strong>{{ $errors->first('corporate_color_forground') }}</strong>
+                                                    </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group{{ $errors->has('corporate_color_background') ? ' has-error' : '' }}">
+                            <label for="corporate_color_background">Corporate Color Background:</label>
+                            <input id="corporate_color_background" type="text" class="form-control" name="corporate_color_background" value="{{$Member->corporate_color_background}}" >
+
+                            @if ($errors->has('corporate_color_background'))
+                                <span class="help-block">
+                                                        <strong>{{ $errors->first('corporate_color_background') }}</strong>
+                                                    </span>
+                            @endif
+                        </div>
+
                         <hr/>
 
                         <div class="form-group{{ $errors->has('images') ? ' has-error' : '' }}">

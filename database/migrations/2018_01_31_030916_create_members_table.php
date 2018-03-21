@@ -25,6 +25,8 @@ class CreateMembersTable extends Migration
             $table->text('address')->nullable();
             $table->string('contact_number', '25')->nullable();
             $table->string('contact_email', '255')->nullable();
+            $table->string('corporate_color_forground', '8')->nullable();
+            $table->string('corporate_color_background', '8')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

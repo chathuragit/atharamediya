@@ -12,7 +12,7 @@
                 <a class="nav-link" href="#">Services</a>
             </li>
 
-            <li class="nav-item {{ Request::segment(1) == 'adcollectors' ? 'active' : ''}}">
+            <li class="nav-item  {{ ((Request::segment(1) == 'adcollectors') || (Request::segment(1) == 'adcollector')) ? 'active' : ''}}">
                 <a class="nav-link" href="{{url('/adcollectors')}}">Ad Collectors</a>
             </li>
 

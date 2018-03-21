@@ -53,24 +53,24 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h3>Contact the Member</h3>
+                            <h3>Contact the Ad Collector</h3>
                             @if($Member->contact_number != null)
-                            <p class="member-contact">
-                                <a href="tel:{{$Member->contact_number}}"><i class="fa fa-phone-square" aria-hidden="true"></i>
-                                    <span class="member-tel">{{$Member->contact_number}}</span>
-                            </p>
+                                <p class="member-contact">
+                                    <a href="tel:{{$Member->contact_number}}"><i class="fa fa-phone-square" aria-hidden="true"></i>
+                                        <span class="member-tel">{{$Member->contact_number}}</span>
+                                </p>
                             @endif
                             @if($Member->contact_email != null)
-                            <p class="member-contact">
-                                <a href="mailto:{{$Member->contact_email}}"><i class="fa fa-envelope-square" aria-hidden="true"></i>
-                                    <span class="contact-email">{{$Member->contact_email}}</span></a>
-                            </p>
+                                <p class="member-contact">
+                                    <a href="mailto:{{$Member->contact_email}}"><i class="fa fa-envelope-square" aria-hidden="true"></i>
+                                        <span class="contact-email">{{$Member->contact_email}}</span></a>
+                                </p>
                             @endif
 
                             @if($Member->address != null)
-                            <hr>
-                            <h3>Member's Office:</h3>
-                            <p>{{$Member->address}}</p>
+                                <hr>
+                                <h3>Ad Collector's Office:</h3>
+                                <p>{{$Member->address}}</p>
                             @endif
 
                             <hr>
@@ -108,7 +108,7 @@
 
                     <div class="row product-list-item">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <a href="{{url('/member/'.$Member->slug)}}" title="{{$Member->title}}">
+                            <a href="{{url('/adcollector/'.$Member->slug)}}" title="{{$Member->title}}">
                                 <img src="{{url('/uploads/'.$default_image)}}" alt="{{$Member->title}}" class="img-fluid">
                             </a>
                         </div>
@@ -123,7 +123,7 @@
                         @foreach($Advertisments as $Advertisment)
                             <div class="row product-list-item">
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 img-product-list">
-                                    <span class="member-tag">Member</span>
+                                    <span class="member-tag">Ad Collector</span>
                                     <a href="{{url('/advertisment/'.$Advertisment->slug)}}" title="{{$Advertisment->title}}">
                                         @php
                                             if(count($Advertisment->advertisment_default_image($Advertisment->id)) > 0){

@@ -13,9 +13,21 @@
                 @foreach($ParentCategories as $ParentCategory)
                     <p>
                         <i class="fa {{$ParentCategory->fontawesome}}" aria-hidden="true"></i>
-                        <a href="{{url('/all-ads')}}/?category={{$ParentCategory->slug}}" title="Motorbikes & Vehicles">
+                        <a href="{{url('/all-ads')}}/?category={{$ParentCategory->slug}}" title="{{$ParentCategory->category_name}}">
                             {{$ParentCategory->category_name}}
                         </a>
+
+                        @if(($SelectedCategory != null) && ($SubCategories != null) && ($ParentCategory->id == $SelectedCategory->id) && (count($SubCategories) > 0))
+                            <ul class="sub_categories">
+                            @foreach($SubCategories as $SubCategory)
+                                <li>
+                                <a href="{{url('/all-ads')}}/?category={{$SubCategory->slug}}" title="{{$ParentCategory->category_name}}">
+                                    {{$SubCategory->category_name}}
+                                </a>
+                                </li>
+                            @endforeach
+                            </ul>
+                        @endif
                     </p>
                 @endforeach
             @endif

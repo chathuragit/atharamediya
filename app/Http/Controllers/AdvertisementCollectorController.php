@@ -82,6 +82,8 @@ class AdvertisementCollectorController extends Controller
             $member->address = $request->address;
             $member->contact_number = $request->contact_number;
             $member->contact_email = $request->contact_email;
+            $member->corporate_color_forground = $request->corporate_color_forground;
+            $member->corporate_color_background = $request->corporate_color_background;
 
             $files = $request->file('images');
             if(count($files) > 0){
@@ -168,6 +170,8 @@ class AdvertisementCollectorController extends Controller
             $member->address = $request->address;
             $member->contact_number = $request->contact_number;
             $member->contact_email = $request->contact_email;
+            $member->corporate_color_forground = $request->corporate_color_forground;
+            $member->corporate_color_background = $request->corporate_color_background;
 
             $files = $request->file('images');
             if(count($files) > 0){
