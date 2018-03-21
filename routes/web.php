@@ -20,7 +20,8 @@ Route::get('/all-ads', 'HomeController@all_ads')->name('all_ads');
 Route::get('/ads', 'HomeController@all_ads')->name('ads');
 Route::get('/advertisment/{slug}', 'HomeController@advertisment')->name('ads');
 
-Route::get('/members', 'HomeController@all_ads')->name('all_ads');
+Route::get('/members', 'HomeController@members')->name('members');
+Route::get('/member/{slug}', 'HomeController@member')->name('member');
 Route::get('/adcollectors', 'HomeController@all_ads')->name('all_ads');
 Route::get('/services', 'HomeController@all_ads')->name('all_ads');
 

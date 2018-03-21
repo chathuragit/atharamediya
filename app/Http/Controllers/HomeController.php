@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Advertisment;
 use App\Banner;
 use App\Category;
+use App\Member;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -55,5 +56,15 @@ class HomeController extends Controller
         return view('advertisment', ['ParentCategories' => $ParentCategories, 'Advertisment' => $Advertisment, 'Advertisments' => $Advertisments,
             'left_web_space_banners' => $left_web_space_banners, 'AdvertismentAttributes' => $AdvertismentAttributes, 'Advertisment_user' => $Advertisment_user
             , 'listing_web_space_banners' => $listing_web_space_banners, 'request' => $request]);
+    }
+
+    public function members(){
+        $Members = Member::memberslist($this->per_page);
+        return view('members', ['Members' => $Members]);
+    }
+
+    public function member($slug){
+        $Member = Member::where('slug', $slug)->first();
+        return view('member', ['Member' => $Member]);
     }
 }
