@@ -20,6 +20,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ asset('js/jscolor.js') }}"></script>
     @yield('header_scripts')
 </head>
 
@@ -43,6 +44,10 @@
 
 @yield('page_JS')
 <script type="text/javascript">
+    function setTextColor(picker) {
+        document.getElementsByTagName('body')[0].style.color = '#' + picker.toString()
+    }
+
     $(document).on('change', ':file', function() {
         var input = $(this),
             numFiles = input.get(0).files ? input.get(0).files.length : 1,

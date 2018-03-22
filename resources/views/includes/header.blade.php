@@ -8,9 +8,9 @@
             <li class="nav-item {{ Request::segment(1) == '' ? 'active' : ''}}">
                 <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item {{ Request::segment(1) == 'services' ? 'active' : ''}}">
+            {{--<li class="nav-item {{ Request::segment(1) == 'services' ? 'active' : ''}}">
                 <a class="nav-link" href="#">Services</a>
-            </li>
+            </li>--}}
 
             <li class="nav-item  {{ ((Request::segment(1) == 'adcollectors') || (Request::segment(1) == 'adcollector')) ? 'active' : ''}}">
                 <a class="nav-link" href="{{url('/adcollectors')}}">Ad Collectors</a>

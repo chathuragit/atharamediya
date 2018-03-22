@@ -19,8 +19,8 @@ class CreateMembersTable extends Migration
             $table->text('title')->nullable();
             $table->text('slug')->nullable();
             $table->string('moto', '255')->nullable();
-            $table->string('logo', '25')->nullable();
-            $table->string('cover_image', '25')->nullable();
+            $table->string('logo', '50')->nullable();
+            $table->string('cover_image', '50')->nullable();
             $table->text('description')->nullable();
             $table->text('address')->nullable();
             $table->string('contact_number', '25')->nullable();

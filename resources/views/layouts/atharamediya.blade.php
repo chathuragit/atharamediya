@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
     <link href="{{ asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/jscolor.js') }}"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -102,6 +103,9 @@
 
 @yield('page_JS')
 <script>
+    function setTextColor(picker) {
+        document.getElementsByTagName('body')[0].style.color = '#' + picker.toString()
+    }
     $(function() {
         if($('.box-tools:first form').attr('action') == undefined){
             $('.sidebar-form input[name=search]').attr('disabled','disabled');

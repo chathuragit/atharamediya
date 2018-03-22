@@ -111,7 +111,7 @@
 
                         <div class="form-group{{ $errors->has('corporate_color_forground') ? ' has-error' : '' }}">
                             <label for="corporate_color_forground">Corporate Color Forgroundr:</label>
-                            <input id="corporate_color_forground" type="text" class="form-control" name="corporate_color_forground" value="{{old('corporate_color_forground')}}" >
+                            <input id="corporate_color_forground" type="text" class="form-control jscolor" name="corporate_color_forground" value="{{old('corporate_color_forground')}}" >
 
                             @if ($errors->has('corporate_color_forground'))
                                 <span class="help-block">
@@ -122,7 +122,7 @@
 
                         <div class="form-group{{ $errors->has('corporate_color_background') ? ' has-error' : '' }}">
                             <label for="corporate_color_background">Corporate Color Background:</label>
-                            <input id="corporate_color_background" type="text" class="form-control" name="corporate_color_background" value="{{old('corporate_color_background')}}" >
+                            <input id="corporate_color_background" type="text" class="form-control jscolor" name="corporate_color_background" value="{{old('corporate_color_background')}}" >
 
                             @if ($errors->has('corporate_color_background'))
                                 <span class="help-block">

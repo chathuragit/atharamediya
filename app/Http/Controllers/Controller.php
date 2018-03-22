@@ -28,7 +28,7 @@ class Controller extends BaseController
     public static function file_uploader($file){
         $extension = $file->getClientOriginalExtension();
         $current_timestamp = Carbon::now()->timestamp;
-        $filename = $current_timestamp.'.'.$extension;
+        $filename = $current_timestamp.uniqid().'.'.$extension;
         $file->move(public_path().'/uploads', $filename);
 
         return $filename;
