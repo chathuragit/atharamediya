@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Individual;
+use App\Member;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -51,6 +53,8 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'member_type' => 'required|not_in:0',
+            'contact_number' => 'required',
         ]);
     }
 
@@ -62,17 +66,40 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'role' => $data['member_type'],
+            'is_active' => false,
         ]);
+
+
+        if($data['member_type'] == 6){
+            Individual::create([
+                'user_id' => $user->id,
+                'contact_number' => $data['contact_number'],
+                'contact_email' => $data['email'],
+                'is_active' => false,
+            ]);
+        }
+
+        if(($data['member_type'] == 4) || ($data['member_type'] == 3)){
+            Member::create([
+                'user_id' => $user->id,
+                'contact_number' => $data['contact_number'],
+                'contact_email' => $data['email'],
+                'is_active' => false,
+            ]);
+        }
+
+        return $user;
     }
 
-    public function showRegistrationForm()
+    /*public function showRegistrationForm()
     {
         return redirect('login');
-    }
+    }*/
 
     /**
      * Handle a registration request for the application.
@@ -80,8 +107,8 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
+    /*public function register(Request $request)
     {
         abort(404);
-    }
+    }*/
 }

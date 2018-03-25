@@ -4,14 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Advertisment extends Model
 {
     use Sluggable;
 
-    public static function FilterAdvertisment($status = null, $per_page, $search = null){
+    public static function FilterAdvertisment($status = null, $per_page, $search = null, $user = false){
         $result = Advertisment::where('status', '!=', 5);
+
+        if((Auth::user()) &&  ($user) && (Auth::user()->role > 2)){
+            $result->where('user_id', Auth::user()->id);
+        }
 
         if($status != null){
             $result->where('status', $status);
@@ -93,6 +98,10 @@ class Advertisment extends Model
                     case 'latest':
                         $result->orderBy('created_at', 'DESC');
                         break;
+
+                    default:
+                        $result->orderBy('created_at', 'DESC');
+                        break;
                 }
             }
 
@@ -109,6 +118,9 @@ class Advertisment extends Model
             }
 
 
+            if(($search->sort_by_price == null) && ($search->sort_by_time == null) && ($search->sort_by_advertisertype == null) && ($search->sort_by_time == "")){
+                $result->orderBy('created_at','DESC');
+            }
         }else{
             $result->orderBy('id','DESC');
         }

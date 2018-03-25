@@ -38,23 +38,23 @@ class AdvertismentController extends Controller
         $status = request()->segment(1);
         switch($status){
             case 'advertisments_active' :
-                $advertisments = Advertisment::FilterAdvertisment(2, $this->per_page);
+                $advertisments = Advertisment::FilterAdvertisment(2, $this->per_page, null, true);
                 break;
 
             case 'advertisments_pending' :
-                $advertisments = Advertisment::FilterAdvertisment(1, $this->per_page);
+                $advertisments = Advertisment::FilterAdvertisment(1, $this->per_page, null, true);
                 break;
 
              case 'advertisments_expired' :
-                $advertisments = Advertisment::FilterAdvertisment(3, $this->per_page);
+                $advertisments = Advertisment::FilterAdvertisment(3, $this->per_page, null, true);
                 break;
 
              case 'advertisments_blocked' :
-                $advertisments = Advertisment::FilterAdvertisment(4, $this->per_page);
+                $advertisments = Advertisment::FilterAdvertisment(4, $this->per_page, null, true);
                 break;
 
             default :
-                $advertisments = Advertisment::FilterAdvertisment(null, $this->per_page);
+                $advertisments = Advertisment::FilterAdvertisment(null, $this->per_page, null, true);
                 break;
         }
 
@@ -101,6 +101,7 @@ class AdvertismentController extends Controller
             'selling_type' => 'required',
             //'locationlocation' => 'required',
             'advertisment_desc' => 'required',
+            //'images' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         );
 
 
@@ -224,6 +225,9 @@ class AdvertismentController extends Controller
             'advertisment_desc' => 'required',
         );
 
+        if ($request->file('images')){
+            //$rules['images'] = 'required|image|mimes:jpeg,png,jpg|max:2048';
+        }
 
         $validator = Validator::make($request->all(), $rules);
 

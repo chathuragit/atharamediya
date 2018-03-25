@@ -16,6 +16,13 @@
 });*/
 
 Route::get('/', 'HomeController@index')->name('home');
+
+
+/*Route::get('/{slug}', function(){
+    return Request::segment(1);
+
+});*/
+
 Route::get('/all-ads', 'HomeController@all_ads')->name('all_ads');
 Route::get('/ads', 'HomeController@all_ads')->name('ads');
 Route::get('/advertisment/{slug}', 'HomeController@advertisment')->name('ads');
@@ -68,6 +75,11 @@ Route::group(['middleware' => ['SuperAdministrator']], function () {
 
     Route::get('/logs/filter', 'LogController@filter');
     Route::get('/logs', 'LogController@index');
+
+    Route::get('/pages', 'PagesController@index')->name('pages');
+    Route::get('/pages/{id}/edit', 'PagesController@edit')->name('pages');
+    Route::post('/pages/{id}/update', 'PagesController@update')->name('pages');
+    Route::get('/pages/filter', 'PagesController@filter');
 });
 
 Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');

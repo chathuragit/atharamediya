@@ -904,3 +904,26 @@ select.selectpicker.category_selectpicker_home{
     max-width: 100%;
     height: auto;
 }
+
+form.sign input{
+    margin-bottom: 10px;
+    float: right;
+}
+form.sign input[type="submit"]{
+    border: none;
+    background: #cc020b;
+    color: #fff;
+    border-radius: 5px;
+}
+form.sign select {
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 0.5rem 0.75rem;
+    outline: none;
+    font-size: 0.8rem;
+    color: #464a4c;
+}
+form.sign select option {
+    color: #bbb;
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Individual;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -107,6 +108,10 @@ class IndividualAdvertiserController extends Controller
         $user = User::find($request->id);
         $user->is_active = ($request->active == 'true') ? true : false;
         $user->update();
+
+        $Individual = Individual::where('user_id', $request->id)->first();
+        $Individual->is_active = ($request->active == 'true') ? true : false;
+        $Individual->update();
 
         if(($request->active == 'true')){
             parent::userLog(Auth::user()->id, 'Individual Advertisers activated #'.$user->id);

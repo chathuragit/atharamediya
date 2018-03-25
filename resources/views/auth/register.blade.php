@@ -39,6 +39,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('contact_number') ? ' has-error' : '' }}">
+                            <label for="contact_number" class="col-md-4 control-label">Contact Number</label>
+
+                            <div class="col-md-6">
+                                <input id="contact_number" type="text" class="form-control" name="contact_number" value="{{ old('contact_number') }}" required>
+
+                                @if ($errors->has('contact_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -58,6 +73,23 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('member_type') ? ' has-error' : '' }}">
+                            <label for="member_type" class="col-md-4 control-label">Confirm Password</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="member_type" required>
+                                    <option value="6" {{ (old('member_type') == 6) ? 'selected' : ''}}>Individual Advertiser</option>
+                                    <option value="4" {{ (old('member_type') == 4) ? 'selected' : ''}}>Advertising Member</option>
+                                    <option value="3" {{ (old('member_type') == 3) ? 'selected' : ''}}>Advertisement Collector</option>
+                                </select>
+                                @if ($errors->has('member_type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('member_type') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

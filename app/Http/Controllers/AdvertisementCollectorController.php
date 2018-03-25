@@ -253,6 +253,10 @@ class AdvertisementCollectorController extends Controller
         $user->is_active = ($request->active == 'true') ? true : false;
         $user->update();
 
+        $Member = Member::where('user_id', $request->id)->first();
+        $Member->is_active = ($request->active == 'true') ? true : false;
+        $Member->update();
+
         if(($request->active == 'true')){
             parent::userLog(Auth::user()->id, 'Advertisement Collector User activated #'.$user->id);
         }

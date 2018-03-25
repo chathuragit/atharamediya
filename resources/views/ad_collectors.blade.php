@@ -63,11 +63,13 @@
                     </div>
                 </article>
                 <section class="col-xs-7 col-sm-7 col-md-7 col-lg-7 text-center mid-section member-section">
+                    @if (isset($Page) && ($Page->cover_image != null) && (file_exists(public_path() . '/uploads/' . $Page->cover_image)))
                     <div class="row product-list-item">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <a href="#" title="New Arrival of P and S to Anuradhapura"><img src="images/members/member-cover-page.jpg" alt="Perera and Sons Cover Page" class="img-fluid"></a>
+                                <img src="{{url('/').'/uploads/'.$Page->cover_image}}" alt="{{$Page->page_title}}" class="img-fluid">
                         </div>
                     </div>
+                    @endif
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h3 class="vgap heading3 nogap-bottom member-ads-heading">All Ad Collectors</h3>
