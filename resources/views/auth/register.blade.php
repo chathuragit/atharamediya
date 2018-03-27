@@ -1,109 +1,154 @@
-@extends('layouts.app')
+@extends('layouts.login')
+
+@section('page_header')
+    <header>
+        <div class="container-flid full-banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="text-center seo">විකුණන්නයි බඩු ගන්නයි අතරමැදියා ලඟටයි එන්නේ ...</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+@endsection
+
+@include('includes.header')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+    <div class="login-logo">
+        <a title="Atharamediya"><img src="{{ asset('images/logo-atharamediya.png')}}" alt="Athramediya" class="img-fluid home-logo"></a>
+    </div>
 
-                <div class="panel-body">
+<div class="container">
+    <div class="row boxer">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 top">
+            <p class="text-center login-box-msg">Sign Up to start advertising</p>
+        </div>
+        <div class="col-lg-4"></div>
+        <div class="col-lg-12 bottom" >
+            <div class="login-box">
+                <div class="login-box-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="control-label">Name</label>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
+                            @if ($errors->has('name'))
+                                <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                            @endif
+
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                            @if ($errors->has('email'))
+                                <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                            @endif
+
                         </div>
 
                         <div class="form-group{{ $errors->has('contact_number') ? ' has-error' : '' }}">
-                            <label for="contact_number" class="col-md-4 control-label">Contact Number</label>
+                            <label for="contact_number" class="control-label">Contact Number</label>
 
-                            <div class="col-md-6">
-                                <input id="contact_number" type="text" class="form-control" name="contact_number" value="{{ old('contact_number') }}" required>
 
-                                @if ($errors->has('contact_number'))
-                                    <span class="help-block">
+                            <input id="contact_number" type="text" class="form-control" name="contact_number" value="{{ old('contact_number') }}" required>
+
+                            @if ($errors->has('contact_number'))
+                                <span class="help-block">
                                         <strong>{{ $errors->first('contact_number') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                            @endif
+
                         </div>
 
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <label for="password" class="control-label">Password</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
+                            <input id="password" type="password" class="form-control" name="password" required>
+
+                            @if ($errors->has('password'))
+                                <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                            @endif
+
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                            <label for="password-confirm" class="control-label">Confirm Password</label>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
+
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+
                         </div>
 
                         <div class="form-group {{ $errors->has('member_type') ? ' has-error' : '' }}">
-                            <label for="member_type" class="col-md-4 control-label">Confirm Password</label>
+                            <label for="member_type" class="control-label">Confirm Password</label>
 
-                            <div class="col-md-6">
-                                <select class="form-control" name="member_type" required>
-                                    <option value="6" {{ (old('member_type') == 6) ? 'selected' : ''}}>Individual Advertiser</option>
-                                    <option value="4" {{ (old('member_type') == 4) ? 'selected' : ''}}>Advertising Member</option>
-                                    <option value="3" {{ (old('member_type') == 3) ? 'selected' : ''}}>Advertisement Collector</option>
-                                </select>
-                                @if ($errors->has('member_type'))
-                                    <span class="help-block">
+
+                            <select class="form-control" id="userselector" name="member_type" required>
+                                <option value="6" {{ (old('member_type') == 6) ? 'selected' : ''}}>Individual Advertiser</option>
+                                <option value="4" {{ (old('member_type') == 4) ? 'selected' : ''}}>Advertising Member</option>
+                                <option value="3" {{ (old('member_type') == 3) ? 'selected' : ''}}>Advertisement Collector</option>
+                            </select>
+                            @if ($errors->has('member_type'))
+                                <span class="help-block">
                                         <strong>{{ $errors->first('member_type') }}</strong>
                                     </span>
-                                @endif
+                            @endif
+
+                        </div>
+
+                        <div id="member"  class="form-group has-feedback users" style="{{ (old('member_type') == 4) ? '' : 'display:none'}}">
+                            <p>Members have special Benefits <a href="{{url('/members')}}" title="Members" target="_blank">Read More...</a></p>
+                            <div class="col-xs-8">
+                                <div class="checkbox icheck">
+                                    <label>
+                                        <input type="radio" value="1" name="package" {{ (old('package') == 1) ? 'checked' : ''}}>[Platinum] - [12 Months] - Rs.[12000]/=
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="2" name="package" {{ (old('package') == 2) ? 'checked' : ''}}>[Gold] - [9 Months] - Rs.[9000]/=
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="3" name="package" {{ (old('package') == 3) ? 'checked' : ''}}>[Silver] - [6 Months] - Rs.[6000]/=
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="4" name="package" {{ (old('package') == 4) ? 'checked' : ''}}>[Bronze] - [3 Months] - Rs.[3000]/=
+                                    </label>
+                                </div>
                             </div>
+                            <!-- /.col -->
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
-                            </div>
+                             
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
+
 </div>
 @endsection

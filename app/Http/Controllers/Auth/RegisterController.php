@@ -89,6 +89,7 @@ class RegisterController extends Controller
                 'user_id' => $user->id,
                 'contact_number' => $data['contact_number'],
                 'contact_email' => $data['email'],
+                'package_id' => $data['package'],
                 'is_active' => false,
             ]);
         }

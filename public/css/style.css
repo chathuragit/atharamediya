@@ -688,6 +688,34 @@ span.es-nav-prev,
 }
 /* /icon-bar */
 
+/* Register */
+form.sign input{
+    margin-bottom: 10px;
+    float: right;
+}
+form.sign input[type="submit"]{
+    border: none;
+    background: #cc020b;
+    color: #fff;
+    border-radius: 5px;
+}
+form.sign select {
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 0.5rem 0.75rem;
+    outline: none;
+    font-size: 0.8rem;
+    color: #464a4c;
+}
+form.sign select option {
+    color: #bbb;
+}
+.login-box, .register-box{
+    margin: 0 auto;
+}
+/* /Register */
+
 /* Footer */
 footer {
 	font-size: 13px;
@@ -905,25 +933,5 @@ select.selectpicker.category_selectpicker_home{
     height: auto;
 }
 
-form.sign input{
-    margin-bottom: 10px;
-    float: right;
-}
-form.sign input[type="submit"]{
-    border: none;
-    background: #cc020b;
-    color: #fff;
-    border-radius: 5px;
-}
-form.sign select {
-    border: none;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    padding: 0.5rem 0.75rem;
-    outline: none;
-    font-size: 0.8rem;
-    color: #464a4c;
-}
-form.sign select option {
-    color: #bbb;
-}
+
+
