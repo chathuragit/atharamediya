@@ -106,7 +106,7 @@
                     </ul>
                 </li>
 
-            @php $treeview = array('pages'); @endphp
+            @php $treeview = array('pages', 'articles'); @endphp
             <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
                 <a href="#">
                     <i class="fa fa-file"></i>
@@ -117,6 +117,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ Request::segment(1) == 'pages' ? 'active' : ''}}"><a href="{{url('/pages')}}"><i class="fa fa-circle-o"></i> Pages</a></li>
+                    <li class="{{ Request::segment(1) == 'articles' ? 'active' : ''}}"><a href="{{url('/articles')}}"><i class="fa fa-circle-o"></i> Articles</a></li>
                 </ul>
             </li>
 
