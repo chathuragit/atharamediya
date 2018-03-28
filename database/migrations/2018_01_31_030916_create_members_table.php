@@ -28,6 +28,7 @@ class CreateMembersTable extends Migration
             $table->string('corporate_color_forground', '8')->nullable();
             $table->string('corporate_color_background', '8')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->integer('package_id')->default(0);
             $table->timestamps();
         });
     }

@@ -80,6 +80,8 @@ Route::group(['middleware' => ['SuperAdministrator']], function () {
     Route::get('/pages/{id}/edit', 'PagesController@edit')->name('pages');
     Route::post('/pages/{id}/update', 'PagesController@update')->name('pages');
     Route::get('/pages/filter', 'PagesController@filter');
+
+    Route::resource('/packages', 'PackageController');
 });
 
 Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');

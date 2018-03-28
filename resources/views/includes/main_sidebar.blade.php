@@ -91,6 +91,20 @@
                 </ul>
             </li>
 
+            @if(Auth::user()->role <= 1)
+                @php $treeview = array('packages'); @endphp
+                <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
+                    <a href="#">
+                        <i class="fa fa-diamond"></i>
+                        <span>Packages</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ Request::segment(1) == 'packages' ? 'active' : ''}}"><a href="{{url('/packages')}}"><i class="fa fa-circle-o"></i> Packages</a></li>
+                    </ul>
+                </li>
 
             @php $treeview = array('pages'); @endphp
             <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
@@ -106,7 +120,7 @@
                 </ul>
             </li>
 
-            @if(Auth::user()->role <= 1)
+
             <li class="{{ Request::segment(1) == 'logs' ? 'active' : ''}}">
                 <a href="{{url('/logs')}}">
                     <i class="fa fa-history"></i> <span>Logs</span>

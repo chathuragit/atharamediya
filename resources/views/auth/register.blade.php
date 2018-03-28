@@ -119,18 +119,19 @@
                             <p>Members have special Benefits <a href="{{url('/members')}}" title="Members" target="_blank">Read More...</a></p>
                             <div class="col-xs-8">
                                 <div class="checkbox icheck">
-                                    <label>
-                                        <input type="radio" value="1" name="package" {{ (old('package') == 1) ? 'checked' : ''}}>[Platinum] - [12 Months] - Rs.[12000]/=
-                                    </label>
-                                    <label>
-                                        <input type="radio" value="2" name="package" {{ (old('package') == 2) ? 'checked' : ''}}>[Gold] - [9 Months] - Rs.[9000]/=
-                                    </label>
-                                    <label>
-                                        <input type="radio" value="3" name="package" {{ (old('package') == 3) ? 'checked' : ''}}>[Silver] - [6 Months] - Rs.[6000]/=
-                                    </label>
-                                    <label>
-                                        <input type="radio" value="4" name="package" {{ (old('package') == 4) ? 'checked' : ''}}>[Bronze] - [3 Months] - Rs.[3000]/=
-                                    </label>
+                                    @php
+                                     $Packages = \App\Package::all();
+                                    @endphp
+
+                                    @if(is_object($Packages) && (count($Packages) > 0))
+                                    @foreach ($Packages as $Package)
+                                            <label>
+                                                <input type="radio" value="{{$Package->id}}" name="package" {{ (old('package') == 1) ? 'checked' : ''}}>
+                                                [{{$Package->package_name}}] - [{{$Package->package_period}} Days] - [{{$Package->package_advertisments}} Advertisments] -  Rs.[{{$Package->package_price}}]/=
+                                            </label>
+                                    @endforeach
+                                    @endif
+
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -141,7 +142,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
-                             
+
                         </div>
                     </form>
                 </div>
