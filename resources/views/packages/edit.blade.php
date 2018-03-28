@@ -38,7 +38,7 @@
 
                     <div class="box-body">
                         <div class="form-group {{ $errors->has('package_period') ? ' has-error' : '' }}">
-                            <label>Package Period (Days)</label>
+                            <label>Package Period <small>(Days)</small></label>
                             <input type="text" class="form-control" placeholder="Enter Package Period" name="package_period" value="{{$Package->package_period}}" required>
                             @if ($errors->has('package_period'))
                                 <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('package_period') }}</label>
@@ -66,6 +66,18 @@
                             <input type="text" class="form-control" placeholder="Enter Package No of Advertisments" name="package_advertisments" value="{{$Package->package_advertisments}}" required>
                             @if ($errors->has('package_advertisments'))
                                 <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('package_advertisments') }}</label>
+                            @endif
+                        </div>
+
+                    </div>
+
+
+                    <div class="box-body">
+                        <div class="form-group {{ $errors->has('advertisment_life_time') ? ' has-error' : '' }}">
+                            <label>Advertisment Life Time <small>(Days)</small></label>
+                            <input type="text" class="form-control" placeholder="Enter Advertisment Life Time" name="advertisment_life_time" value="{{$Package->advertisment_life_time}}" required>
+                            @if ($errors->has('advertisment_life_time'))
+                                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('advertisment_life_time') }}</label>
                             @endif
                         </div>
 

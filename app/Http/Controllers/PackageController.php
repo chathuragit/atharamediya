@@ -70,6 +70,7 @@ class PackageController extends Controller
             $Package->package_period = $request->package_period;
             $Package->package_price = $request->package_price;
             $Package->package_advertisments = $request->package_advertisments;
+            $Package->advertisment_life_time = $request->advertisment_life_time;
             $Package->save();
 
             parent::userLog(Auth::user()->id, 'Created Package #'.$Package->id);
@@ -130,6 +131,7 @@ class PackageController extends Controller
             $Package->package_period = $request->package_period;
             $Package->package_price = $request->package_price;
             $Package->package_advertisments = $request->package_advertisments;
+            $Package->advertisment_life_time = $request->advertisment_life_time;
             $Package->save();
 
             parent::userLog(Auth::user()->id, 'Updated Package #'.$Package->id);

@@ -19,6 +19,7 @@ class CreatePackagesTable extends Migration
             $table->string('package_period', 255);
             $table->double('package_price');
             $table->integer('package_advertisments')->default(0);
+            $table->integer('advertisment_life_time')->default(0);
             $table->timestamps();
         });
     }
