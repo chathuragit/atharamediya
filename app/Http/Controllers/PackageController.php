@@ -156,4 +156,9 @@ class PackageController extends Controller
         $request->session()->flash('message', "Package Deleted Successfully!");
         $request->session()->flash('is_error', false);
     }
+
+    public function filter(Request $request){
+        $Packages = Package::where('package_name', 'like', '%' . $request->search . '%')->paginate($this->per_page);
+        return view('packages.list', ['Packages' => $Packages, 'request' => $request]);
+    }
 }
