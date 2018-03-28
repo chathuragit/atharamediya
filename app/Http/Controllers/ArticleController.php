@@ -99,7 +99,7 @@ class ArticleController extends Controller
     public function show($id)
     {
         $Article = Article::find($id);
-        $SelectedPages = collect($Article->assigned_pages)->map(function($x){ return $x->id;})->toArray();
+        $SelectedPages = collect($Article->assigned_pages)->map(function($x){ return $x->page_id;})->toArray();
         return view('articles.show', ['pages' => Page::all(), 'Article' => $Article, 'SelectedPages' => $SelectedPages]);
     }
 
@@ -112,7 +112,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $Article = Article::find($id);
-        $SelectedPages = collect($Article->assigned_pages)->map(function($x){ return $x->id;})->toArray();
+        $SelectedPages = collect($Article->assigned_pages)->map(function($x){ return $x->page_id;})->toArray();
         return view('articles.edit', ['pages' => Page::all(), 'Article' => $Article, 'SelectedPages' => $SelectedPages]);
     }
 

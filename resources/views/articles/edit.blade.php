@@ -59,6 +59,7 @@
                         </div>
 
                         <hr/>
+
                         @if(count($pages) > 0)
                             @foreach($pages as $page)
                                 <div class="form-group">

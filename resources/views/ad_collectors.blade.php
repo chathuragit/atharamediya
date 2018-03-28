@@ -34,33 +34,16 @@
                         </div>
                     </div>
                     <!-- /intro -->
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <hr>
-                            <h3>Ad Collectors' Duties:</h3>
-                            <p>Lorem Ipsum dolor et</p>
-                            <hr>
-                            <h3>Ad Collectors' Responsibilities:</h3>
-                            <p>A typical list goes like this ...</p>
-                            <ul>
-                                <li>Lorem ipsum</li>
-                                <li>Con dolor</li>
-                                <li>aitken dapc</li>
-                                <li>Red velthwk</li>
-                            </ul>
-                            <hr>
-                            <h3>Heading 1 goes here</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                            <hr>
-                            <h3>Another Heading goes here</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <p>Lorem ipsum dolor sit amaute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidattur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-                            <hr>
-                            <h3>Another Heading Goes</h3>
-                            <p>ehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidattur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim</p>
-                            <hr>
+                    @if(is_object($ArticlesLeft) && (count($ArticlesLeft) > 0))
+                        <div class="row">
+                            @foreach($ArticlesLeft as $ArticleLeft)
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h3 class="vgap">{!! $ArticleLeft->title !!}</h3>
+                                    {!!$ArticleLeft->desc !!}
+                                </div>
+                            @endforeach
                         </div>
-                    </div>
+                    @endif
                 </article>
                 <section class="col-xs-7 col-sm-7 col-md-7 col-lg-7 text-center mid-section member-section">
                     @if (isset($Page) && ($Page->cover_image != null) && (file_exists(public_path() . '/uploads/' . $Page->cover_image)))
@@ -123,21 +106,17 @@
                                 <a href="https://plus.google.com/share?url={{urlencode(Request::fullUrl())}}" title="Google Plus"><i class="fa fa-google-plus-square"></i></a>
                                 <h2 class="text-right">Share...</h2>
                             </div>
-                            <h3>Content Heading 1</h3>
-                            <p>
-                                Atharamediya.lk is a website where you can buy and sell almost everything. The best deals are often done with people who live in your own city or on your own street, etcetera. The Atharamediya.lk provides an easy way to buy and sell locally. All you have to do is select your region.
-                            </p>
-                            <h3>Content Heading 2</h3>
-                            <p>
-                                Atharamediya.lk does not specialize in any specific category - here you can buy and sell items in more than 50 different categories. We also carefully review all ads that are being published, to make sure the quality is up to our standards.
-                            </p>
-                            <h3>Content Heading 3</h3>
-                            <p>
-                                Atharamediya.lk does not specialize in any specific category - here you can buy and sell items in more than 50 different categories. We also carefully review all ads that are being published, to make sure the quality is up to our standards.
-                            </p>
-                            <p>
-                                If you'd like to get in touch with us, go to Contact us.
-                            </p>
+
+                            @if(is_object($ArticlesRight) && (count($ArticlesRight) > 0))
+                                <div class="row">
+                                    @foreach($ArticlesRight as $ArticleRight)
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h2 class="vgap">{!! $ArticleRight->title !!}</h2>
+                                            {!!$ArticleRight->desc !!}
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </aside>

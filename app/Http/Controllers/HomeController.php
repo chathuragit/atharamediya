@@ -29,12 +29,16 @@ class HomeController extends Controller
     {
         $ParentCategories = Category::where('parent_category_id' , 0)->where('is_active' , 1)->get();
         $Page = Page::find(1);
-        return view('home', ['ParentCategories' => $ParentCategories, 'request' => $request, 'Page' => $Page]);
+        $Article = $Page->page_articles($Page->id, 1, 1);
+        return view('home', ['ParentCategories' => $ParentCategories, 'request' => $request, 'Page' => $Page, 'Article' => $Article]);
     }
 
     public function all_ads(Request $request)
     {
         $Page = Page::find(4);
+        $ArticlesLeft = $Page->page_articles($Page->id, 2, 1);
+        $ArticlesRight = $Page->page_articles($Page->id, 3);
+
         $Advertisments = Advertisment::FilterAdvertisment(2, $this->per_page, $request);
         $ParentCategories = Category::where('parent_category_id' , 0)->where('is_active' , 1)->get();
         $SelectedCategory = Category::where('slug', $request->category)->first();
@@ -49,11 +53,15 @@ class HomeController extends Controller
         $listing_web_space_banners = Banner::web_space_banners(3, null, 3);
 
         return view('advertisments', ['ParentCategories' => $ParentCategories, 'Advertisments' => $Advertisments,  'left_web_space_banners' => $left_web_space_banners
-            , 'listing_web_space_banners' => $listing_web_space_banners, 'request' => $request, 'Page' => $Page, 'SubCategories' => $SubCategories, 'SelectedCategory' => $SelectedCategory]);
+            , 'listing_web_space_banners' => $listing_web_space_banners, 'request' => $request, 'Page' => $Page
+            , 'SubCategories' => $SubCategories, 'SelectedCategory' => $SelectedCategory, 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight]);
     }
 
     public function advertisment(Request $request, $slug){
         $Page = Page::find(4);
+        $ArticlesLeft = $Page->page_articles($Page->id, 2, 1);
+        $ArticlesRight = $Page->page_articles($Page->id, 3);
+
         $Advertisment = Advertisment::where('slug', $slug)->where('is_active', true)->where('status', 2)->first();
         $AdvertismentAttributes =$Advertisment->advertisment_attributes_and_values($Advertisment->id);
         $ParentCategories = Category::where('parent_category_id' , 0)->where('is_active' , 1)->get();
@@ -74,13 +82,17 @@ class HomeController extends Controller
 
         return view('advertisment', ['ParentCategories' => $ParentCategories, 'Advertisment' => $Advertisment, 'Advertisments' => $Advertisments,
             'left_web_space_banners' => $left_web_space_banners, 'AdvertismentAttributes' => $AdvertismentAttributes, 'Advertisment_user' => $Advertisment_user
-            , 'listing_web_space_banners' => $listing_web_space_banners, 'request' => $request, 'Page' => $Page, 'SubCategories' => $SubCategories, 'SelectedCategory' => $SelectedCategory]);
+            , 'listing_web_space_banners' => $listing_web_space_banners, 'request' => $request, 'Page' => $Page, 'SubCategories' => $SubCategories, 'SelectedCategory' => $SelectedCategory
+            , 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight]);
     }
 
     public function members(){
         $Page = Page::find(3);
+        $ArticlesLeft = $Page->page_articles($Page->id, 2);
+        $ArticlesRight = $Page->page_articles($Page->id, 3);
+
         $Members = Member::memberslist($this->per_page, 4);
-        return view('members', ['Members' => $Members, 'Page' => $Page]);
+        return view('members', ['Members' => $Members, 'Page' => $Page, 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight]);
     }
 
     public function member($slug){
@@ -92,8 +104,11 @@ class HomeController extends Controller
 
     public function ad_collectors(){
         $Page = Page::find(2);
+        $ArticlesLeft = $Page->page_articles($Page->id, 2);
+        $ArticlesRight = $Page->page_articles($Page->id, 3);
+
         $Members = Member::memberslist($this->per_page, 3);
-        return view('ad_collectors', ['Members' => $Members, 'Page' => $Page]);
+        return view('ad_collectors', ['Members' => $Members, 'Page' => $Page, 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight]);
     }
 
     public function ad_collector($slug){

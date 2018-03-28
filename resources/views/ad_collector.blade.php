@@ -5,7 +5,7 @@
 
 @section('page_header')
     <header>
-        <div class="container-flid full-banner member-banner" @if($Member->corporate_color_forground != null) style="background: #{{$Member->corporate_color_forground}}" @endif>
+        <div class="container-flid full-banner member-banner" @if($Member->corporate_color_forground != null) style="background: {{$Member->corporate_color_forground}}" @endif>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 </article>
-                <section class="col-xs-7 col-sm-7 col-md-7 col-lg-7 text-center mid-section member-section" @if($Member->corporate_color_background != null) style="background: #{{$Member->corporate_color_background}}" @endif>
+                <section class="col-xs-7 col-sm-7 col-md-7 col-lg-7 text-center mid-section member-section" @if($Member->corporate_color_background != null) style="background: {{$Member->corporate_color_background}}" @endif>
                     @php
                         if(($Member->cover_image != null) && ($Member->cover_image != '') && file_exists('uploads/'.$Member->cover_image)){
                             $default_image = $Member->cover_image;

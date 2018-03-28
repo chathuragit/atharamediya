@@ -5,12 +5,16 @@
         </div>
     </div>
     <!-- intro -->
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h2>Inner Page Heading</h2>
-            <p>Munere eleifend persecuti has cu. Ex debet tollit has, detracto consulatu conclusionemque his ad. Eu quo commune salutandi.</p>
+
+    @if(is_object($ArticlesLeft) && (count($ArticlesLeft) > 0))
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2>{!! $ArticlesLeft->title !!}</h2>
+                {!! $ArticlesLeft->desc !!}
+            </div>
         </div>
-    </div>
+    @endif
+
     <!-- /intro -->
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

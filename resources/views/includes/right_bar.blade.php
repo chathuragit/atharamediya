@@ -34,18 +34,15 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h2 class="vgap">What is atharamediya.lk?</h2>
-            <p>
-                Atharamediya.lk is a website where you can buy and sell almost everything. The best deals are often done with people who live in your own city or on your own street, etcetera. The Atharamediya.lk provides an easy way to buy and sell locally. All you have to do is select your region.
-            </p>
-            <p>
-                Atharamediya.lk does not specialize in any specific category - here you can buy and sell items in more than 50 different categories. We also carefully review all ads that are being published, to make sure the quality is up to our standards.
-            </p>
-            <p>
-                If you'd like to get in touch with us, go to Contact us.
-            </p>
+
+    @if(is_object($ArticlesRight) && (count($ArticlesRight) > 0))
+        <div class="row">
+            @foreach($ArticlesRight as $ArticleRight)
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h2 class="vgap">{!! $ArticleRight->title !!}</h2>
+                    {!!$ArticleRight->desc !!}
+                </div>
+            @endforeach
         </div>
-    </div>
+    @endif
 </aside>

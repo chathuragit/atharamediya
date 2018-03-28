@@ -140,12 +140,15 @@
                         </div>
                     </div>
                     <!-- intro -->
-                    <div class="row">
-                        <div class="col-sm-12 home-note">
-                            <h2>Buy and sell anything within few seconds - for free!</h2>
-                            <p>Munere eleifend persecuti has cu. Ex debet tollit has, detracto consulatu conclusionemque his ad. Eu quo commune salutandi.</p>
+                    @if(is_object($Article) && (count($Article) > 0))
+                        <div class="row">
+                            <div class="col-sm-12 home-note">
+                                <h2>{!! $Article->title !!}</h2>
+                                {!! $Article->desc !!}
+                            </div>
                         </div>
-                    </div>
+                    @endif
+
                     <!-- /intro -->
                 </article>
                 <section class="map_wrapper col-sm-3 text-center" >
