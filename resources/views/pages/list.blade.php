@@ -48,7 +48,6 @@
                                         <td>{{$page->id}}</td>
                                         <td>{{$page->page}}</td>
                                          <td>
-                                            <a href="{{url('/pages')}}/{{$page->id}}/" title="view details" class="actions"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="{{url('/pages')}}/{{$page->id}}/edit" title="edit details" class="actions"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>

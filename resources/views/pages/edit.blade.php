@@ -52,6 +52,14 @@
                             @endif
                         </div>
 
+                        <div class="form-group {{ $errors->has('meta_desc') ? ' has-error' : '' }}">
+                            <label>Page Meta Description</label>
+                            <textarea  class="form-control" placeholder="Enter Page Meta Description" name="meta_desc">{{$page->meta_desc}}</textarea>
+                            @if ($errors->has('meta_desc'))
+                                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('meta_desc') }}</label>
+                            @endif
+                        </div>
+
                         <hr/>
                         <div class="form-group{{ $errors->has('images') ? ' has-error' : '' }}">
                             <label>Images *</label>
@@ -82,7 +90,7 @@
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                        <a  href="{{url('/categories')}}" class="btn btn-default pull-left">Close</a>
+                        <a  href="{{url('/pages')}}" class="btn btn-default pull-left">Close</a>
                         <button type="submit" class="btn btn-success pull-right">Update</button>
                     </div>
                     {!! Form::close() !!}

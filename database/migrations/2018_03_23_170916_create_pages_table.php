@@ -19,6 +19,7 @@ class CreatePagesTable extends Migration
             $table->string('cover_image', 255)->nullable();
             $table->text('page_title')->nullable();
             $table->text('page_meta_data')->nullable();
+            $table->text('meta_desc')->nullable();
             $table->timestamps();
         });
     }

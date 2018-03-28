@@ -63,6 +63,7 @@ class PagesController extends Controller
             $Page->page = $request->page;
             $Page->page_title = $request->page_title;
             $Page->page_meta_data = $request->page_meta_data;
+            $Page->meta_desc = $request->meta_desc;
 
             if ($request->file('images')) {
                 $file = $request->file('images');
