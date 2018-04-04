@@ -5,11 +5,11 @@
                 <div class="col-sm-4">
                     <h3>About Atharamediya</h3>
                     <ul>
-                        <li><a href="#" title="Services">Atharamedi Services</a></li>
-                        <li><a href="#" title="All Ads">Atharamedi Ads</a></li>
-                        <li><a href="#" title="Privacy Policy">Privacy Policy</a></li>
-                        <li><a href="#" title="Terms & Conditions">Terms &amp; Conditions</a></li>
-                        <li><a href="#" title="Login">Login</a></li>
+                        <li><a href="{{url('/services')}}" title="Services">Atharamedi Services</a></li>
+                        <li><a href="{{url('/atharamedi_ads')}}" title="All Ads">Atharamedi Ads</a></li>
+                        <li><a href="{{url('/privacy_policy')}}" title="Privacy Policy">Privacy Policy</a></li>
+                        <li><a href="{{url('/terms_conditions')}}" title="Terms & Conditions">Terms &amp; Conditions</a></li>
+                        <li><a href="{{url('/login')}}" title="Login">Login</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4">
@@ -25,11 +25,11 @@
                 <div class="col-sm-4">
                     <h3>Grow Your Business With Ads</h3>
                     <ul>
-                        <li><a href="#" title="How to sell fast">How to sell fast</a></li>
-                        <li><a href="#" title="Buy Now on Atharamediya.lk">Buy Now on Atharamediya.lk</a></li>
-                        <li><a href="#" title="Banner Advertising">Banner Advertising</a></li>
-                        <li><a href="#" title="Promote Your Ad">Promote Your Ad</a></li>
-                        <li><a href="#" title="Site Map">Site Map</a></li>
+                        <li><a href="{{url('/how_to_sell_fast')}}" title="How to sell fast">How to sell fast</a></li>
+                        <li><a href="{{url('/buy_now')}}" title="Buy Now on Atharamediya.lk">Buy Now on Atharamediya.lk</a></li>
+                        <li><a href="{{url('/banner_advertising')}}" title="Banner Advertising">Banner Advertising</a></li>
+                        <li><a href="{{url('/promote_your_ad')}}" title="Promote Your Ad">Promote Your Ad</a></li>
+                        {{--<li><a href="#" title="Site Map">Site Map</a></li>--}}
                     </ul>
                 </div>
             </div>

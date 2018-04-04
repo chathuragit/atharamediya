@@ -31,7 +31,15 @@ Route::get('/members', 'HomeController@members')->name('members');
 Route::get('/member/{slug}', 'HomeController@member')->name('member');
 Route::get('/adcollectors', 'HomeController@ad_collectors')->name('adcollectors');
 Route::get('/adcollector/{slug}', 'HomeController@ad_collector')->name('adcollector');
-Route::get('/services', 'HomeController@all_ads')->name('all_ads');
+
+Route::get('/services', 'HomeController@static_page')->name('pages');
+Route::get('/atharamedi_ads', 'HomeController@static_page')->name('pages');
+Route::get('/privacy_policy', 'HomeController@static_page')->name('pages');
+Route::get('/terms_conditions', 'HomeController@static_page')->name('pages');
+Route::get('/how_to_sell_fast', 'HomeController@static_page')->name('pages');
+Route::get('/buy_now', 'HomeController@static_page')->name('pages');
+Route::get('/banner_advertising', 'HomeController@static_page')->name('pages');
+Route::get('/promote_your_ad', 'HomeController@static_page')->name('pages');
 
 Auth::routes();
 
@@ -112,6 +120,10 @@ Route::get('/profile', 'ProfileController@index');
 Route::get('/banners/filter', 'BannerController@filter');
 Route::post('/banners/change_status', 'BannerController@change_status');
 Route::resource('/banners', 'BannerController');
+
+Route::post('/member_articles/change_status', 'MemberArticleController@change_status');
+Route::get('/member_articles/filter', 'MemberArticleController@filter');
+Route::resource('/member_articles', 'MemberArticleController');
 
 
 

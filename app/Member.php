@@ -30,4 +30,23 @@ class Member extends Model
             ->select('members.*')
             ->paginate($per_page);
     }
+
+    public static function page_articles($member, $section, $count = null, $type = 4){
+        $query = DB::table('member_articles')
+            ->where('type', $type)
+            ->where('is_active', true)
+            ->where('show_in', $section)
+            ->where('member_id', $member)
+            ->orderBy('id', 'desc');
+
+        if($count == 1){
+            $query = $query->first();
+        }
+        else{
+            $query = $query->get();
+        }
+
+
+        return $query;
+    }
 }

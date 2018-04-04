@@ -933,5 +933,9 @@ select.selectpicker.category_selectpicker_home{
     height: auto;
 }
 
+.inner-page-section{
+    background: none;
+    border: 1px solid #dedede;
+}
 
 

@@ -98,8 +98,12 @@ class HomeController extends Controller
     public function member($slug){
         $Page = Page::find(3);
         $Member = Member::where('slug', $slug)->first();
+
+        $ArticlesLeft = $Member->page_articles($Member->id, 2, $count = null, 4);
+        $ArticlesRight = $Member->page_articles($Member->id, 3, $count = null, 4);
+
         $Advertisments = Advertisment::where('user_id', $Member->user_id)->where('is_active', true)->where('status', 2)->orderBy('id', 'DESC')->paginate(15);
-        return view('member', ['Member' => $Member, 'Advertisments' => $Advertisments, 'Page' => $Page]);
+        return view('member', ['Member' => $Member, 'Advertisments' => $Advertisments, 'Page' => $Page, 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight]);
     }
 
     public function ad_collectors(){
@@ -114,7 +118,21 @@ class HomeController extends Controller
     public function ad_collector($slug){
         $Page = Page::find(2);
         $Member = Member::where('slug', $slug)->first();
+
+        $ArticlesLeft = $Member->page_articles($Member->id, 2, $count = null, 3);
+        $ArticlesRight = $Member->page_articles($Member->id, 3, $count = null, 3);
+
         $Advertisments = Advertisment::where('user_id', $Member->user_id)->where('is_active', true)->where('status', 2)->orderBy('id', 'DESC')->paginate(15);
-        return view('ad_collector', ['Member' => $Member, 'Advertisments' => $Advertisments, 'Page' => $Page]);
+        return view('ad_collector', ['Member' => $Member, 'Advertisments' => $Advertisments, 'Page' => $Page, 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight]);
+    }
+
+    public function static_page(Request $request){
+        $Page = Page::where('slug', $request->segment(1))->first();
+
+        $ArticlesMain = $Page->page_articles($Page->id, 1);
+        $ArticlesLeft = $Page->page_articles($Page->id, 2);
+        $ArticlesRight = $Page->page_articles($Page->id, 3);
+
+        return view('page',['ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight, 'ArticlesMain' => $ArticlesMain]);
     }
 }

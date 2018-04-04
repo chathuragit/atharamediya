@@ -91,6 +91,22 @@
                 </ul>
             </li>
 
+            @if(in_array(Auth::user()->role, [3,4]))
+                @php $treeview = array('member_articles'); @endphp
+                <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
+                    <a href="#">
+                        <i class="fa fa-file"></i>
+                        <span>Articles</span>
+                        <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ Request::segment(1) == 'member_articles' ? 'active' : ''}}"><a href="{{url('/member_articles')}}"><i class="fa fa-circle-o"></i> Articles</a></li>
+                    </ul>
+                </li>
+            @endif
+
             @if(Auth::user()->role <= 1)
                 @php $treeview = array('packages'); @endphp
                 <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
@@ -106,7 +122,7 @@
                     </ul>
                 </li>
 
-            @php $treeview = array('pages', 'articles'); @endphp
+            @php $treeview = array('pages', 'articles', 'member_articles'); @endphp
             <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
                 <a href="#">
                     <i class="fa fa-file"></i>
@@ -118,6 +134,7 @@
                 <ul class="treeview-menu">
                     <li class="{{ Request::segment(1) == 'pages' ? 'active' : ''}}"><a href="{{url('/pages')}}"><i class="fa fa-circle-o"></i> Pages</a></li>
                     <li class="{{ Request::segment(1) == 'articles' ? 'active' : ''}}"><a href="{{url('/articles')}}"><i class="fa fa-circle-o"></i> Articles</a></li>
+                    <li class="{{ Request::segment(1) == 'member_articles' ? 'active' : ''}}"><a href="{{url('/member_articles')}}"><i class="fa fa-circle-o"></i> Member Articles</a></li>
                 </ul>
             </li>
 
