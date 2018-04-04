@@ -937,5 +937,8 @@ select.selectpicker.category_selectpicker_home{
     background: none;
     border: 1px solid #dedede;
 }
-
-
+.sub_categories {
+    font-size: 14px;
+    text-decoration: underline;
+    margin-bottom: 7px;
+}
