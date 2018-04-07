@@ -20,8 +20,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+
     <script src="{{ asset('js/jscolor.js') }}"></script>
     @yield('header_scripts')
 </head>
