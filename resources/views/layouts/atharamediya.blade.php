@@ -41,6 +41,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
     @yield('page_CSS')
     <!-- Google Font -->
     {{--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">--}}
@@ -104,6 +106,11 @@
 
 @yield('page_JS')
 <script>
+
+    $(document).ready(function() {
+        $('.selectpicker').select2();
+    });
+
     function setTextColor(picker) {
         document.getElementsByTagName('body')[0].style.color = '#' + picker.toString()
     }

@@ -41,9 +41,9 @@
                 </li>
             @endif
 
-            <li class="nav-item">
+            <li class="nav-item createad">
                 @if(Auth::user() != null)
-                    <a class="nav-link" href="{{url('/create-add')}}">Create Add</a>
+                    <a class="nav-link" href="{{url('/advertisments/create')}}">Create Add</a>
                 @else
                     <a class="nav-link" href="{{url('/login')}}">Create Add</a>
                 @endif

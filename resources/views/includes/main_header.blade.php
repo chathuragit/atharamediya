@@ -2,13 +2,41 @@
     <!-- Logo -->
     <a href="{{url('/')}}" class="logo">
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>A</b>tharamediya</span>
+        <span class="logo-lg">Atharamediya.lk</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+
+                <li class="nav-item {{ Request::segment(1) == '' ? 'active' : ''}}">
+                    <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                {{--<li class="nav-item {{ Request::segment(1) == 'services' ? 'active' : ''}}">
+                    <a class="nav-link" href="#">Services</a>
+                </li>--}}
+
+                <li class="nav-item  {{ ((Request::segment(1) == 'adcollectors') || (Request::segment(1) == 'adcollector')) ? 'active' : ''}}">
+                    <a class="nav-link" href="{{url('/adcollectors')}}">Ad Collectors</a>
+                </li>
+
+                <li class="nav-item {{ ((Request::segment(1) == 'members') || (Request::segment(1) == 'member')) ? 'active' : ''}}">
+                    <a class="nav-link" href="{{url('/members')}}">Members</a>
+                </li>
+
+                <li class="nav-item {{ Request::segment(1) == 'all-ads' ? 'active' : ''}}">
+                    <a class="nav-link" href="{{url('/all-ads')}}">All Ads </a>
+                </li>
+
+
+                <li class="nav-item createad">
+                    @if(Auth::user() != null)
+                        <a class="nav-link" href="{{url('/advertisments/create')}}">Create Add</a>
+                    @else
+                        <a class="nav-link" href="{{url('/login')}}">Create Add</a>
+                    @endif
+                </li>
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
