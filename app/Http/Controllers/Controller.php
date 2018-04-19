@@ -59,11 +59,13 @@ class Controller extends BaseController
                 $filepath = $destinationPath.'/'.$filename;
 
                 //http://image.intervention.io/getting_started/installation
-                $img = Image::make(public_path($filepath))->fit(650, 440, function ($constraint) {
+                $img = Image::make(public_path($filepath))->fit(800, 526, function ($constraint) {
                     $constraint->upsize();
                 })->insert(public_path('watermark.png'), 'center');
 
-                $img->save(public_path($filepath));
+                //$img = Image::make($image->getRealPath())->resize(200, 200)->save($path);
+
+                $img->resize(800, 526)->save(public_path($filepath));
             }
         }
     }

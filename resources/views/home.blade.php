@@ -121,7 +121,7 @@
                                     <div class="col-lg-12">
                                         <div class="input-group">
 
-                                            <select class="selectpicker category_selectpicker_home" name="category">
+                                            <select class=" category_selectpicker_home select_wosearch" name="category">
                                                 <option value="">All Categories</option>
                                                 @if(count($ParentCategories) > 0)
                                                     @foreach($ParentCategories as $ParentCategory)

@@ -19,8 +19,20 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{{ asset('js/tether.min.js')}}" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ asset('js/ie10-viewport-bug-workaround.js')}}"></script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="{{ asset('js/jscolor.js') }}"></script>
     @yield('header_scripts')
 </head>
@@ -33,18 +45,19 @@
 @yield('content')
 
 @include('includes.footer')
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
-<script src="{{ asset('js/tether.min.js')}}" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="{{ asset('js/bootstrap.min.js')}}"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="{{ asset('js/ie10-viewport-bug-workaround.js')}}"></script>
+
 
 @yield('page_JS')
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('.selectpicker').select2();
+        $('.select_wosearch').select2({
+            minimumResultsForSearch: -1
+        });
+        $('.select_wsearch').select2({
+        });
+    });
+
     function setTextColor(picker) {
         document.getElementsByTagName('body')[0].style.color = '#' + picker.toString()
     }

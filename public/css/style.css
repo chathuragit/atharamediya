@@ -64,14 +64,14 @@ h1.seo {
 
 h2{
 	color: #000;
-	font-size: 1.7rem;
+    font-size: 1.5rem;
 }
 h3{
 	font-size: 1rem;
 }
 
 .heading3{
-    color: #fff;
+    color: #000;
 }
 
 .heading3 span{
@@ -98,18 +98,20 @@ h3{
 }
 
 h2.vgap.item-heading {
-    color: #fff;
+
     display: table;
     width: 100%;
-    background: #000;
+
     padding: 10px;
-    border-radius: 10px 10px 0px 0;
+    background: #fff;
+    color: #000;
+    border: 1px solid #afadac;
     margin: 0;
 }
 
 h2.vgap.item-heading a {
-    color: #fff;
-    font-size: 1.4rem;
+    color: #000;
+    font-size: 1.2rem;
     margin: 0;
     padding: 0;
     display: table-cell;
@@ -118,7 +120,7 @@ h2.vgap.item-heading a {
 }
 
 h2.vgap.item-heading a:hover {
-    color: #c7a1a1;
+    color: #b71a1e;
     text-decoration: none;
 }
 
@@ -354,9 +356,13 @@ button.btn.btn-secondary.dropdown-toggle.btn-home-category {
 }
 /* mid-section */
 .mid-section{
-	background-color: #560101;
+
 	border-radius: 10px;
 	padding-bottom: 15px;
+    background-color: #e6e7e8;
+    -webkit-box-shadow: 9px -8px 10px -7px rgba(128,130,133,1);
+    -moz-box-shadow: 9px -8px 10px -7px rgba(128,130,133,1);
+    box-shadow: 9px -8px 10px -7px rgba(128,130,133,1);
 }
 /* mid-section */
 
@@ -451,8 +457,8 @@ button.btn.btn-secondary.dropdown-toggle.btn-home-category {
 
 /* Item */
 .product-item {
-    background-color: #000;
-    border-radius: 0px 0px 10px 10px;
+    background-color: #fff;
+    border: 1px solid #afadac;
     margin: 0;
     padding-top: 15px;
 }
@@ -519,11 +525,12 @@ button.btn.btn-secondary.dropdown-toggle.btn-home-category {
 .single-product-details dl dt{
     color: #fff;
     font-weight: 400;
-    padding: .3em;
+
     white-space: nowrap;
     width: auto;
     display: inline;
-    background: #000;
+    padding: .2em 0em 0.2em 0.2em;
+    background: #6d6e70;
     border-radius: 5px;
     margin-right: 4px;
 }
@@ -661,7 +668,7 @@ span.es-nav-prev,
 }
 .icon-bar p a {
     color: #d3d3d3;
-    font-size: 14px;
+    font-size: 12px;
     display: table-cell;
     width: auto;
     line-height: 1;
@@ -938,7 +945,8 @@ select.selectpicker.category_selectpicker_home{
     border: 1px solid #dedede;
 }
 .sub_categories {
-    font-size: 14px;
+    font-size: 12px;
+    padding-left: 20px;
     text-decoration: underline;
     margin-bottom: 7px;
 }
@@ -959,4 +967,10 @@ select.selectpicker.category_selectpicker_home{
     aside p{
         font-size: 12px;
     }
+}
+
+input.form-control.home-search-input,
+select.selectpicker.category_selectpicker_home,
+select{
+    font-size: 13px;
 }
