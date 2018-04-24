@@ -27,7 +27,7 @@ body {
   min-height: none;
   padding-top: 3.5rem;
   /*background: url("../images/bg-1.jpg") no-repeat center center fixed; 22/11/2017 */
-  background: url(../images/bg-home.jpg) no-repeat center center fixed;
+  background: url(../images/bg-home.jpg) no-repeat top center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -240,6 +240,10 @@ a:focus, a:hover, a:active, a:target {
     display: block;
     width: 75%;
 }
+.homelogo a img.img-fluid.home-logo,
+.login-logo a img {
+    width: auto;
+}
 /* Home Search */
 #advanced-search{
 	margin: 10% 0;
@@ -257,10 +261,10 @@ a:focus, a:hover, a:active, a:target {
 .home-search-submit {
     width: 40px;
     background: url(../images/btn-search.png) no-repeat center center #fff;
-    background-size: 80% auto;
+    background-size: 50% auto;
     border-radius: 0 0.25rem 0.25rem 0;
     border: none;
-    height: 38px;
+    height: 28px;
     outline: none;
 }
 .home-search-input{
@@ -834,6 +838,12 @@ p.member-contact {
 }
 
 /* /Member */
+
+/* Overrides */
+input.form-control.home-search-input {
+    height: 28px;
+}
+/* /Overrides*/
 
 @media (max-width: 1200px) {
 	/* button.btn.btn-secondary.dropdown-toggle.btn-home-category {
