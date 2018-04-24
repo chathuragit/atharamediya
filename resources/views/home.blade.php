@@ -108,7 +108,7 @@
             <div class="row align-items-center">
                 <article class="col-sm-7">
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 homelogo">
                             <a href="{{url('/')}}" title="Atharamediya Logo"><img src="images/logo-atharamediya.png" alt="Athramediya Logo" class="img-fluid home-logo"></a>
                         </div>
                     </div>
