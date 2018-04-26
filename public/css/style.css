@@ -262,6 +262,7 @@ a:focus, a:hover, a:active, a:target {
     width: 40px;
     background: url(../images/btn-search.png) no-repeat center center #fff;
     background-size: 50% auto;
+    border: 1px solid #aaaaaa;
     border-radius: 0 0.25rem 0.25rem 0;
     border: none;
     height: 28px;
@@ -546,7 +547,7 @@ button.btn.btn-secondary.dropdown-toggle.btn-home-category {
     margin-right: 4px;
 }
 .single-product-details dl dd{
-    color: #ccc;
+    color: #6d6e70;
     word-wrap: break-word;
     text-align: left;
     display: inline;
@@ -663,7 +664,7 @@ span.es-nav-prev,
 	font-size: 40px;
 }
 .icon-bar h2{
-    color: #fff;
+    color: #727376;
 	font-size: 14px;
 	padding-bottom: 20px;
     text-align: left;
@@ -675,9 +676,10 @@ span.es-nav-prev,
     display: table-cell;
     width: 20px;
     font-size: 14px;
+    color: #696363;
 }
 .icon-bar p a {
-    color: #d3d3d3;
+    color: #332f2f;
     font-size: 12px;
     display: table-cell;
     width: auto;
@@ -860,6 +862,11 @@ input.form-control.home-search-input {
 .input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-group {
     margin-right: 0;
 }
+.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
+    border-radius: 0;
+    border: 1px solid #aaaaaa;
+    padding: 0;
+}
 /* /Overriding Bootstrap */
 
 .map_wrapper {
@@ -969,7 +976,7 @@ select.selectpicker.category_selectpicker_home{
 /* media query */
 @media only screen and (max-width: 768px){
     img.img-fluid.home-logo {
-        width: 70%;
+        width: 50%;
     }
 
     .selectpicker.category_selectpicker_home {
@@ -982,6 +989,17 @@ select.selectpicker.category_selectpicker_home{
 
     aside p{
         font-size: 12px;
+    }
+    .map_wrapper{
+        display: none;
+    }
+    .icon-bar h2{
+        padding-bottom: 5px;
+    }
+    .input-group{
+        margin-bottom: 10px;
+        margin: 0 auto 10px auto;
+        width: fit-content;
     }
 }
 
