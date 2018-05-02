@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                             <label>Email address</label>
-                            <input type="email" class="form-control" placeholder="Enter email" name="email" value="{{$User->email}}" required>
+                            <input type="email" class="form-control" placeholder="Enter email" name="email" value="{{$User->email}}" readonly>
                             @if ($errors->has('email'))
                                 <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('email') }}</label>
                             @endif
