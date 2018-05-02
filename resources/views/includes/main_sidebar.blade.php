@@ -77,6 +77,7 @@
                 </ul>
             </li>
 
+            @if(in_array(Auth::user()->role, [1,2,5]))
             @php $treeview = array('banners'); @endphp
             <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
                 <a href="#">
@@ -90,6 +91,7 @@
                     <li class="{{ Request::segment(1) == 'banners' ? 'active' : ''}}"><a href="{{url('/banners')}}"><i class="fa fa-circle-o"></i> Web Space Banners</a></li>
                 </ul>
             </li>
+            @endif
 
             @if(in_array(Auth::user()->role, [3,4]))
                 @php $treeview = array('member_articles'); @endphp

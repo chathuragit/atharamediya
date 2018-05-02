@@ -204,6 +204,17 @@
                             <label for="negotiable_2">No</label>
                         </div>
 
+                        <div class="form-group{{ $errors->has('contact_name') ? ' has-error' : '' }}">
+                            <label for="contact_name">Contact Name:</label>
+                            <input id="contact_name" type="text" class="form-control" name="contact_name" value="{{$Advertisment->contact_name}}" >
+
+                            @if ($errors->has('contact_name'))
+                                <span class="help-block">
+                                                    <strong>{{ $errors->first('contact_name') }}</strong>
+                                                </span>
+                            @endif
+                        </div>
+
                         <div class="form-group{{ $errors->has('contact_email') ? ' has-error' : '' }}">
                             <label for="contact_email">Contact email:</label>
                             <input id="contact_email" type="text" class="form-control" name="contact_email" value="{{$Advertisment->contact_email}}" >

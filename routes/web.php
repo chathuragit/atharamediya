@@ -18,6 +18,10 @@
 Route::get('/', 'HomeController@index')->name('home');
 
 
+Route::get('register/verify/{confirmationCode}', [
+    'as' => 'confirmation_path',
+    'uses' => 'RegistrationController@confirm'
+]);
 /*Route::get('/{slug}', function(){
     return Request::segment(1);
 

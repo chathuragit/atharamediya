@@ -27,6 +27,7 @@ class CreateAdvertismentsTable extends Migration
             $table->integer('location_id')->default(0);
             $table->string('location','255')->nullable(0);
             $table->string('price', '45')->default('0.00');
+            $table->string('contact_name','255')->nullable();
             $table->string('contact_email','255')->nullable();
             $table->string('contact_mobile','25')->nullable();
             $table->boolean('is_negotiable')->default(false);

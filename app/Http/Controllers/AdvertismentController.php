@@ -133,6 +133,7 @@ class AdvertismentController extends Controller
             $Advertisment->price =  $request->price;
             $Advertisment->selling_type =  ($request->selling_type == 'Whole_Selling') ? 1 : 0;
             $Advertisment->is_negotiable = $request->negotiable;
+            $Advertisment->contact_name = $request->contact_name;
             $Advertisment->contact_email = $request->contact_email;
             $Advertisment->contact_mobile = $request->contact_number;
             $Advertisment->expier_at = Carbon::now()->addDays(env('ATHARAMEDIYA_ALLOWED_TIME_FRAME_FOR_MEMBER'));
@@ -263,6 +264,7 @@ class AdvertismentController extends Controller
             $Advertisment->location =  $request->location;
             $Advertisment->price =  $request->price;
             $Advertisment->is_negotiable = $request->negotiable;
+            $Advertisment->contact_name = $request->contact_name;
             $Advertisment->contact_email = $request->contact_email;
             $Advertisment->contact_mobile = $request->contact_number;
             $Advertisment->update();

@@ -97,6 +97,7 @@ class RegisterController extends Controller
         return $user;
     }
 
+    //https://scqq.blogspot.com/2016/11/laravel-5-tutorial-email-verification.html
     /*public function showRegistrationForm()
     {
         return redirect('login');

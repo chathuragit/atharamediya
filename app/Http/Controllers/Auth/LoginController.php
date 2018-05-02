@@ -41,12 +41,13 @@ class LoginController extends Controller
     }
 
     public function authenticated($request , $user){
-        if($user->role > 1){
+        if($user->role > 2){
             parent::userLog($user->id, 'Logged in to system');
             return Redirect::to('/dashboard');
-        }else{
+        }
+        else{
             parent::userLog($user->id, 'Logged in to system');
-            return Redirect::to('/dashboard');
+            return Redirect::to('/advertisments/create');
         }
     }
 

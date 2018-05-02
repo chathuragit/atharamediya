@@ -62,7 +62,9 @@
                                     <i class="fa fa-phone-square" aria-hidden="true"></i>
                                     {{$Advertisment->contact_mobile}}
 
-                                    @if(count($Advertisment_user) > 0)
+                                    @if($Advertisment->contact_name != null)
+                                        <span class="contact-name">{{$Advertisment->contact_name}}</span></a></h2>
+                                    @elseif(count($Advertisment_user) > 0)
                                         <span class="contact-name">{{$Advertisment_user->name}}</span></a></h2>
                                     @endif
                         </div>
