@@ -41,7 +41,7 @@ class LoginController extends Controller
     }
 
     public function authenticated($request , $user){
-        if($user->role > 2){
+        if($user->role <= 2){
             parent::userLog($user->id, 'Logged in to system');
             return Redirect::to('/dashboard');
         }
