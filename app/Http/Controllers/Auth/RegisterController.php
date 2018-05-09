@@ -6,8 +6,10 @@ use App\Individual;
 use App\Member;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/advertisments/create';
 
     /**
      * Create a new controller instance.
@@ -96,6 +98,7 @@ class RegisterController extends Controller
 
         return $user;
     }
+
 
     //https://scqq.blogspot.com/2016/11/laravel-5-tutorial-email-verification.html
     /*public function showRegistrationForm()
