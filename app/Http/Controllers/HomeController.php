@@ -8,6 +8,7 @@ use App\Category;
 use App\Member;
 use App\Page;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -63,22 +64,34 @@ class HomeController extends Controller
         $ArticlesRight = $Page->page_articles($Page->id, 3);
 
         $Advertisment = Advertisment::where('slug', $slug)->where('is_active', true)->where('status', 2)->first();
-        $AdvertismentAttributes =$Advertisment->advertisment_attributes_and_values($Advertisment->id);
-        $ParentCategories = Category::where('parent_category_id' , 0)->where('is_active' , 1)->get();
+        if(is_object($Advertisment)){
+            $AdvertismentAttributes =$Advertisment->advertisment_attributes_and_values($Advertisment->id);
+            $ParentCategories = Category::where('parent_category_id' , 0)->where('is_active' , 1)->get();
 
-        $Advertisment_user = $Advertisment->advertisment_user($Advertisment->id);
+            $Advertisment_user = $Advertisment->advertisment_user($Advertisment->id);
 
-        $SelectedCategory = Category::where('id', $Advertisment->category_id)->first();
-        if($SelectedCategory != null){
-            $SubCategories = Category::where('parent_category_id', $SelectedCategory->id)->where('is_active', true)->get();
+            $SelectedCategory = Category::where('id', $Advertisment->category_id)->first();
+            if($SelectedCategory != null){
+                $SubCategories = Category::where('parent_category_id', $SelectedCategory->id)->where('is_active', true)->get();
+            }
+            else{
+                $SubCategories = null;
+            }
+
+            $Advertisments = Advertisment::similar_ads($Advertisment, 3);
+            $left_web_space_banners = Banner::web_space_banners(1, $Advertisment->category_id, 3);
+            $listing_web_space_banners = Banner::web_space_banners(3, null, 1);
         }
         else{
+            $AdvertismentAttributes = null;
+            $ParentCategories = null;
+            $Advertisment_user = null;
+            $SelectedCategory = null;
             $SubCategories = null;
+            $Advertisments = null;
+            $left_web_space_banners = null;
+            $listing_web_space_banners = null;
         }
-
-        $Advertisments = Advertisment::similar_ads($Advertisment, 3);
-        $left_web_space_banners = Banner::web_space_banners(1, $Advertisment->category_id, 3);
-        $listing_web_space_banners = Banner::web_space_banners(3, null, 1);
 
         return view('advertisment', ['ParentCategories' => $ParentCategories, 'Advertisment' => $Advertisment, 'Advertisments' => $Advertisments,
             'left_web_space_banners' => $left_web_space_banners, 'AdvertismentAttributes' => $AdvertismentAttributes, 'Advertisment_user' => $Advertisment_user

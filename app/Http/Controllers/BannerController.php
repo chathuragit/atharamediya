@@ -59,6 +59,7 @@ class BannerController extends Controller
             'advertisment_title' => 'required',
             'category' => 'required',
             'display_position' => 'required',
+            'display_period' => 'required',
         );
 
 
@@ -74,6 +75,7 @@ class BannerController extends Controller
             $Advertisment->link_url = $request->link_url;
             $Advertisment->user_id = Auth::user()->id;
             $Advertisment->display_in = $request->display_position;
+            $Advertisment->display_period = $request->display_period;
 
             if(Auth::user()->role > 2) {
                 $Advertisment->is_active = false;
@@ -144,6 +146,7 @@ class BannerController extends Controller
             'advertisment_title' => 'required',
             'category' => 'required',
             'display_position' => 'required',
+            'display_period' => 'required',
         );
 
 
@@ -158,6 +161,7 @@ class BannerController extends Controller
             $Advertisment->category_id = $request->category;
             $Advertisment->link_url = $request->link_url;
             $Advertisment->display_in = $request->display_position;
+            $Advertisment->display_period = $request->display_period;
 
             if(Auth::user()->role > 2) {
                 $Advertisment->is_active = false;

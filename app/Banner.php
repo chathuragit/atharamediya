@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Banner extends Model
 {
@@ -34,6 +35,7 @@ class Banner extends Model
         $result = Banner::where('status', 2);
         $result->where('is_active', true);
         $result->where('display_in', $position);
+        $result->where('display_period', '>=', Carbon::today());
         $result->whereIn('category_id', [$category, 0]);
 
         return $result->inRandomOrder()->limit($limit)->get();

@@ -30,6 +30,18 @@
 
         <div class="row product-list-item">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 img-product-list">
+                @php
+                    $advertisment_user = $Advertisment->advertisment_user($Advertisment->id);
+
+                    if(is_object($advertisment_user) && ($advertisment_user->role == 3)){
+                        echo  '<span class="member-tag">Ad Collector</span>';
+                    }
+
+                    if(is_object($advertisment_user) && ($advertisment_user->role == 4)){
+                        echo  '<span class="member-tag">Member</span>';
+                    }
+                @endphp
+
                 <a href="{{url('/advertisment/'.$Advertisment->slug)}}" title="{{$Advertisment->title}}">
                     @php
                         if(count($Advertisment->advertisment_default_image($Advertisment->id)) > 0){
@@ -60,10 +72,10 @@
 
         @php $count++; @endphp
     @endforeach
-@else
+{{--@else
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <h3 class="vgap heading3">No Advertisements Found!</h3>
         </div>
-    </div>
+    </div>--}}
 @endif

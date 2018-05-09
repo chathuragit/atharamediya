@@ -15,7 +15,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
+                        @if(is_object($Advertisment))
                         <h1 class="text-center seo">{{$Advertisment->title}}</h1>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -54,6 +56,7 @@
                             <!-- /Search -->
                         </div>
                     </div>
+                    @if(is_object($Advertisment))
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2 class="vgap item-heading">{{$Advertisment->title}}
@@ -158,6 +161,13 @@
                             <h3 class="heading3 vgap text-right"><a href="{{url('/all-ads')}}" title="All Ads">All Adds<span class="arrow-right"></span></a></h3>
                         </div>
                     </div>
+                    @else
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h3 class="vgap item-heading">Advertisement Not Found!</h3>
+                            </div>
+                        </div>
+                    @endif
                 </section>
 
                 @include('includes.right_bar')

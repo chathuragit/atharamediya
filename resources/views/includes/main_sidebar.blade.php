@@ -59,6 +59,7 @@
             </li>
             @endif
 
+            @if(!in_array(Auth::user()->role, [5]))
             @php $treeview = array('advertisments', 'advertisments_active', 'advertisments_pending', 'advertisments_expired', 'advertisments_blocked'); @endphp
             <li class="treeview {{ in_array(Request::segment(1), $treeview) ? 'active' : ''}}">
                 <a href="#">
@@ -76,6 +77,7 @@
                     <li class="{{ Request::segment(1) == 'advertisments_blocked' ? 'active' : ''}}"><a href="{{url('/advertisments_blocked')}}"><i class="fa fa-circle-o"></i> Blocked Advertisments</a></li>
                 </ul>
             </li>
+            @endif
 
             @if(in_array(Auth::user()->role, [1,2,5]))
             @php $treeview = array('banners'); @endphp

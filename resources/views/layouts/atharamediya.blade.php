@@ -25,11 +25,15 @@
     <!-- jvectormap -->
     <link rel="stylesheet" href="{{ asset('bower_components/jvectormap/jquery-jvectormap.css') }}">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <link href="{{ asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet">
 
@@ -45,6 +49,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     @yield('page_CSS')
+
+    <script>
+        $( function() {
+            $(".datepickerAtharamediya").datepicker({dateFormat: 'yy-mm-dd'});
+        } );
+    </script>
     <!-- Google Font -->
     {{--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">--}}
 </head>
@@ -87,10 +97,10 @@
 <!-- jQuery Knob Chart -->
 <script src="{{asset('bower_components/jquery-knob/dist/jquery.knob.min.js')}}"></script>
 <!-- daterangepicker -->
-<script src="{{asset('bower_components/moment/min/moment.min.js')}}"></script>
-<script src="{{asset('bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+
+
 <!-- datepicker -->
-<script src="{{asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <!-- Slimscroll -->

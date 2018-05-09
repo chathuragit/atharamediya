@@ -60,6 +60,14 @@
                         </div>
 
 
+                        <div class="form-group {{ $errors->has('display_period') ? ' has-error' : '' }}">
+                            <label>Display Period <small>(Days)</small></label>
+                            <input type="text" class="form-control datepickerAtharamediya" placeholder="Enter Display Period" name="display_period" value="{{old('display_period')}}" required>
+                            @if ($errors->has('display_period'))
+                                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('display_period') }}</label>
+                            @endif
+                        </div>
+
                         <div class="form-group {{ $errors->has('display_position') ? ' has-error' : '' }}">
                             <label>Display Position</label>
                             <select class="form-control" name="display_position" required>
@@ -74,12 +82,13 @@
                             @endif
                         </div>
 
+
                         <hr/>
 
                         <div class="form-group{{ $errors->has('banner_image') ? ' has-error' : '' }}">
                             <label>Banner Image</label>
 
-                            <div class="input-group">
+                            <div class="input-group" style="z-index: 1 !important;">
                                 <label class="input-group-btn">
                                         <span class="btn btn-primary btn-browse">
                                             Browse&hellip;
