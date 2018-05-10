@@ -45,45 +45,7 @@
 <script src="{{ asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<!-- iCheck -->
-<script src="{{ asset('plugins/iCheck/icheck.min.js')}}"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
-<script>
-    $(function() {
-        $('#userselector').change(function(){
-            if($(this).val() == 4){
-                $('.users').show();
-            }else {
-                $('.users').hide();
-            }
 
-        });
-    });
-    $(function() {
-        $('#formselector').change(function(){
-            $('.forms').hide();
-            $('#' + $(this).val()).show();
-        });
-    });
-</script>
-
-<script>
-    // tell the embed parent frame the height of the content
-    if (window.parent && window.parent.parent){
-        window.parent.parent.postMessage(["resultsFrame", {
-            height: document.body.getBoundingClientRect().height,
-            slug: "ukrbnb3n"
-        }], "*")
-    }
-</script>
 
 </body>
 </html>
