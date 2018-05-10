@@ -55,6 +55,8 @@ Route::group(['middleware' => ['SuperAdministrator']], function () {
     Route::get('/administrators/filter', 'AdministratorController@filter');
     Route::resource('/administrators', 'AdministratorController');
 
+    Route::get('/reports', 'ReportController@index');
+    Route::get('/reports/filter', 'ReportController@index');
 
     Route::post('/advertisement_collectors/change_status', 'AdvertisementCollectorController@change_status');
     Route::get('/advertisement_collectors/change_password/{id}', 'AdvertisementCollectorController@changePasswordRequest');
@@ -116,6 +118,7 @@ Route::post('/advertisments/advertisment_attributes', 'AdvertismentController@ad
 Route::post('/advertisments/sub_categories', 'AdvertismentController@sub_categories');
 Route::get('/advertisments/filter', 'AdvertismentController@filter');
 Route::post('/advertisments/change_status', 'AdvertismentController@change_status');
+Route::post('/advertisments_pending/change_status', 'AdvertismentController@change_status');
 Route::get('/remove_advertisment_image', 'AdvertismentController@remove_image');
 Route::resource('/advertisments', 'AdvertismentController');
 

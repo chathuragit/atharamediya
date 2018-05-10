@@ -143,6 +143,12 @@
             </li>
 
 
+                <li class="{{ Request::segment(1) == 'reports' ? 'active' : ''}}">
+                    <a href="{{url('/reports')}}">
+                        <i class="fa fa-line-chart"></i> <span>Reports</span>
+                    </a>
+                </li>
+
             <li class="{{ Request::segment(1) == 'logs' ? 'active' : ''}}">
                 <a href="{{url('/logs')}}">
                     <i class="fa fa-history"></i> <span>Logs</span>
