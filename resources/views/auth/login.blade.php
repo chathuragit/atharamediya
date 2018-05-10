@@ -14,9 +14,8 @@
     </header>
 @endsection
 
-@include('includes.header')
-
 @section('content')
+    @include('includes.header')
     <div class="login-logo">
         <a title="Atharamediya"><img src="{{ asset('images/logo-atharamediya.png')}}" alt="Athramediya" class="img-fluid home-logo"></a>
     </div>

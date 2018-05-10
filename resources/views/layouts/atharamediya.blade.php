@@ -31,11 +31,11 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
-    @if(Request::segment(1) == 'banners')
+
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    @endif
+
 
     <link href="{{ asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet">
 
@@ -52,13 +52,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     @yield('page_CSS')
 
-    @if(Request::segment(1) == 'banners')
+
     <script>
         $( function() {
             $(".datepickerAtharamediya").datepicker({dateFormat: 'yy-mm-dd'});
         } );
     </script>
-    @endif
+
     <!-- Google Font -->
     {{--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">--}}
 </head>
