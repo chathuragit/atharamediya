@@ -8,6 +8,10 @@ use App\AdvertismentMedia;
 use App\AdvertismentStatus;
 use App\Category;
 use App\District;
+use App\Mail\AdvertismentApprovedEmail;
+use App\Mail\AdvertismentPendingApprovalEmail;
+use App\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -155,6 +159,8 @@ class AdvertismentController extends Controller
                 }
             }
 
+
+            Mail::to('atharamediya.lk@gmail.com')->send(new AdvertismentPendingApprovalEmail($Advertisment));
             parent::userLog(Auth::user()->id, 'Created Advertisment #'.$Advertisment->id);
 
             $request->session()->flash('message', "Advertisment Created Successfully!");
@@ -253,6 +259,9 @@ class AdvertismentController extends Controller
             if((isset($request->advertisment_status)) && ($request->advertisment_status == 2)){
                 $Advertisment->approved_by = Auth::user()->id;
                 $Advertisment->is_active = true;
+
+                $AdvertUser = User::find($Advertisment->user_id);
+                Mail::to($AdvertUser->email)->send(new AdvertismentApprovedEmail($Advertisment));
             }else{
                 $Advertisment->is_active = false;
             }
@@ -351,6 +360,9 @@ class AdvertismentController extends Controller
         if($Advertisment->status == 1){
             $Advertisment->status = 2;
             $Advertisment->approved_by = Auth::user()->id;
+
+            $AdvertUser = User::find($Advertisment->user_id);
+            Mail::to($AdvertUser->email)->send(new AdvertismentApprovedEmail($Advertisment));
         }
         $Advertisment->update();
 
