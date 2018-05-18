@@ -261,7 +261,9 @@ class AdvertismentController extends Controller
                 $Advertisment->is_active = true;
 
                 $AdvertUser = User::find($Advertisment->user_id);
-                Mail::to($AdvertUser->email)->send(new AdvertismentApprovedEmail($Advertisment));
+                if(is_object($AdvertUser)) {
+                    Mail::to($AdvertUser->email)->send(new AdvertismentApprovedEmail($Advertisment));
+                }
             }else{
                 $Advertisment->is_active = false;
             }
@@ -362,7 +364,9 @@ class AdvertismentController extends Controller
             $Advertisment->approved_by = Auth::user()->id;
 
             $AdvertUser = User::find($Advertisment->user_id);
-            Mail::to($AdvertUser->email)->send(new AdvertismentApprovedEmail($Advertisment));
+            if(is_object($AdvertUser)) {
+                Mail::to($AdvertUser->email)->send(new AdvertismentApprovedEmail($Advertisment));
+            }
         }
         $Advertisment->update();
 

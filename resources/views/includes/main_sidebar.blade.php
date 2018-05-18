@@ -154,6 +154,13 @@
                     <i class="fa fa-history"></i> <span>Logs</span>
                 </a>
             </li>
+
+
+                <li class="{{ Request::segment(1) == 'update_date' ? 'active' : ''}}">
+                    <a href="{{url('/update_date')}}">
+                        <i class="fa fa-database"></i> <span>Data Update</span>
+                    </a>
+                </li>
             @endif
 
             <li>

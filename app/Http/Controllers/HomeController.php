@@ -7,8 +7,10 @@ use App\Banner;
 use App\Category;
 use App\Member;
 use App\Page;
+use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -51,11 +53,12 @@ class HomeController extends Controller
         }
 
         $left_web_space_banners = Banner::web_space_banners(1, null, 3);
+        $right_web_space_banners = Banner::web_space_banners(2, null, 3);
         $listing_web_space_banners = Banner::web_space_banners(3, null, 3);
 
         return view('advertisments', ['ParentCategories' => $ParentCategories, 'Advertisments' => $Advertisments,  'left_web_space_banners' => $left_web_space_banners
-            , 'listing_web_space_banners' => $listing_web_space_banners, 'request' => $request, 'Page' => $Page
-            , 'SubCategories' => $SubCategories, 'SelectedCategory' => $SelectedCategory, 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight]);
+            , 'listing_web_space_banners' => $listing_web_space_banners, 'right_web_space_banners' => $right_web_space_banners, 'request' => $request, 'Page' => $Page
+            , 'SubCategories' => $SubCategories, 'SelectedCategory' => $SelectedCategory, 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight, 'maincategory' => 0]);
     }
 
     public function advertisment(Request $request, $slug){
@@ -80,7 +83,9 @@ class HomeController extends Controller
 
             $Advertisments = Advertisment::similar_ads($Advertisment, 3);
             $left_web_space_banners = Banner::web_space_banners(1, $Advertisment->category_id, 3);
+            $right_web_space_banners = Banner::web_space_banners(2,  $Advertisment->category_id, 3);
             $listing_web_space_banners = Banner::web_space_banners(3, null, 1);
+            $maincategory = $Advertisment->category_id;
         }
         else{
             $AdvertismentAttributes = null;
@@ -91,12 +96,14 @@ class HomeController extends Controller
             $Advertisments = null;
             $left_web_space_banners = null;
             $listing_web_space_banners = null;
+            $right_web_space_banners = null;
+            $maincategory = 0;
         }
 
         return view('advertisment', ['ParentCategories' => $ParentCategories, 'Advertisment' => $Advertisment, 'Advertisments' => $Advertisments,
             'left_web_space_banners' => $left_web_space_banners, 'AdvertismentAttributes' => $AdvertismentAttributes, 'Advertisment_user' => $Advertisment_user
-            , 'listing_web_space_banners' => $listing_web_space_banners, 'request' => $request, 'Page' => $Page, 'SubCategories' => $SubCategories, 'SelectedCategory' => $SelectedCategory
-            , 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight]);
+            , 'listing_web_space_banners' => $listing_web_space_banners, 'right_web_space_banners' => $right_web_space_banners, 'request' => $request, 'Page' => $Page, 'SubCategories' => $SubCategories, 'SelectedCategory' => $SelectedCategory
+            , 'ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight, 'maincategory' => $maincategory]);
     }
 
     public function members(){
@@ -147,5 +154,57 @@ class HomeController extends Controller
         $ArticlesRight = $Page->page_articles($Page->id, 3);
 
         return view('page',['ArticlesLeft' => $ArticlesLeft, 'ArticlesRight' => $ArticlesRight, 'ArticlesMain' => $ArticlesMain]);
+    }
+
+    public function confirm_email($email, $confirmation_code){
+        $user = User::where('email', $email)->where('confirmation_code', $confirmation_code)->first();
+        if($user){
+            $user->confirmed = true;
+            $user->update();
+        }
+
+        return Redirect::to('/');
+    }
+
+    public function web_banners_ajax(Request $request){
+        if($request->side = 1){
+            $category = $request->category;
+            $left_web_space_banners = Banner::web_space_banners(1, $category, 3);
+            $right_web_space_banners = Banner::web_space_banners(2, $category, 3);
+
+            if(isset($left_web_space_banners) && (count($left_web_space_banners) > 0)){
+                foreach($left_web_space_banners as $left_banner){
+                    echo '<figure>';
+                    if($left_banner->link_url != ''){
+                        echo '<a href="'.$left_banner->link_url.'" target="_blank" class="img-fluid">';
+                    }
+
+                    echo '<img src="'. asset('uploads/'.$left_banner->data_url).'" alt="'.$left_banner->title.'" class="img-fluid">';
+                    echo '<figcaption class="text-center">'.$left_banner->title.'</figcaption>';
+                    if($left_banner->link_url != ''){
+                        echo '</a>';
+                    }
+
+                    echo '</figure>';
+                }
+            }
+
+            if(isset($right_web_space_banners) && (count($right_web_space_banners) > 0)){
+                foreach($right_web_space_banners as $right_banner){
+                    echo '<figure>';
+                    if($right_banner->link_url != ''){
+                        echo '<a href="'.$right_banner->link_url.'" target="_blank" class="img-fluid">';
+                    }
+
+                    echo '<img src="'. asset('uploads/'.$right_banner->data_url).'" alt="'.$right_banner->title.'" class="img-fluid">';
+                    echo '<figcaption class="text-center">'.$right_banner->title.'</figcaption>';
+                    if($right_banner->link_url != ''){
+                        echo '</a>';
+                    }
+
+                    echo '</figure>';
+                }
+            }
+        }
     }
 }

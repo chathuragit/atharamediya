@@ -115,7 +115,7 @@
 
                         </div>
 
-                        <div id="member"  class="form-group has-feedback users" style="{{ (old('member_type') == 4) ? '' : 'display:none'}}">
+                        <div id="member"  class="form-group has-feedback users" >
                             <p>Members have special Benefits <a href="{{url('/members')}}" title="Members" target="_blank">Read More...</a></p>
                             <div class="col-xs-8">
                                 <div class="checkbox icheck">

@@ -10,7 +10,7 @@ class Member extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['user_id', 'contact_number', 'contact_email', 'is_active', 'package_id'];
+    protected $fillable = ['user_id', 'contact_number', 'contact_email', 'is_active', 'package_id', 'expier_at'];
 
     public function sluggable()
     {

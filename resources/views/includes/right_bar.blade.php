@@ -45,4 +45,37 @@
             @endforeach
         </div>
     @endif
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center vgap">
+            @if(isset($right_web_space_banners) && (count($right_web_space_banners) > 0))
+                @foreach($right_web_space_banners as $right_banner)
+                    <figure>
+                        {!!  ($right_banner->link_url != '') ? '<a href="'.$right_banner->link_url.'" target="_blank" class="img-fluid">' : ''  !!}
+                        <img src="{{ asset('uploads/'.$right_banner->data_url)}}" alt="{{$right_banner->title}}" class="img-fluid">
+                        <figcaption class="text-center">{{$right_banner->title}}</figcaption>
+                        {!! ($right_banner->link_url != '') ? '</a>' : ''  !!}
+                    </figure>
+                @endforeach
+            @endif
+        </div>
+    </div>
 </aside>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        setInterval(function()
+        {
+            $.ajax({
+                type:"post",
+                url:"/web_banners_ajax",
+                data: { side : 2, _token: '{{csrf_token()}}' , category : <?php echo $maincategory;?> },
+                success:function(data)
+                {
+                    $('#left_webBanners').html(data);
+                }
+            });
+
+        }, 10000);
+    });
+</script>

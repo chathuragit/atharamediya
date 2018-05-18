@@ -28,6 +28,7 @@ Route::get('register/verify/{confirmationCode}', [
 
 });*/
 
+Route::get('/confirm_email/{email}/{confirmation_code}', 'HomeController@confirm_email')->name('confirm_email');
 Route::get('/all-ads', 'HomeController@all_ads')->name('all_ads');
 Route::get('/ads', 'HomeController@all_ads')->name('ads');
 Route::get('/advertisment/{slug}', 'HomeController@advertisment')->name('ads');
@@ -102,6 +103,7 @@ Route::group(['middleware' => ['SuperAdministrator']], function () {
 
     Route::get('/packages/filter', 'PackageController@filter');
     Route::resource('/packages', 'PackageController');
+    Route::resource('/update_date', 'UpdateDataController');
 });
 
 Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');
@@ -132,6 +134,8 @@ Route::resource('/banners', 'BannerController');
 Route::post('/member_articles/change_status', 'MemberArticleController@change_status');
 Route::get('/member_articles/filter', 'MemberArticleController@filter');
 Route::resource('/member_articles', 'MemberArticleController');
+
+Route::post('/web_banners_ajax', 'HomeController@web_banners_ajax');
 
 
 

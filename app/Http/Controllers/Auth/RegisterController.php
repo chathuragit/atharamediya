@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Individual;
 use App\Member;
+use App\Package;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -68,11 +72,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $confirmation_code = uniqid();
+        $package = Package::find($data['package']);
+        $today = Carbon::today();
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role' => $data['member_type'],
+            'confirmation_code' => $confirmation_code,
+            'expier_at' => (is_object($package) && (count($package) > 0)) ? ($today->addDays($package->package_period)) : '',
             'is_active' => false,
         ]);
 
@@ -92,9 +102,12 @@ class RegisterController extends Controller
                 'contact_number' => $data['contact_number'],
                 'contact_email' => $data['email'],
                 'package_id' => $data['package'],
+                'expier_at' => (is_object($package) && (count($package) > 0)) ? ($today->addDays($package->package_period)) : '',
                 'is_active' => false,
             ]);
         }
+
+        Mail::to($data['email'])->send(new WelcomeMail($user));
 
         return $user;
     }
