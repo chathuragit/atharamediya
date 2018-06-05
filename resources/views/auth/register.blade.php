@@ -115,7 +115,7 @@
 
                         </div>
 
-                        <div id="member"  class="form-group has-feedback users" >
+                        <div id="member"  class="form-group has-feedback users " style="display: none" >
                             <p>Members have special Benefits <a href="{{url('/members')}}" title="Members" target="_blank">Read More...</a></p>
                             <div class="col-xs-8">
                                 <div class="checkbox icheck">
@@ -152,4 +152,14 @@
     </div>
 
 </div>
+    <script>
+        $('#userselector').on('change', function() {
+
+            if(this.value !== '4'){
+                $('#member').attr('style', 'display: none');
+            }else{
+                $('#member').attr('style', 'display: block');
+            }
+        });
+    </script>
 @endsection
