@@ -73,16 +73,24 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $confirmation_code = uniqid();
-        $package = Package::find($data['package']);
+
+        if (isset($data['package'])){
+            $package = Package::find($data['package']);
+        }
+        else{
+            $package = null;
+        }
         $today = Carbon::today();
 
+
+       // dd($today->addDays($package->package_period));
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role' => $data['member_type'],
             'confirmation_code' => $confirmation_code,
-            'expier_at' => (is_object($package) && (count($package) > 0)) ? ($today->addDays($package->package_period)) : '',
+            'expier_at' => (is_object($package) && (count($package) > 0)) ? ($today->addDays($package->package_period)) : '0000-00-00 00:00:00',
             'is_active' => false,
         ]);
 
@@ -97,14 +105,27 @@ class RegisterController extends Controller
         }
 
         if(($data['member_type'] == 4) || ($data['member_type'] == 3)){
-            Member::create([
-                'user_id' => $user->id,
-                'contact_number' => $data['contact_number'],
-                'contact_email' => $data['email'],
-                'package_id' => $data['package'],
-                'expier_at' => (is_object($package) && (count($package) > 0)) ? ($today->addDays($package->package_period)) : '',
-                'is_active' => false,
-            ]);
+
+            if($data['member_type'] == 4){
+                Member::create([
+                    'user_id' => $user->id,
+                    'contact_number' => $data['contact_number'],
+                    'contact_email' => $data['email'],
+                    'package_id' => $data['package'],
+                    'expier_at' => (is_object($package) && (count($package) > 0)) ? ($today->addDays($package->package_period)) : '0000-00-00 00:00:00',
+                    'is_active' => false,
+                ]);
+            }
+            else{
+                Member::create([
+                    'user_id' => $user->id,
+                    'contact_number' => $data['contact_number'],
+                    'contact_email' => $data['email'],
+                    'expier_at' => (is_object($package) && (count($package) > 0)) ? ($today->addDays($package->package_period)) : '0000-00-00 00:00:00',
+                    'is_active' => false,
+                ]);
+            }
+
         }
 
         Mail::to($data['email'])->send(new WelcomeMail($user));
