@@ -73,6 +73,11 @@
                             <p>{{$Member->address}}</p>
                             @endif
 
+                            @if($Member->description != null)
+                                <hr>
+                                <p>{{$Member->description}}</p>
+                            @endif
+
                             @if(is_object($ArticlesLeft) && (count($ArticlesLeft) > 0))
                                 <div class="row">
                                     @foreach($ArticlesLeft as $ArticleLeft)
